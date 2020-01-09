@@ -1,4 +1,4 @@
-# THlEd Bugtracker
+# THlEd BUGTRACKER
 
 ## Requirements
 
