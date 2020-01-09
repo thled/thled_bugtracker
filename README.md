@@ -34,6 +34,7 @@
 
 ## Usage
 
+- Access the application: `localhost:80`
 - SSH into container: `$ docker-compose exec app bash`
 - Manage DB with Adminer: `localhost:8080`
   - System: MySQL
@@ -56,7 +57,7 @@
 
 ## Tests
 
-todo
+- Run whole test suite: `$ docker-compose exec app bin/phpunit`
 
 [1]: https://docs.docker.com/install/
 [2]: https://docs.docker.com/compose/install/
