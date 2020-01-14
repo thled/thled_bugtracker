@@ -11,7 +11,7 @@ jobs:
     - uses: actions/checkout@v1
 
     - name: Change to app directory
-      run: cd app
+      run: cd app && ls
 
     - name: Validate composer.json and composer.lock
       run: composer validate
@@ -19,5 +19,5 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
 
-    - name: Run test suite
+    - name: Run CI
       run: composer run-script ci
