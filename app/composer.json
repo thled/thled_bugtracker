@@ -30,6 +30,12 @@
         "symfony/yaml": "5.0.*"
     },
     "require-dev": {
+        "phpstan/extension-installer": "^1.0",
+        "phpstan/phpstan": "^0.12.5",
+        "phpstan/phpstan-doctrine": "^0.12.9",
+        "phpstan/phpstan-phpunit": "^0.12.6",
+        "phpstan/phpstan-strict-rules": "^0.12.1",
+        "phpstan/phpstan-symfony": "^0.12.3",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
         "symfony/profiler-pack": "*",
@@ -70,6 +76,19 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "phpstan": [
+            "@php bin/console cache:warmup --env=dev",
+            "@php bin/console cache:warmup --env=test",
+            "@phpstan-src",
+            "@phpstan-tests"
+        ],
+        "phpstan-src": "@php vendor/bin/phpstan analyse -c phpstan.neon src --level max --no-progress",
+        "phpstan-tests": "@php vendor/bin/phpstan analyse -c phpstan-tests.neon tests --level max --no-progress",
+        "tests": "@php bin/phpunit",
+        "ci": [
+            "@phpstan",
+            "@tests"
         ]
     },
     "conflict": {
