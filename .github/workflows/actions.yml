@@ -1,4 +1,4 @@
-name: PHP Composer
+name: THlEd BUGTRACKER CI
 
 on: [push]
 
@@ -6,12 +6,11 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      working-directory: ./app
 
     steps:
     - uses: actions/checkout@v1
-
-    - name: Change to app directory
-      run: cd app && ls
 
     - name: Validate composer.json and composer.lock
       run: composer validate
