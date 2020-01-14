@@ -8,6 +8,7 @@ RUN apk add --no-cache \
 RUN pecl install xdebug-2.9.0 \
     && docker-php-ext-enable xdebug
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN mkdir -p /.composer && chown 1000 /.composer \
+    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 WORKDIR /usr/src/app
