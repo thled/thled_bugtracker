@@ -6,17 +6,18 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    env:
-      working-directory: ./app
 
     steps:
     - uses: actions/checkout@v1
 
     - name: Validate composer.json and composer.lock
+      working-directory: ./app
       run: ls
 
     - name: Install dependencies
+      working-directory: ./app
       run: composer install --prefer-dist --no-progress --no-suggest
 
     - name: Run CI
+      working-directory: ./app
       run: composer run-script ci
