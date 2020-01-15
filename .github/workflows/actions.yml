@@ -5,14 +5,20 @@ on: [push]
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: php:7.4.1-fpm-alpine3.11
 
     steps:
     - uses: actions/checkout@v1
 
+    - name: Install apk
+      run: apk add --no-cache libzip-dev wget git autoconf gcc g++ make && docker-php-ext-install pdo_mysql zip
+
+    - name: Install Composer
+      run: mkdir -p /.composer && chown 1000 /.composer && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
     - name: Validate composer.json and composer.lock
       working-directory: ./app
-      run: ls
+      run: composer validate
 
     - name: Install dependencies
       working-directory: ./app
