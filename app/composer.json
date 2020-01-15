@@ -77,6 +77,7 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
+        "tests": "@php bin/phpunit",
         "phpstan": [
             "@php bin/console cache:warmup --env=dev",
             "@php bin/console cache:warmup --env=test",
@@ -85,15 +86,9 @@
         ],
         "phpstan-src": "@php vendor/bin/phpstan analyse -c phpstan.neon src --level max --no-progress",
         "phpstan-tests": "@php vendor/bin/phpstan analyse -c phpstan-tests.neon tests --level max --no-progress",
-        "tests": [
-            "@phpunit-install",
-            "@phpunit-run"
-        ],
-        "phpunit-install": "@php bin/phpunit install",
-        "phpunit-run": "@php bin/phpunit",
         "ci": [
-            "@phpstan",
-            "@tests"
+            "@tests",
+            "@phpstan"
         ]
     },
     "conflict": {
