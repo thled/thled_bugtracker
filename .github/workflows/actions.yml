@@ -3,18 +3,23 @@ name: THlEd BUGTRACKER CI
 on: [push]
 
 jobs:
-  build:
+  run:
 
-    runs-on: php:7.4.1-fpm-alpine3.11
+    name: Run
+    runs-on: ubuntu-18.04
 
     steps:
     - uses: actions/checkout@v1
 
-    - name: Install apk
-      run: apk add --no-cache libzip-dev wget git autoconf gcc g++ make && docker-php-ext-install pdo_mysql zip
+    - name: Setup PHP
+      uses: ./
+      with:
+        php-version: 7.4
 
-    - name: Install Composer
-      run: mkdir -p /.composer && chown 1000 /.composer && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    - name: php --version
+      run: |
+        php -i
+        php -m
 
     - name: Validate composer.json and composer.lock
       working-directory: ./app
