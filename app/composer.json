@@ -85,7 +85,12 @@
         ],
         "phpstan-src": "@php vendor/bin/phpstan analyse -c phpstan.neon src --level max --no-progress",
         "phpstan-tests": "@php vendor/bin/phpstan analyse -c phpstan-tests.neon tests --level max --no-progress",
-        "tests": "@php bin/phpunit",
+        "tests": [
+            "@phpunit-install",
+            "@phpunit-run"
+        ],
+        "phpunit-install": "@php bin/phpunit install",
+        "phpunit-run": "@php bin/phpunit",
         "ci": [
             "@phpstan",
             "@tests"
