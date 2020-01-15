@@ -11,10 +11,8 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Setup PHP
-      uses: ./
-      with:
-        php-version: 7.4
+    - name: Install PHP 7.4
+      run: sudo apt-fast install -y php7.4
 
     - name: php --version
       run: |
