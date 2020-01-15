@@ -1,5 +1,7 @@
 # THlEd BUGTRACKER
 
+[![Version][version-badge]][changelog] [![MIT License][license-badge]][license]
+
 ## Requirements
 
 ### Server
@@ -17,8 +19,8 @@
 
 ### Development
 
-- [Docker][1]
-- [Docker-Compose][2]
+- [Docker][docker]
+- [Docker-Compose][docker-compose]
 - Free ports on host as defined in `.env`
 
 ## Installation
@@ -59,5 +61,13 @@
 
 - Run whole test suite: `$ docker-compose exec app bin/phpunit`
 
-[1]: https://docs.docker.com/install/
-[2]: https://docs.docker.com/compose/install/
+## Contribute
+
+Please do contribute! Issues and pull requests are welcome.
+
+[version-badge]: https://img.shields.io/badge/version-0.4.0-blue.svg
+[changelog]: ./CHANGELOG.md
+[license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
+[license]: ./LICENSE
+[docker]: https://docs.docker.com/install/
+[docker-compose]: https://docs.docker.com/compose/install/
