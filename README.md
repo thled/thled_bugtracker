@@ -57,6 +57,21 @@
   - Start "Listening for PHP Debug Connections"
 - Receive mails with Mailcatcher: `http://localhost:1080`
 
+## Code Quality
+
+To ensure a high quality of the code base different tools are used to analyse, lint and fix code which does not adhere to the standards (PSR, Symfony etc.).
+There are manual tools and automatic tools for this purpose. Manual tools should be executed regularly while developing and automatic tools are executed in the Github Actions Workflow (alias Pipeline) or externally (e.g. SonarQube).
+
+### Manual tools
+
+- php-cs-fixer: `$ composer fix`
+
+### Automatic tools
+
+- PHPStan
+- PHP_CodeSniffer
+- SonarQube
+
 ## Tests
 
 - Run whole test suite: `$ docker-compose exec app bin/phpunit`

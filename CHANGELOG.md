@@ -10,10 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Security-Advisories from Roave.
+- php-cs-fixer to automatically fix code to follow standards.
 
 ### Changed
 
 - Unpack Symfony packs in composer.json and edit version constraints.
+- Add "Code Quality" section to Readme.
 
 ## [0.4.0] - 2020-01-15
 

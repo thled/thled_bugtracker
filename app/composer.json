@@ -103,7 +103,8 @@
         "ci": [
             "@tests",
             "@phpstan"
-        ]
+        ],
+        "fix": "@php /usr/local/bin/php-cs-fixer fix --allow-risky=yes"
     },
     "conflict": {
         "symfony/symfony": "*"
