@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Security-Advisories from Roave.
+
+### Changed
+
+- Unpack Symfony packs in composer.json and edit version constraints.
+
 ## [0.4.0] - 2020-01-15
 
 ### Added
