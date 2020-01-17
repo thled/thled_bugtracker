@@ -39,6 +39,7 @@
     },
     "require-dev": {
         "easycorp/easy-log-handler": "^1.0",
+        "friendsofphp/php-cs-fixer": "^2.16",
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan": "^0.12",
         "phpstan/phpstan-doctrine": "^0.12",
@@ -46,6 +47,7 @@
         "phpstan/phpstan-strict-rules": "^0.12",
         "phpstan/phpstan-symfony": "^0.12",
         "roave/security-advisories": "dev-master",
+        "squizlabs/php_codesniffer": "^3.5",
         "symfony/browser-kit": "5.0.*",
         "symfony/css-selector": "5.0.*",
         "symfony/debug-bundle": "5.0.*",
@@ -91,6 +93,13 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
+        "ci": [
+            "@lint",
+            "@tests",
+            "@phpstan"
+        ],
+        "lint": "@php vendor/bin/phpcs",
+        "fix": "@php vendor/bin/php-cs-fixer fix --allow-risky=yes",
         "tests": "@php bin/phpunit",
         "phpstan": [
             "@php bin/console cache:warmup --env=dev",
@@ -99,12 +108,7 @@
             "@phpstan-tests"
         ],
         "phpstan-src": "@php vendor/bin/phpstan analyse -c phpstan.neon src --level max --no-progress",
-        "phpstan-tests": "@php vendor/bin/phpstan analyse -c phpstan-tests.neon tests --level max --no-progress",
-        "ci": [
-            "@tests",
-            "@phpstan"
-        ],
-        "fix": "@php /usr/local/bin/php-cs-fixer fix --allow-risky=yes"
+        "phpstan-tests": "@php vendor/bin/phpstan analyse -c phpstan-tests.neon tests --level max --no-progress"
     },
     "conflict": {
         "symfony/symfony": "*"

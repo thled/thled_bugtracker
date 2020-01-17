@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Security-Advisories from Roave.
+- PHP_CodeSniffer for linting code and ensure code quality in Github Actions.
 - php-cs-fixer to automatically fix code to follow standards.
 
 ### Changed

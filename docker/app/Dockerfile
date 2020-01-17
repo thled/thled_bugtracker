@@ -11,8 +11,4 @@ RUN pecl install xdebug-2.9.0 \
 RUN mkdir -p /.composer && chown 1000 /.composer \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN wget https://cs.symfony.com/download/php-cs-fixer-v2.phar -O php-cs-fixer \
-    && chmod a+x php-cs-fixer \
-    && mv php-cs-fixer /usr/local/bin/php-cs-fixer
-
 WORKDIR /usr/src/app
