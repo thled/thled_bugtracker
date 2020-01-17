@@ -7,11 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0] - 2020-01-17
+
 ### Added
 
 - Security-Advisories from Roave.
 - PHP_CodeSniffer for linting code and ensure code quality in Github Actions.
 - php-cs-fixer to automatically fix code to follow standards.
+- SonarCloud for continuous code quality (<https://sonarcloud.io>).
 
 ### Changed
 
@@ -57,7 +60,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Set up the Docker environment for development.
 - Readme for installation instructions.
 
-[unreleased]: https://github.com/thled/thled_bugtracker/compare/v0.4.0...HEAD
+[unreleased]: https://github.com/thled/thled_bugtracker/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/thled/thled_bugtracker/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/thled/thled_bugtracker/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/thled/thled_bugtracker/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/thled/thled_bugtracker/compare/v0.1.1...v0.2.0
