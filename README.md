@@ -1,6 +1,8 @@
 # THlEd BUGTRACKER
 
-[![Version][version-badge]][changelog] [![MIT License][license-badge]][license]
+[![Version][version-badge]][changelog]
+[![MIT License][license-badge]][license]
+[![Quality Gate Status][sonarcloud-quality-gate-badge]](sonarcloud-dashboard)
 
 ## Requirements
 
@@ -58,9 +60,20 @@
 - Receive mails with Mailcatcher: `http://localhost:1080`
 
 ## Code Quality
+[![Quality Gate Status][sonarcloud-quality-gate-badge]](sonarcloud-dashboard)
+
+[![Reliability Rating][sonarcloud-reliability-badge]](sonarcloud-dashboard):
+[![Bugs][sonarcloud-bugs-badge]](sonarcloud-dashboard)
+
+[![Security Rating][sonarcloud-security]](sonarcloud-dashboard):
+[![Vulnerabilities][sonarcloud-vulnerabilities]](sonarcloud-dashboard)
+
+[![Maintainability Rating][sonarcloud-maintainability]](sonarcloud-dashboard):
+[![Code Smells][sonarcloud-code-smells]](sonarcloud-dashboard),
+[![Duplicated Lines (%)][sonarcloud-duplicated-lines]](sonarcloud-dashboard)
 
 To ensure a high quality of the code base different tools are used to analyse, lint and fix code which does not adhere to the standards (PSR, Symfony etc.).
-There are manual tools and automatic tools for this purpose. Manual tools should be executed regularly while developing and automatic tools are executed in the Github Actions Workflow (alias Pipeline) or externally (e.g. SonarQube).
+There are manual tools and automatic tools for this purpose. Manual tools should be executed regularly while developing and automatic tools are executed in the Github Actions Workflow (alias Pipeline) or externally (e.g. SonarQube/SonarCloud).
 
 ### Manual tools
 
@@ -68,9 +81,9 @@ There are manual tools and automatic tools for this purpose. Manual tools should
 
 ### Automatic tools
 
-- PHPStan
-- PHP_CodeSniffer
-- SonarQube
+- PHPStan: `$ composer phpstan`
+- PHP_CodeSniffer: `$ composer lint`
+- SonarCloud (triggered by pushing to Master branch)
 
 ## Tests
 
@@ -84,5 +97,14 @@ Please do contribute! Issues and pull requests are welcome.
 [changelog]: ./CHANGELOG.md
 [license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [license]: ./LICENSE
+[sonarcloud-quality-gate-badge]: https://sonarcloud.io/api/project_badges/measure?project=thled_thled_bugtracker&metric=alert_status
+[sonarcloud-reliability-badge]: https://sonarcloud.io/api/project_badges/measure?project=thled_thled_bugtracker&metric=reliability_rating
+[sonarcloud-bugs-badge]: https://sonarcloud.io/api/project_badges/measure?project=thled_thled_bugtracker&metric=bugs
+[sonarcloud-security]: https://sonarcloud.io/api/project_badges/measure?project=thled_thled_bugtracker&metric=security_rating
+[sonarcloud-vulnerabilities]: https://sonarcloud.io/api/project_badges/measure?project=thled_thled_bugtracker&metric=vulnerabilities
+[sonarcloud-maintainability]: https://sonarcloud.io/api/project_badges/measure?project=thled_thled_bugtracker&metric=sqale_rating
+[sonarcloud-code-smells]: https://sonarcloud.io/api/project_badges/measure?project=thled_thled_bugtracker&metric=code_smells
+[sonarcloud-duplicated-lines]: https://sonarcloud.io/api/project_badges/measure?project=thled_thled_bugtracker&metric=duplicated_lines_density
+[sonarcloud-dashboard]: https://sonarcloud.io/dashboard?id=thled_thled_bugtracker
 [docker]: https://docs.docker.com/install/
 [docker-compose]: https://docs.docker.com/compose/install/

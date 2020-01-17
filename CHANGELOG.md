@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- "Code Quality" section in Readme.
+- Add SonarCloud Quality Gate Status to Readme.
+
 ## [0.5.0] - 2020-01-17
 
 ### Added
