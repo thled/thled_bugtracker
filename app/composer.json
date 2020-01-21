@@ -100,6 +100,10 @@
         ],
         "lint": "@php vendor/bin/phpcs",
         "fix": "@php vendor/bin/php-cs-fixer fix --allow-risky=yes",
+        "analyse": [
+            "@phpstan-src",
+            "@phpstan-tests"
+        ],
         "tests": "@php bin/phpunit",
         "phpstan": [
             "@php bin/console cache:warmup --env=dev",
