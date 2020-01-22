@@ -33,7 +33,7 @@ To meet my intention to showcase my programming skills, the software needs to fu
 - PHP 7.4
 - Symfony 5.0
 - Bootstrap 4.4
-- MariaDB 10.4
+- PostgreSQL 12.1
 
 ### Views
 

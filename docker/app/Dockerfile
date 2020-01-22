@@ -1,9 +1,9 @@
 FROM php:7.4.1-fpm-alpine3.11
 
 RUN apk add --no-cache \
-    libzip-dev \
+    postgresql-dev libzip-dev \
     bash wget git autoconf gcc g++ make \
-    && docker-php-ext-install pdo_mysql zip
+    && docker-php-ext-install pdo_pgsql zip
 
 RUN pecl install xdebug-2.9.0 \
     && docker-php-ext-enable xdebug

@@ -28,14 +28,12 @@ services:
             - "app"
 
     db:
-        image: mariadb:10.4.11
+        image: postgres:12.1-alpine
         restart: unless-stopped
         environment:
-            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            - "POSTGRES_PASSWORD=${POSTGRES_ROOT_PASSWORD}"
         volumes:
-            - "./docker/db/my.cnf:/etc/mysql/my.cnf:ro"
-            - "dbdata:/var/lib/mysql"
+            - "dbdata:/var/lib/postgresql/data"
 
     adminer:
         image: adminer:4.7.5

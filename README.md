@@ -8,8 +8,8 @@
 
 ### Server
 
-- PHP 7.4.1 or higher
-- MariaDB 10.4.11 or higher
+- PHP 7.4 or higher
+- PostgreSQL 12.1 or higher
 - PHP extensions:
   - Ctype
   - iconv
@@ -41,11 +41,11 @@
 - Access the application: `localhost:80`
 - SSH into container: `$ docker-compose exec app bash`
 - Manage DB with Adminer: `localhost:8080`
-  - System: MySQL
+  - System: PostgreSqQL
   - Server: db
-  - Username: root
-  - Password: root
-  - Database: db
+  - Username: postgres
+  - Password: postgres
+  - Database: postgres
 - Debug with xDebug:
   - Maybe adjust local IP of host with `xdebug.remote_host` in `docker/php/xdebug.ini`
   - PHPStorm configuration:
@@ -60,6 +60,7 @@
 - Receive mails with Mailcatcher: `http://localhost:1080`
 
 ## Code Quality
+
 [![Quality Gate Status][sonarcloud-quality-gate-badge]](sonarcloud-dashboard)
 
 [![Reliability Rating][sonarcloud-reliability-badge]](sonarcloud-dashboard):
@@ -81,7 +82,7 @@ There are manual tools and automatic tools for this purpose. Manual tools should
 
 ### Automatic tools
 
-- PHPStan: `$ composer phpstan`
+- PHPStan: `$ composer analyse`
 - PHP_CodeSniffer: `$ composer lint`
 - SonarCloud (triggered by pushing to Master branch)
 

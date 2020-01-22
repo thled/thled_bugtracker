@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - "Code Quality" section in Readme.
 - Add SonarCloud Quality Gate Status to Readme.
 - PHPUnit configuration.
+- Logging strategy to rotating files.
+- DB from MariaDB to PostgreSQL.
 
 ## [0.5.0] - 2020-01-17
 
