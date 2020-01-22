@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Software Requirements Specification as guideline to what to develop.
+- EditorConfig for app created with PHPStorm.
 
 ### Changed
 
