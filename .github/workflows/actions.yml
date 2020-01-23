@@ -1,4 +1,4 @@
-name: THlEd BUGTRACKER CI
+name: ci-pipeline
 
 on: [push]
 

@@ -1,7 +1,8 @@
 # THlEd BUGTRACKER
 
-[![Version][version-badge]][changelog]
-[![MIT License][license-badge]][license]
+[![Version][version-badge]](changelog)
+[![MIT License][license-badge]](license)
+[![Pipeline][pipeline-badge]](pipeline)
 [![Quality Gate Status][sonarcloud-quality-gate-badge]](sonarcloud-dashboard)
 
 ## Requirements
@@ -61,6 +62,9 @@
 
 ## Code Quality
 
+Master [![Pipeline][pipeline-badge]](pipeline),
+Develop [![Pipeline Develop][pipeline-dev-badge]](pipeline-dev)
+
 [![Quality Gate Status][sonarcloud-quality-gate-badge]](sonarcloud-dashboard)
 
 [![Reliability Rating][sonarcloud-reliability-badge]](sonarcloud-dashboard):
@@ -98,6 +102,10 @@ Please do contribute! Issues and pull requests are welcome.
 [changelog]: ./CHANGELOG.md
 [license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [license]: ./LICENSE
+[pipeline-badge]: https://github.com/thled/thled_bugtracker/workflows/ci-pipeline/badge.svg?branch=master
+[pipeline]: https://github.com/thled/thled_bugtracker/actions?query=workflow%3A%22ci-pipeline%22+branch%3Amaster
+[pipeline-dev-badge]: https://github.com/thled/thled_bugtracker/workflows/ci-pipeline/badge.svg?branch=develop
+[pipeline-dev]: https://github.com/thled/thled_bugtracker/actions?query=workflow%3A%22ci-pipeline%22+branch%3Adevelop
 [sonarcloud-quality-gate-badge]: https://sonarcloud.io/api/project_badges/measure?project=thled_thled_bugtracker&metric=alert_status
 [sonarcloud-reliability-badge]: https://sonarcloud.io/api/project_badges/measure?project=thled_thled_bugtracker&metric=reliability_rating
 [sonarcloud-bugs-badge]: https://sonarcloud.io/api/project_badges/measure?project=thled_thled_bugtracker&metric=bugs

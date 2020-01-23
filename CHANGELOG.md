@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Software Requirements Specification as guideline to what to develop.
 - EditorConfig for app created with PHPStorm.
+- User Fixtures for test users.
 
 ### Changed
 
@@ -38,7 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Github Actions for CI/CD (auto. pipeline for running tests and code analysis).
+- Github Actions Workflow for CI/CD (auto. pipeline for running tests and code analysis).
 - Changelog (this file) to show the history and progress of the application.
 - MIT License file.
 
