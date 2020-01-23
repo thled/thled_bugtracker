@@ -40,7 +40,6 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "easycorp/easy-log-handler": "^1.0",
-        "friendsofphp/php-cs-fixer": "^2.16",
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan": "^0.12",
         "phpstan/phpstan-doctrine": "^0.12",
@@ -48,6 +47,7 @@
         "phpstan/phpstan-strict-rules": "^0.12",
         "phpstan/phpstan-symfony": "^0.12",
         "roave/security-advisories": "dev-master",
+        "slevomat/coding-standard": "^6.1",
         "squizlabs/php_codesniffer": "^3.5",
         "symfony/browser-kit": "5.0.*",
         "symfony/css-selector": "5.0.*",
@@ -100,7 +100,7 @@
             "@phpstan"
         ],
         "lint": "@php vendor/bin/phpcs",
-        "fix": "@php vendor/bin/php-cs-fixer fix --allow-risky=yes",
+        "fix": "@php vendor/bin/phpcbf -wp",
         "analyse": [
             "@phpstan-src",
             "@phpstan-tests"

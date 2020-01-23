@@ -1,9 +1,8 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
+use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
@@ -17,12 +16,16 @@ final class Version20200122065506 extends AbstractMigration
         return 'Create User';
     }
 
+    /**
+     * @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter
+     * @throws DBALException
+     */
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf(
-            'postgresql' !== $this->connection->getDatabasePlatform()->getName(),
-            'Migration can only be executed safely on \'postgresql\'.'
+            $this->connection->getDatabasePlatform()->getName() !== 'postgresql',
+            'Migration can only be executed safely on \'postgresql\'.',
         );
 
         $this->addSql('CREATE SEQUENCE user_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
@@ -32,17 +35,21 @@ final class Version20200122065506 extends AbstractMigration
                 email VARCHAR(180) NOT NULL,
                 roles JSON NOT NULL,
                 password VARCHAR(255) NOT NULL,
-                PRIMARY KEY(id))'
+                PRIMARY KEY(id))',
         );
         $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649E7927C74 ON "user" (email)');
     }
 
+    /**
+     * @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter
+     * @throws DBALException
+     */
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf(
-            'postgresql' !== $this->connection->getDatabasePlatform()->getName(),
-            'Migration can only be executed safely on \'postgresql\'.'
+            $this->connection->getDatabasePlatform()->getName() !== 'postgresql',
+            'Migration can only be executed safely on \'postgresql\'.',
         );
 
         $this->addSql('CREATE SCHEMA public');

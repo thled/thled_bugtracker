@@ -1,15 +1,11 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- */
+/** @ORM\Entity(repositoryClass="App\Repository\UserRepository") */
 class User implements UserInterface
 {
     /**
@@ -19,9 +15,7 @@ class User implements UserInterface
      */
     private int $id;
 
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
+    /** @ORM\Column(type="string", length=180, unique=true) */
     private string $email;
 
     /**
@@ -30,9 +24,7 @@ class User implements UserInterface
      */
     private array $roles = [];
 
-    /**
-     * @ORM\Column(type="string")
-     */
+    /** @ORM\Column(type="string") */
     private string $password;
 
     public function getId(): ?int
@@ -57,6 +49,7 @@ class User implements UserInterface
         return $this->email;
     }
 
+    /** @return array<string> */
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -66,9 +59,7 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
-    /**
-     * @param array<string> $roles
-     */
+    /** @param array<string> $roles */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;

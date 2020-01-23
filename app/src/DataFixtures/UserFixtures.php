@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\DataFixtures;
 
@@ -45,13 +43,13 @@ final class UserFixtures extends Fixture
 
     private function createProjectOwners(int $amountOfPos): void
     {
-        for ($i = 0; $i < $amountOfPos; ++$i) {
+        for ($i = 0; $i < $amountOfPos; $i++) {
             $name = sprintf('po%s', $i);
             $this->createProjectOwner($name);
         }
     }
 
-    private function createProjectOwner($name): void
+    private function createProjectOwner(string $name): void
     {
         $email = sprintf('%s@example.com', $name);
         $plainPassword = 'admin123';
@@ -68,7 +66,7 @@ final class UserFixtures extends Fixture
         }
     }
 
-    private function createDeveloper($name): void
+    private function createDeveloper(string $name): void
     {
         $email = sprintf('%s@example.com', $name);
         $plainPassword = 'admin123';
@@ -77,6 +75,7 @@ final class UserFixtures extends Fixture
         $this->createUser($email, $plainPassword, $roles);
     }
 
+    /** @param array<string> $roles */
     private function createUser(
         string $email,
         string $plainPassword,

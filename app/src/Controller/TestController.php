@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Controller;
 
@@ -10,9 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class TestController extends AbstractController
 {
-    /**
-     * @Route("/test")
-     */
+    /** @Route("/test") */
     public function testAction(): Response
     {
         return new Response('foobar');
