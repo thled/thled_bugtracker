@@ -44,9 +44,9 @@
 - Manage DB with Adminer: `localhost:8080`
   - System: PostgreSqQL
   - Server: db
-  - Username: postgres
-  - Password: postgres
-  - Database: postgres
+  - Username: db
+  - Password: db
+  - Database: db
 - Debug with xDebug:
   - Maybe adjust local IP of host with `xdebug.remote_host` in `docker/php/xdebug.ini`
   - PHPStorm configuration:
@@ -82,7 +82,7 @@ There are manual tools and automatic tools for this purpose. Manual tools should
 
 ### Manual tools
 
-- php-cs-fixer: `$ composer fix`
+- PHP Code Beautifier and Fixer: `$ composer fix`
 
 ### Automatic tools
 

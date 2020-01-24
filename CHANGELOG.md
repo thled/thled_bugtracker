@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Software Requirements Specification as guideline to what to develop.
 - EditorConfig for app created with PHPStorm.
 - User Fixtures for test users.
+- SlevomatCodingStandard rule set to PHP_CodeSniffer and excluded/configured rules.
 
 ### Changed
 
@@ -20,6 +21,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PHPUnit configuration.
 - Logging strategy to rotating files.
 - DB from MariaDB to PostgreSQL.
+- Composer "fix" script now uses PHP Code Beautifier and Fixer instead of PHP CS Fixer.
+
+### Removed
+
+- PHP Coding Standards Fixer (PHP CS Fixer) tool because it is replaced by PHP Code Beautifier and Fixer.
 
 ## [0.5.0] - 2020-01-17
 
@@ -27,7 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Security-Advisories from Roave.
 - PHP_CodeSniffer for linting code and ensure code quality in Github Actions.
-- php-cs-fixer to automatically fix code to follow standards.
+- PHP CS Fixer to automatically fix code to follow standards.
 - SonarCloud for continuous code quality (<https://sonarcloud.io>).
 
 ### Changed
@@ -46,7 +52,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Add links to Changelog and License in Readme.
-- Gitignore to no longer ignore the application .env.
+
+### Fixed
+
+- Gitignore to no longer ignore the application's .env.
 
 ## [0.3.0] - 2020-01-14
 
