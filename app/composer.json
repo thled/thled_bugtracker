@@ -99,7 +99,7 @@
             "@tests",
             "@phpstan"
         ],
-        "lint": "@php vendor/bin/phpcs",
+        "lint": "@php vendor/bin/phpcs -ws",
         "fix": "@php vendor/bin/phpcbf -wp",
         "analyse": [
             "@phpstan-src",

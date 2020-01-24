@@ -62,7 +62,7 @@ final class UserFixtures extends Fixture
 
     private function createDevelopers(int $amountOfDevs): void
     {
-        for ($i = 0; $i < $amountOfDevs; ++$i) {
+        for ($i = 0; $i < $amountOfDevs; $i++) {
             $name = sprintf('dev%s', $i);
             $this->createDeveloper($name);
         }

@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class TestController extends AbstractController
 {
-    /** @Route("/test") */
+    /** @Route("/test", name="test") */
     public function testAction(): Response
     {
         return new Response('foobar');

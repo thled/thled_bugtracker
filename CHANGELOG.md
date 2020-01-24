@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - EditorConfig for app created with PHPStorm.
 - User Fixtures for test users.
 - SlevomatCodingStandard rule set to PHP_CodeSniffer and excluded/configured rules.
+- Login Form to authenticate users.
 
 ### Changed
 

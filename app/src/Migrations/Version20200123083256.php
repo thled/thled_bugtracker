@@ -17,7 +17,7 @@ final class Version20200123083256 extends AbstractMigration
 
     /**
      * @throws \Doctrine\DBAL\DBALException
-     * @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter
+     * @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
      */
     public function up(Schema $schema): void
     {
@@ -40,7 +40,7 @@ final class Version20200123083256 extends AbstractMigration
 
     /**
      * @throws DBALException
-     * @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter
+     * @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
      */
     public function down(Schema $schema): void
     {
