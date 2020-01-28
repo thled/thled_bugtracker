@@ -42,23 +42,27 @@
 - Access the application: `localhost:80`
 - SSH into container: `$ docker-compose exec app bash`
 - Manage DB with Adminer: `localhost:8080`
-  - System: PostgreSqQL
-  - Server: db
-  - Username: db
-  - Password: db
-  - Database: db
+  - System: `PostgreSQL`
+  - Server: `db`
+  - Username: `db`
+  - Password: `db`
+  - Database: `db`
+- Receive mails with Mailcatcher: `http://localhost:1080`
 - Debug with xDebug:
   - Maybe adjust local IP of host with `xdebug.remote_host` in `docker/php/xdebug.ini`
   - PHPStorm configuration:
-    - Change debug port under `Settings/Languages/PHP/Debug` to 9001
+    - Change debug port under `Settings/Languages/PHP/Debug` to `9001`
     - Add new server under `Settings/Languages/PHP/Servers`
-      - Name: docker-server
-      - Host: localhost
-      - Port: 80
-      - Debugger: Xdebug
+      - Name: `docker-server`
+      - Host: `localhost`
+      - Port: `80`
+      - Debugger: `Xdebug`
       - Select "Use path mappings" and map "Project files" to `/usr/src/app`
   - Start "Listening for PHP Debug Connections"
-- Receive mails with Mailcatcher: `http://localhost:1080`
+- Lint with CodeSniffer:
+  - PHPStorm configuration:
+    - Set path to script under `Settings/Languages/PHP/Quality_Tools/PHP_CodeSniffer` to `path/to/project/app/scripts/phpcs.sh`
+    - Activate "PHP_CodeSniffer validation" unter `Settings/Editor/Inspections/PHP/Quality_tools`
 
 ## Code Quality
 
@@ -78,7 +82,8 @@ Develop [![Pipeline Develop][pipeline-dev-badge]](pipeline-dev)
 [![Duplicated Lines (%)][sonarcloud-duplicated-lines]](sonarcloud-dashboard)
 
 To ensure a high quality of the code base different tools are used to analyse, lint and fix code which does not adhere to the standards (PSR, Symfony etc.).
-There are manual tools and automatic tools for this purpose. Manual tools should be executed regularly while developing and automatic tools are executed in the Github Actions Workflow (alias Pipeline) or externally (e.g. SonarQube/SonarCloud).
+There are manual tools and automatic tools for this purpose.
+Manual tools should be executed regularly while developing and automatic tools are executed in the Github Actions Workflow (alias Pipeline) or externally (e.g. SonarQube/SonarCloud).
 
 ### Manual tools
 

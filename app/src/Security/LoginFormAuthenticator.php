@@ -68,7 +68,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements
     }
 
     /**
-     * @param array<string> $credentials
+     * @param mixed|array<string> $credentials
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.DisallowMixedTypeHint.DisallowedMixedTypeHint
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
      * @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
      */
@@ -91,7 +92,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements
     }
 
     /**
-     * @param array<string> $credentials
+     * @param mixed|array<string> $credentials
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.DisallowMixedTypeHint.DisallowedMixedTypeHint
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
      */
     public function checkCredentials($credentials, UserInterface $user): bool
@@ -104,7 +106,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
      *
-     * @param array<string> $credentials
+     * @param mixed|array<string> $credentials
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.DisallowMixedTypeHint.DisallowedMixedTypeHint
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
      */
     public function getPassword($credentials): ?string
