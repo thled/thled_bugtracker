@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - User Fixtures for test users.
 - SlevomatCodingStandard rule set to PHP_CodeSniffer and excluded/configured rules.
 - Login Form to authenticate users.
+- Register Form for letting users register by themselves.
 
 ### Changed
 
@@ -23,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Logging strategy to rotating files.
 - DB from MariaDB to PostgreSQL.
 - Composer "fix" script now uses PHP Code Beautifier and Fixer instead of PHP CS Fixer.
+- Readme with how to use CodeSniffer in PHPStorm through docker container.
 
 ### Removed
 
