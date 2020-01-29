@@ -20,10 +20,10 @@ class User implements UserInterface
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private ?int $id = null;
 
     /** @ORM\Column(type="string", length=180, unique=true) */
-    private string $email;
+    private string $email = '';
 
     /**
      * @var array<string>
@@ -32,7 +32,7 @@ class User implements UserInterface
     private array $roles = [];
 
     /** @ORM\Column(type="string") */
-    private string $password;
+    private string $password = '';
 
     public function getId(): ?int
     {

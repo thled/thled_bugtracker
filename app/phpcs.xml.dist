@@ -43,6 +43,7 @@
     <rule ref="SlevomatCodingStandard.Classes.TraitUseSpacing">
         <properties>
             <property name="linesCountBeforeFirstUse" value="0"/>
+            <property name="linesCountBeforeFirstUseWhenFirstInClass" value="0"/>
             <property name="linesCountBetweenUses" value="0"/>
             <property name="linesCountAfterLastUse" value="1"/>
             <property name="linesCountAfterLastUseWhenLastInClass" value="0"/>
