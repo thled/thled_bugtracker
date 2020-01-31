@@ -95,6 +95,12 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
+        "bootstrap": [
+            "cp .env.docker .env.local",
+            "@composer install",
+            "@php bin/console doctrine:migrations:migrate --no-interaction",
+            "@php bin/console doctrine:fixtures:load --no-interaction"
+        ],
         "reset": [
             "@php bin/console doctrine:database:drop --force",
             "@php bin/console doctrine:database:create",

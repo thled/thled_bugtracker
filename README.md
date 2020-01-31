@@ -32,10 +32,7 @@
 1. Change to project directory: `$ cd thled_bugtracker`
 1. Copy .env for Docker-Compose: `$ cp .env.dist .env`
 1. Build and start the docker containers: `$ docker-compose up -d`
-1. Copy .env for App: `$ cp app/.env.docker app/.env.local`
-1. Install dependencies: `$ docker-compose exec app composer install`
-1. Create DB schema: `$ docker-compose exec app bin/console doctrine:migrations:migrate -n`
-1. Load fixtures: `$ docker-compose exec app bin/console doctrine:fixtures:load -n`
+1. Initialize the app: `$ docker-compose exec app composer bootstrap`
 
 ## Usage
 
