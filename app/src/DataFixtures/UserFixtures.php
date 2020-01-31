@@ -89,6 +89,21 @@ final class UserFixtures extends Fixture
         $user->setPassword($encodedPassword);
         $user->setRoles($roles);
 
+        $this->persistAndReference($user, $email);
+    }
+
+    private function persistAndReference(User $user, string $email): void
+    {
         $this->manager->persist($user);
+
+        $nameAndDomain = explode('@', $email);
+        $name = reset($nameAndDomain);
+        $this->setReference(
+            sprintf(
+                'user-%s',
+                $name,
+            ),
+            $user,
+        );
     }
 }

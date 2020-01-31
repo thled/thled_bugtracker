@@ -47,7 +47,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements
 
     public function supports(Request $request): bool
     {
-        return $request->attributes->get('_route') === 'app_login'
+        return $request->attributes->get('_route') === 'login'
             && $request->isMethod('POST');
     }
 
@@ -132,6 +132,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements
 
     protected function getLoginUrl(): string
     {
-        return $this->urlGenerator->generate('app_login');
+        return $this->urlGenerator->generate('login');
     }
 }
