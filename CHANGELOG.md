@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Frontend dependencies like Encore to manage CSS and JS.
+
 ## [0.6.0] - 2020-01-31
 
 ### Added
