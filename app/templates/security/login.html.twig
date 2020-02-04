@@ -1,11 +1,23 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('login') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('login') }}
+{% endblock %}
+
 {% block title %}Log in{% endblock %}
 
 {% block body %}
-    <form method="post">
+    <form class="form-signin text-center" method="post">
         {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            <div class="alert alert-danger">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
         {% endif %}
 
         {% if app.user %}
@@ -14,24 +26,56 @@
             </div>
         {% endif %}
 
+        <img
+                class="mb-4"
+                src="{{ asset('images/logo.svg') }}"
+                alt="THlEd BUGTRACKER Logo"
+                width="128"
+                height="128"
+        >
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="inputEmail">Email</label>
-        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required
-               autofocus>
-        <label for="inputPassword">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" required>
 
-        <input type="hidden" name="_csrf_token"
-               value="{{ csrf_token('authenticate') }}"
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input
+                type="email"
+                value="{{ last_username }}"
+                name="email"
+                id="inputEmail"
+                class="form-control"
+                placeholder="Email address"
+                required
+                autofocus
+        >
+
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input
+                type="password"
+                name="password"
+                id="inputPassword"
+                class="form-control"
+                placeholder="Password"
+                required
+        >
+
+        <input
+                type="hidden"
+                name="_csrf_token"
+                value="{{ csrf_token('authenticate') }}"
         >
 
         <div class="checkbox mb-3">
-            <input type="checkbox" id="remember_me" name="_remember_me" checked/>
-            <label for="remember_me">Remember me</label>
+            <label>
+                <input
+                        type="checkbox"
+                        id="remember_me"
+                        name="_remember_me"
+                        checked
+                >
+                Remember me
+            </label>
         </div>
 
-        <button class="btn btn-lg btn-primary" type="submit">
-            Sign in
-        </button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <p class="mt-5 mb-3 text-muted">No Account? <a href="#">Please register!</a></p>
     </form>
 {% endblock %}

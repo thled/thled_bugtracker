@@ -38,6 +38,7 @@
 
 - Access the application: `localhost:80`
 - SSH into container: `$ docker-compose exec app bash`
+- SSH into node container for using Yarn: `$ docker-compose exec frontend sh`
 - Manage DB with Adminer: `localhost:8080`
   - System: `PostgreSQL`
   - Server: `db`
