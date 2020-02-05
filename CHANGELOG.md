@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bootstrap for styling the frontend.
 - Style for Login form.
 
+### Fixed
+
+- Links in Readme.
+
 ## [0.6.0] - 2020-01-31
 
 ### Added

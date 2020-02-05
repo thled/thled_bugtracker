@@ -1,9 +1,9 @@
 # THlEd BUGTRACKER
 
-[![Version][version-badge]](changelog)
-[![MIT License][license-badge]](license)
-[![Pipeline][pipeline-badge]](pipeline)
-[![Quality Gate Status][sonarcloud-quality-gate-badge]](sonarcloud-dashboard)
+[![Version][version-badge]][changelog]
+[![MIT License][license-badge]][license]
+[![Pipeline][pipeline-badge]][pipeline]
+[![Quality Gate Status][sonarcloud-quality-gate-badge]][sonarcloud-dashboard]
 
 ## Requirements
 
@@ -64,20 +64,20 @@
 
 ## Code Quality
 
-Master [![Pipeline][pipeline-badge]](pipeline),
-Develop [![Pipeline Develop][pipeline-dev-badge]](pipeline-dev)
+Master [![Pipeline][pipeline-badge]][pipeline],
+Develop [![Pipeline Develop][pipeline-dev-badge]][pipeline-dev]
 
-[![Quality Gate Status][sonarcloud-quality-gate-badge]](sonarcloud-dashboard)
+[![Quality Gate Status][sonarcloud-quality-gate-badge]][sonarcloud-dashboard]
 
-[![Reliability Rating][sonarcloud-reliability-badge]](sonarcloud-dashboard):
-[![Bugs][sonarcloud-bugs-badge]](sonarcloud-dashboard)
+[![Reliability Rating][sonarcloud-reliability-badge]][sonarcloud-dashboard]:
+[![Bugs][sonarcloud-bugs-badge]][sonarcloud-dashboard]
 
-[![Security Rating][sonarcloud-security]](sonarcloud-dashboard):
-[![Vulnerabilities][sonarcloud-vulnerabilities]](sonarcloud-dashboard)
+[![Security Rating][sonarcloud-security]][sonarcloud-dashboard]:
+[![Vulnerabilities][sonarcloud-vulnerabilities]][sonarcloud-dashboard]
 
-[![Maintainability Rating][sonarcloud-maintainability]](sonarcloud-dashboard):
-[![Code Smells][sonarcloud-code-smells]](sonarcloud-dashboard),
-[![Duplicated Lines (%)][sonarcloud-duplicated-lines]](sonarcloud-dashboard)
+[![Maintainability Rating][sonarcloud-maintainability]][sonarcloud-dashboard]:
+[![Code Smells][sonarcloud-code-smells]][sonarcloud-dashboard],
+[![Duplicated Lines (%)][sonarcloud-duplicated-lines]][sonarcloud-dashboard]
 
 To ensure a high quality of the code base different tools are used to analyse, lint and fix code which does not adhere to the standards (PSR, Symfony etc.).
 There are manual tools and automatic tools for this purpose.
