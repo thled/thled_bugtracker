@@ -17,6 +17,7 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress",
-        "docker": "yarn install && yarn encore dev --watch"
+        "docker": "yarn install && yarn encore dev --watch",
+        "ci": "yarn install && yarn encore dev"
     }
 }
