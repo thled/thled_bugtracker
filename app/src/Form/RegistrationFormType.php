@@ -7,15 +7,27 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegistrationFormType extends AbstractType
 {
+    private const PASSWORD_LENGTH_MIN = 6;
+    private const PASSWORD_LENGTH_MAX = 4_096;
+
+    private TranslatorInterface $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     /**
      * @param array<mixed> $options
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.DisallowMixedTypeHint.DisallowedMixedTypeHint
@@ -24,16 +36,23 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
+            ->add(
+                'email',
+                EmailType::class,
+                [
+                    'label' => 'register.email',
+                ],
+            )
             ->add(
                 'agreeTerms',
                 CheckboxType::class,
                 [
+                    'label' => 'register.agree_terms',
                     'mapped' => false,
                     'constraints' => [
                         new IsTrue(
                             [
-                                'message' => 'You should agree to our terms.',
+                                'message' => $this->translator->trans('register.should_agree'),
                             ],
                         ),
                     ],
@@ -43,22 +62,22 @@ class RegistrationFormType extends AbstractType
                 'plainPassword',
                 PasswordType::class,
                 [
-                    'label' => 'Password',
+                    'label' => 'register.password',
                     // instead of being set onto the object directly,
                     // this is read and encoded in the controller
                     'mapped' => false,
                     'constraints' => [
                         new NotBlank(
                             [
-                                'message' => 'Please enter a password',
+                                'message' => $this->translator->trans('register.enter_password'),
                             ],
                         ),
                         new Length(
                             [
-                                'min' => 6,
-                                'minMessage' => 'Your password should be at least {{ limit }} characters',
+                                'min' => self::PASSWORD_LENGTH_MIN,
+                                'minMessage' => $this->translator->trans('register.password_length'),
                                 // max length allowed by Symfony for security reasons
-                                'max' => 4_096,
+                                'max' => self::PASSWORD_LENGTH_MAX,
                             ],
                         ),
                     ],

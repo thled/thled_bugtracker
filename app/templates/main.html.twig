@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <header>
+                {% block header %}{% endblock %}
+            </header>
+        </div>
+        <div class="row">
+            <main role="main">
+                {% block main %}{% endblock %}
+            </main>
+        </div>
+        <div class="row">
+            <footer>
+                {% block footer %}{% endblock %}
+            </footer>
+        </div>
+    </div>
+{% endblock %}

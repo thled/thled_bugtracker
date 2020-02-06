@@ -24,7 +24,7 @@ class RegistrationControllerTest extends FunctionalTestBase
             ],
         );
 
-        self::assertUserIsCreated();
+        $this->assertUserIsCreated();
     }
 
     private function assertUserIsCreated(): void

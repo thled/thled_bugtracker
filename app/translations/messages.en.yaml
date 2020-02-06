@@ -1,0 +1,27 @@
+user:
+    email:
+        not_blank: Email is required.
+        max: Email cannot be longer than 180 characters.
+        email: Email needs to be a valid email address.
+
+login:
+    login: Login
+    logged_in: You are logged in as
+    logout: Logout
+    title: THlEd BUGTRACKER Login
+    email: Email address
+    password: Password
+    sign_in: Sign in
+    remember_me: Remember me
+    forgot_password: Forgot your <a href="%path%">Password</a>?
+    register: No Account? <a href="%path%">Sign up</a>
+    demo: Sign in as <a href="%path%">Demo User</a>
+
+register:
+    register: Register
+    email: Email
+    agree_terms: Agree Terms
+    should_agree: You should agree to our terms.
+    password: Password
+    enter_password: Please enter a password.
+    password_length: Your password should be at least {{ limit }} characters.

@@ -7,6 +7,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table("`user`")
@@ -22,7 +23,12 @@ class User implements UserInterface
      */
     private ?int $id = null;
 
-    /** @ORM\Column(type="string", length=180, unique=true) */
+    /**
+     * @Assert\NotBlank(message="user.email.not_blank")
+     * @Assert\Length(max="180", maxMessage="user.email.max")
+     * @Assert\Email(message="user.email.email")
+     * @ORM\Column(type="string", length=180, unique=true)
+     */
     private string $email = '';
 
     /**
