@@ -13,6 +13,6 @@ final class IndexController extends AbstractController
     /** @Route("/", name="index") */
     public function index(): Response
     {
-        return new Response('Welcome to THlEd BUGTRACKER!');
+        return $this->render('main.html.twig');
     }
 }

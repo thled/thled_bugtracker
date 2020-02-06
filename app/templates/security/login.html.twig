@@ -10,84 +10,93 @@
     {{ encore_entry_script_tags('login') }}
 {% endblock %}
 
-{% block title %}{% trans %}login.login{% endtrans %}{% endblock %}
+{% block title %}
+    {{ 'login.login'|trans }}
+{% endblock %}
 
 {% block body %}
-    <form class="form-signin text-center" method="post">
-        {% if error %}
-            <div class="alert alert-danger">
-                {{ error.messageKey|trans(error.messageData, 'security') }}
-            </div>
-        {% endif %}
+    <div class="card px-5">
+        <form class="form-signin text-center" method="post">
+            {% if error %}
+                <div class="alert alert-danger">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+            {% endif %}
 
-        {% if app.user %}
-            <div class="mb-3">
-                {% trans %}login.logged_in{% endtrans %} {{ app.user.username }},
-                <a href="{{ path('logout') }}">{% trans %}login.logout{% endtrans %}</a>
-            </div>
-        {% endif %}
+            {% if app.user %}
+                <div class="mb-3">
+                    {{ 'login.logged_in'|trans }} {{ app.user.username }},
+                    <a href="{{ path('logout') }}">{{ 'login.logout'|trans }}</a>
+                </div>
+            {% endif %}
 
-        <img
-                class="mb-4"
-                src="{{ asset('images/logo.svg') }}"
-                alt="THlEd BUGTRACKER Logo"
-                width="128"
-                height="128"
-        >
-        <h1 class="h3 mb-3 font-weight-normal">{% trans %}login.title{% endtrans %}</h1>
+            <img
+                    class="mb-4"
+                    src="{{ asset('images/logo.svg') }}"
+                    alt="THlEd BUGTRACKER Logo"
+                    width="128"
+                    height="128"
+            >
+            <div class="card-body">
+                <h5 class="card-title">
+                    {{ 'website.title'|trans }}
+                    {{ 'login.login'|trans }}
+                </h5>
 
-        <label for="inputEmail" class="sr-only">{% trans %}login.email{% endtrans %}</label>
-        <input
-                type="email"
-                value="{{ last_username }}"
-                name="email"
-                id="inputEmail"
-                class="form-control"
-                placeholder="Email address"
-                required
-                autofocus
-        >
-
-        <label for="inputPassword" class="sr-only">{% trans %}login.password{% endtrans %}</label>
-        <input
-                type="password"
-                name="password"
-                id="inputPassword"
-                class="form-control"
-                placeholder="Password"
-                required
-        >
-
-        <input
-                type="hidden"
-                name="_csrf_token"
-                value="{{ csrf_token('authenticate') }}"
-        >
-
-        <div class="checkbox mb-3">
-            <label>
+                <label for="inputEmail" class="sr-only">{{ 'login.email'|trans }}</label>
                 <input
-                        type="checkbox"
-                        id="remember_me"
-                        name="_remember_me"
-                        checked
+                        type="email"
+                        value="{{ last_username }}"
+                        name="email"
+                        id="inputEmail"
+                        class="form-control"
+                        placeholder="Email address"
+                        required
+                        autofocus
                 >
-                {% trans %}login.remember_me{% endtrans %}
-            </label>
-        </div>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">
-            {% trans %}login.sign_in{% endtrans %}
-        </button>
+                <label for="inputPassword" class="sr-only">{{ 'login.password'|trans }}</label>
+                <input
+                        type="password"
+                        name="password"
+                        id="inputPassword"
+                        class="form-control"
+                        placeholder="Password"
+                        required
+                >
 
-        <p class="mt-5 text-muted">
-            {% trans with {'%path%': '#' } %}login.forgot_password{% endtrans %}
-        </p>
-        <p class="text-muted">
-            {% trans with {'%path%': path('register') } %}login.register{% endtrans %}
-        </p>
-        <p class="mb-3 text-muted">
-            {% trans with {'%path%': "#" } %}login.demo{% endtrans %}
-        </p>
-    </form>
+                <input
+                        type="hidden"
+                        name="_csrf_token"
+                        value="{{ csrf_token('authenticate') }}"
+                >
+
+                <div class="checkbox mb-3">
+                    <label>
+                        <input
+                                type="checkbox"
+                                id="remember_me"
+                                name="_remember_me"
+                                checked
+                        >
+                        {{ 'login.remember_me'|trans }}
+                    </label>
+                </div>
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit">
+                    {{ 'login.sign_in'|trans }}
+                </button>
+
+                <p class="mt-5 text-muted">
+                    {{ 'login.forgot_password'|trans({'%path%': '#'})|raw }}
+                </p>
+                <p class="text-muted">
+                    {{ 'login.register'|trans({'%path%': path('register')})|raw }}
+                </p>
+                <p class="mb-3 text-muted">
+                    {{ 'login.demo'|trans({'%path%': '#'})|raw }}
+                </p>
+            </div>
+        </form>
+    </div>
 {% endblock %}

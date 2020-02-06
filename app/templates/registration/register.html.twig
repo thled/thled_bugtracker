@@ -13,13 +13,33 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    {{ form_start(registrationForm) }}
-    {{ form_row(registrationForm.email) }}
-    {{ form_row(registrationForm.plainPassword) }}
-    {{ form_row(registrationForm.agreeTerms) }}
+    <div class="card px-5 text-center">
+        {{ form_start(registrationForm) }}
+        <img
+                class="mb-4"
+                src="{{ asset('images/logo.svg') }}"
+                alt="THlEd BUGTRACKER Logo"
+                width="128"
+                height="128"
+        >
+        <div class="card-body">
+            <h5 class="card-title">
+                {{ 'website.title'|trans }}
+                {{ 'register.register'|trans }}
+            </h5>
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit">
-        {% trans %}register.register{% endtrans %}
-    </button>
-    {{ form_end(registrationForm) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword) }}
+            {{ form_row(registrationForm.agreeTerms) }}
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">
+                {{ 'register.register'|trans }}
+            </button>
+
+            <p class="my-3 text-muted">
+                {{ 'register.read_terms'|trans({'%path%': '#'})|raw }}
+            </p>
+        </div>
+        {{ form_end(registrationForm) }}
+    </div>
 {% endblock %}
