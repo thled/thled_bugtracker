@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Frontend dependencies like Encore to manage CSS and JS.
 - Bootstrap for styling the frontend.
 - Style for Login form.
+- Style for Register form.
+- Translations for future multilingual support.
 
 ### Fixed
 
