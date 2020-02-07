@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <header class="sticky-top">
+    <header class="sticky-top my-4">
         {% block header %}
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <img
@@ -13,6 +13,7 @@
                 <span class="navbar-brand mb-0 h1">
                     {% trans %}website.title{% endtrans %}
                 </span>
+
                 <button
                         class="navbar-toggler"
                         type="button"
@@ -34,35 +35,37 @@
         {% endblock %}
     </header>
     <main role="main">
-        <div class="container">
+        <div class="container-fluid">
             {% block main %}
-            <div class="card px-5 my-3">
-                <h1 class="mt-5">
-                    {% block main_title %}
-                        Title of the content!
-                    {% endblock %}
-                </h1>
-                <p class="lead">
-                    {% block main_lead %}
-                        Leading text to the main content.
-                    {% endblock %}
-                </p>
-                <p>
-                    {% block main_content %}
-                        {% include 'loremIpsum.html.twig' %}
-                    {% endblock %}
-                </p>
-            </div>
+                <div class="card px-5">
+                    <h1 class="mt-5">
+                        {% block main_title %}
+                            Title of the content!
+                        {% endblock %}
+                    </h1>
+                    <p class="lead">
+                        {% block main_lead %}
+                            Leading text to the main content.
+                        {% endblock %}
+                    </p>
+                    <p>
+                        {% block main_content %}
+                            {% include 'loremIpsum.html.twig' %}
+                        {% endblock %}
+                    </p>
+                </div>
             {% endblock %}
         </div>
     </main>
-    <footer class="footer fixed-bottom">
-        {% block footer %}
-        <nav class="navbar navbar-expand navbar-light bg-darker">
-            {% block footer_content %}
-                {% include 'footer.html.twig' %}
+    <footer class="footer">
+        <div class="container-fluid">
+            {% block footer %}
+                <nav class="navbar navbar-expand-md">
+                    {% block footer_content %}
+                        {% include 'footer.html.twig' %}
+                    {% endblock %}
+                </nav>
             {% endblock %}
-        </nav>
-        {% endblock %}
+        </div>
     </footer>
 {% endblock %}
