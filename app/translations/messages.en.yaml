@@ -5,7 +5,11 @@ header:
     dashboard: 'Dashboard'
     projects: 'Projects'
     tickets: 'Tickets'
-    account: 'Account'
+    account:
+        name: 'Account'
+        profile: 'Profile'
+        settings: 'Settings'
+        logout: 'Logout'
     search: 'Search'
 
 footer:
@@ -13,7 +17,7 @@ footer:
     disclaimer: 'Disclaimer'
     terms: 'Terms of Use'
     privacy: 'Privacy Policy'
-    copyright: '© 2020 Copyright: Thomas Le Duc'
+    copyright: '© 2020-%year% Thomas Le Duc'
 
 user:
     email:
@@ -41,4 +45,5 @@ register:
     password: 'Password'
     enter_password: 'Please enter a password.'
     password_length: 'Your password should be at least {{ limit }} characters.'
+    login: 'Already have an account? <a href="%path%">Sign in</a>'
     read_terms: 'Read <a href="%path%">Terms</a>'

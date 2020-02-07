@@ -12,4 +12,4 @@
         <a class="nav-link text-muted" href="#">{{ 'footer.privacy'|trans }}</a>
     </li>
 </ul>
-<span class="text-muted">{{ 'footer.copyright'|trans }}</span>
+<span class="text-muted">{{ 'footer.copyright'|trans({'%year%': 'now'|date('Y')}) }}</span>

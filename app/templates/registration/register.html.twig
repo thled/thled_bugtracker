@@ -36,7 +36,10 @@
                 {{ 'register.register'|trans }}
             </button>
 
-            <p class="my-3 text-muted">
+            <p class="text-muted mt-5">
+                {{ 'register.login'|trans({'%path%': path('login')})|raw }}
+            </p>
+            <p class="text-muted">
                 {{ 'register.read_terms'|trans({'%path%': '#'})|raw }}
             </p>
         </div>
