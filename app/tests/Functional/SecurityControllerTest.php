@@ -8,7 +8,7 @@ use App\Entity\User;
 
 class SecurityControllerTest extends FunctionalTestBase
 {
-    private const PLAIN_PASSWORD = 'admin123';
+    private const PASSWORD = 'admin123';
 
     public function testLogin(): void
     {
@@ -21,10 +21,20 @@ class SecurityControllerTest extends FunctionalTestBase
             'Sign in',
             [
                 'email' => $user->getEmail(),
-                'password' => self::PLAIN_PASSWORD,
+                'password' => self::PASSWORD,
             ],
         );
 
         self::assertTrue($this->client->getResponse()->isRedirect('/'));
+    }
+
+    public function testLogout(): void
+    {
+        $this->logIn('admin@example.com');
+
+        $this->client->request('GET', '/logout');
+
+        $this->client->request('GET', '/');
+        self::assertTrue($this->client->getResponse()->isRedirect('/login'));
     }
 }
