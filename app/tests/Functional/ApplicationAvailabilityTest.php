@@ -8,6 +8,10 @@ use Generator;
 
 class ApplicationAvailabilityTest extends FunctionalTestBase
 {
+    private const ADMIN = 'admin@example.com';
+    private const DEV = 'dev0@example.com';
+    private const PO = 'po0@example.com';
+
     /** @dataProvider urlProviderAnonymous */
     public function testPageIsSuccessfulAnonymous(string $url): void
     {
@@ -26,7 +30,7 @@ class ApplicationAvailabilityTest extends FunctionalTestBase
     /** @dataProvider urlProviderAdmin */
     public function testPageIsSuccessfulAdmin(string $url): void
     {
-        // todo: login as admin
+        $this->logIn(self::ADMIN);
 
         $this->client->request('GET', $url);
 
@@ -44,7 +48,7 @@ class ApplicationAvailabilityTest extends FunctionalTestBase
     /** @dataProvider urlProviderPo */
     public function testPageIsSuccessfulPo(string $url): void
     {
-        // todo: login as po
+        $this->logIn(self::PO);
 
         $this->client->request('GET', $url);
 
@@ -62,7 +66,7 @@ class ApplicationAvailabilityTest extends FunctionalTestBase
     /** @dataProvider urlProviderDev */
     public function testPageIsSuccessfulDev(string $url): void
     {
-        // todo: login as dev
+        $this->logIn(self::DEV);
 
         $this->client->request('GET', $url);
 
