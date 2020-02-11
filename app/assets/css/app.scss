@@ -36,9 +36,17 @@ $link-hover-decoration: underline; // underline
 
 html {
   min-height: 100vh;
-  body {
-    main {
-      min-height: 80vh;
-    }
+
+  main {
+    min-height: 80vh;
   }
+}
+
+.btn-outline-brand {
+  color: $brand-primary;
+  border-color: $brand-primary;
+}
+
+.navbar-nav .dropdown-item.active, .dropdown-item:active {
+  background-color: $brand-primary;
 }

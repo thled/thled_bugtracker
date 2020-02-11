@@ -4,7 +4,10 @@ website:
 header:
     dashboard: 'Dashboard'
     projects: 'Projects'
-    tickets: 'Tickets'
+    bugs:
+        name: 'Bugs'
+        show: 'Show Bugs'
+        issue: 'Issue a Bug'
     account:
         name: 'Account'
         profile: 'Profile'

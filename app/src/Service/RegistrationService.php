@@ -8,7 +8,7 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class RegistrationService
+final class RegistrationService
 {
     private EntityManagerInterface $em;
     private UserPasswordEncoderInterface $passwordEncoder;

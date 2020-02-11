@@ -23,7 +23,7 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
 use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements
+final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements
     PasswordAuthenticatedInterface
 {
     use TargetPathTrait;
