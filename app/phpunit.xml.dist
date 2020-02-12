@@ -33,8 +33,15 @@
     </testsuites>
 
     <filter>
-        <whitelist>
-            <directory>src</directory>
+        <whitelist
+                addUncoveredFilesFromWhitelist="true"
+                processUncoveredFilesFromWhitelist="true"
+        >
+            <directory>src/Controller</directory>
+            <directory>src/Form</directory>
+            <directory>src/Repository</directory>
+            <directory>src/Security</directory>
+            <directory>src/Service</directory>
         </whitelist>
     </filter>
 

@@ -115,7 +115,6 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implem
         return $credentials['password'];
     }
 
-
     /** @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter */
     public function onAuthenticationSuccess(
         Request $request,

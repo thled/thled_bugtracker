@@ -43,7 +43,7 @@ final class ApplicationAvailabilityTest extends FunctionalTestBase
     {
         yield ['/login'];
         yield ['/register'];
-        
+
 //        yield ['/'];
     }
 
