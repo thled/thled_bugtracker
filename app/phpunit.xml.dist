@@ -37,11 +37,14 @@
                 addUncoveredFilesFromWhitelist="true"
                 processUncoveredFilesFromWhitelist="true"
         >
-            <directory>src/Controller</directory>
-            <directory>src/Form</directory>
-            <directory>src/Repository</directory>
-            <directory>src/Security</directory>
-            <directory>src/Service</directory>
+            <directory suffix=".php">src</directory>
+            <exclude>
+                <directory suffix=".php">src/DataFixtures</directory>
+                <directory suffix=".php">src/Doctrine</directory>
+                <directory suffix=".php">src/Entity</directory>
+                <directory suffix=".php">src/Migrations</directory>
+                <file>src/Kernel.php</file>
+            </exclude>
         </whitelist>
     </filter>
 
