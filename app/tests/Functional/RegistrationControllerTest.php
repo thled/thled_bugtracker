@@ -6,11 +6,13 @@ namespace App\Tests\Functional;
 
 use App\Entity\User;
 
-class RegistrationControllerTest extends FunctionalTestBase
+/** @covers \App\Controller\RegistrationController */
+final class RegistrationControllerTest extends FunctionalTestBase
 {
     private const EMAIL = 'foobar@example.com';
     private const PASSWORD = 'admin123';
 
+    /** @covers \App\Controller\RegistrationController::register */
     public function testRegisterUser(): void
     {
         $this->client->request('GET', '/register');

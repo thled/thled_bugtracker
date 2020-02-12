@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-class FunctionalTestBase extends WebTestCase
+abstract class FunctionalTestBase extends WebTestCase
 {
     use FixturesTrait;
 

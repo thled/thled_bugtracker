@@ -6,7 +6,8 @@ namespace App\Tests\Functional;
 
 use Generator;
 
-class ApplicationAvailabilityTest extends FunctionalTestBase
+/** @coversNothing */
+final class ApplicationAvailabilityTest extends FunctionalTestBase
 {
     private const ADMIN = 'admin@example.com';
     private const DEV = 'dev0@example.com';

@@ -10,7 +10,7 @@ use Doctrine\Common\DataFixtures\ReferenceRepository;
 use Liip\TestFixturesBundle\Test\FixturesTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class IntegrationTestBase extends KernelTestCase
+abstract class IntegrationTestBase extends KernelTestCase
 {
     use FixturesTrait;
 
