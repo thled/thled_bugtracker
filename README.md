@@ -64,6 +64,8 @@
 
 ## Code Quality
 
+[![PHPStan][phpstan-badge]][phpstan]
+
 Master [![Pipeline][pipeline-badge]][pipeline],
 Develop [![Pipeline Develop][pipeline-dev-badge]][pipeline-dev]
 
@@ -101,7 +103,7 @@ Manual tools should be executed regularly while developing and automatic tools a
 
 Please do contribute! Issues and pull requests are welcome.
 
-[version-badge]: https://img.shields.io/badge/version-0.4.0-blue.svg
+[version-badge]: https://img.shields.io/badge/version-0.7.0-blue.svg
 [changelog]: ./CHANGELOG.md
 [license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [license]: ./LICENSE
@@ -118,5 +120,7 @@ Please do contribute! Issues and pull requests are welcome.
 [sonarcloud-code-smells]: https://sonarcloud.io/api/project_badges/measure?project=thled_thled_bugtracker&metric=code_smells
 [sonarcloud-duplicated-lines]: https://sonarcloud.io/api/project_badges/measure?project=thled_thled_bugtracker&metric=duplicated_lines_density
 [sonarcloud-dashboard]: https://sonarcloud.io/dashboard?id=thled_thled_bugtracker
+[phpstan-badge]: https://img.shields.io/badge/PHPStan-level%208-brightgreen.svg
+[phpstan]: https://github.com/phpstan/phpstan
 [docker]: https://docs.docker.com/install/
 [docker-compose]: https://docs.docker.com/compose/install/
