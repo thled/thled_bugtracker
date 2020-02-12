@@ -32,7 +32,6 @@ final class ApplicationAvailabilityTest extends FunctionalTestBase
     public function testPageIsSuccessfulAdmin(string $url): void
     {
         $this->logIn(self::ADMIN);
-        dd($this->client);
 
         $this->client->request('GET', $url);
 
@@ -44,7 +43,8 @@ final class ApplicationAvailabilityTest extends FunctionalTestBase
     {
         yield ['/login'];
         yield ['/register'];
-        yield ['/'];
+        
+//        yield ['/'];
     }
 
     /** @dataProvider urlProviderPo */
@@ -62,7 +62,8 @@ final class ApplicationAvailabilityTest extends FunctionalTestBase
     {
         yield ['/login'];
         yield ['/register'];
-        yield ['/'];
+
+//        yield ['/'];
     }
 
     /** @dataProvider urlProviderDev */
@@ -80,6 +81,7 @@ final class ApplicationAvailabilityTest extends FunctionalTestBase
     {
         yield ['/login'];
         yield ['/register'];
-        yield ['/'];
+
+//        yield ['/'];
     }
 }
