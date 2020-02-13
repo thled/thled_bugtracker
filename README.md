@@ -64,7 +64,7 @@
 
 ## Code Quality
 
-[![PHPStan][phpstan-badge]][phpstan]
+[![PHPStan][phpstan-badge]][phpstan] [![Codecov][codecov-badge]][codecov]
 
 Master [![Pipeline][pipeline-badge]][pipeline],
 Develop [![Pipeline Develop][pipeline-dev-badge]][pipeline-dev]
@@ -122,5 +122,7 @@ Please do contribute! Issues and pull requests are welcome.
 [sonarcloud-dashboard]: https://sonarcloud.io/dashboard?id=thled_thled_bugtracker
 [phpstan-badge]: https://img.shields.io/badge/PHPStan-level%208-brightgreen.svg
 [phpstan]: https://github.com/phpstan/phpstan
+[codecov-badge]: https://codecov.io/gh/thled/thled_bugtracker/branch/master/graph/badge.svg
+[codecov]: https://codecov.io/gh/thled/thled_bugtracker
 [docker]: https://docs.docker.com/install/
 [docker-compose]: https://docs.docker.com/compose/install/
