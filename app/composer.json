@@ -41,6 +41,7 @@
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "easycorp/easy-log-handler": "^1.0",
+        "jangregor/phpstan-prophecy": "^0.6",
         "liip/test-fixtures-bundle": "^1.6",
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan": "^0.12",
@@ -120,6 +121,9 @@
             "@phpstan-tests"
         ],
         "tests": "@php bin/phpunit",
+        "unit": "@php bin/phpunit --testsuit unit",
+        "integration": "@php bin/phpunit --testsuit integration",
+        "functional": "@php bin/phpunit --testsuit functional",
         "tests-coverage": "@php bin/phpunit --coverage-clover=coverage.xml",
         "phpstan": [
             "@php bin/console cache:warmup --env=dev",

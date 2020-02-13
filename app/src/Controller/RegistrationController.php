@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Repository\UserRepository;
 use App\Service\RegistrationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +18,8 @@ final class RegistrationController extends AbstractController
     /** @Route("/register", name="register") */
     public function register(
         Request $request,
-        RegistrationService $registration
+        RegistrationService $registration,
+        UserRepository $userRepo
     ): Response {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -27,7 +29,7 @@ final class RegistrationController extends AbstractController
             $passwordPlain = $form->get('plainPassword')->getData();
             $registration->encodePasswordInUser($user, $passwordPlain);
 
-            $registration->saveUser($user);
+            $userRepo->save($user);
 
             return $this->redirectToRoute('login');
         }

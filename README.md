@@ -94,10 +94,33 @@ Manual tools should be executed regularly while developing and automatic tools a
 - PHPStan: `$ composer analyse`
 - PHP_CodeSniffer: `$ composer lint`
 - SonarCloud (triggered by pushing to Master branch)
+- Codecov (triggered by pushing)
 
 ## Tests
 
-- Run whole test suite: `$ docker-compose exec app bin/phpunit`
+### Usage
+
+- Run whole test suite: `$ composer tests`
+- Run unit tests: `$ composer unit`
+- Run integration tests: `$ composer integration`
+- Run functional tests: `$ composer functional`
+
+### Writing tests
+
+#### Configuration
+
+- PHPUnit is used as testing framework.
+- Prophecy is used as object mocking framework.
+- There are three types of tests:
+  - Unit Tests: Testing methods in isolation. (E.g. Service classes)
+  - Integration Tests: Testing modules without stubbing/mocking dependencies like a database. (E.g. Repository classes)
+  - Functional Tests: Testing frontend behavior. (E.g. Controller classes)
+
+#### Philosophy
+
+- Seek for 100% code coverage.
+- Do not test objects which have no logic like Entities and Models.
+- It is not necessary to stub/mock third party libraries.
 
 ## Contribute
 
