@@ -18,6 +18,7 @@
         <exclude name="SlevomatCodingStandard.Namespaces.UseOnlyWhitelistedNamespaces.NonFullyQualified"/>
         <exclude name="SlevomatCodingStandard.ControlStructures.NewWithoutParentheses.UselessParentheses"/>
         <exclude name="SlevomatCodingStandard.ControlStructures.BlockControlStructureSpacing.IncorrectLinesCountBeforeControlStructure"/>
+        <exclude name="SlevomatCodingStandard.ControlStructures.BlockControlStructureSpacing.IncorrectLinesCountAfterControlStructure"/>
         <exclude name="SlevomatCodingStandard.ControlStructures.RequireYodaComparison.RequiredYodaComparison"/>
         <exclude name="SlevomatCodingStandard.Operators.DisallowIncrementAndDecrementOperators.DisallowedPostIncrementOperator"/>
         <exclude name="SlevomatCodingStandard.TypeHints.DisallowArrayTypeHintSyntax.DisallowedArrayTypeHintSyntax"/>

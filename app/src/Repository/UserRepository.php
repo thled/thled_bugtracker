@@ -38,7 +38,7 @@ final class UserRepository extends ServiceEntityRepository implements PasswordUp
         $this->_em->flush();
     }
 
-    public function save(User $user): void
+    public function save(UserInterface $user): void
     {
         $this->_em->persist($user);
         $this->_em->flush();

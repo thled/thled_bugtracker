@@ -118,7 +118,7 @@ Manual tools should be executed regularly while developing and automatic tools a
 
 #### Philosophy
 
-- Seek for 100% code coverage.
+- Seek for high code coverage.
 - Do not test objects which have no logic like Entities and Models.
 - It is not necessary to stub/mock third party libraries.
 
