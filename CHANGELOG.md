@@ -13,10 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dynamic highlighting of navigation items.
 - Code coverage with report functionality from Codecov.
 - "Issue a Bug" page.
+- Tests for several classes.
 
 ### Changed
 
-- Main style.
+- Main frontend style.
 - Copyright year to update automatically.
 
 ## [0.7.0] - 2020-02-06

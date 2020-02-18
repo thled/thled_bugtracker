@@ -12,6 +12,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 /** @covers \App\Service\RegistrationService */
 class RegistrationServiceTest extends TestCase
 {
+    /** @covers \App\Service\RegistrationService::encodePasswordInUser */
     public function testEncodePasswordInUser(): void
     {
         $passwordEncoder = $this->prophesize(UserPasswordEncoderInterface::class);

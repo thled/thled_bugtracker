@@ -6,23 +6,21 @@ namespace App\Tests\Integration;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
-use Doctrine\Persistence\ObjectManager;
 use LogicException;
 
+/** @covers \App\Repository\UserRepository */
 class UserRepositoryTest extends IntegrationTestBase
 {
-    private ObjectManager $entityManager;
     private UserRepository $userRepo;
 
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->entityManager = self::$kernel->getContainer()
-            ->get('doctrine')
-            ->getManager();
         $this->userRepo = $this->entityManager->getRepository(User::class);
     }
+
+    /** @covers \App\Repository\UserRepository::upgradePassword */
     public function testUpgradePassword(): void
     {
         $user = $this->userRepo->find(1);
@@ -43,6 +41,7 @@ class UserRepositoryTest extends IntegrationTestBase
         self::assertSame($newEncodedPassword, $upgradedPassword);
     }
 
+    /** @covers \App\Repository\UserRepository::save */
     public function testSave(): void
     {
         $user = new User();

@@ -7,6 +7,7 @@ namespace App\Tests\Integration;
 use App\DataFixtures\UserFixtures;
 use Doctrine\Common\DataFixtures\Executor\AbstractExecutor;
 use Doctrine\Common\DataFixtures\ReferenceRepository;
+use Doctrine\Persistence\ObjectManager;
 use Liip\TestFixturesBundle\Test\FixturesTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -15,6 +16,7 @@ abstract class IntegrationTestBase extends KernelTestCase
     use FixturesTrait;
 
     protected ReferenceRepository $fixtures;
+    protected ObjectManager $entityManager;
 
     public function setUp(): void
     {
@@ -28,5 +30,9 @@ abstract class IntegrationTestBase extends KernelTestCase
         }
 
         self::bootKernel();
+
+        $this->entityManager = self::$container
+            ->get('doctrine')
+            ->getManager();
     }
 }
