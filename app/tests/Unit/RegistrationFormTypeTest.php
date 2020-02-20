@@ -8,17 +8,25 @@ use App\Form\RegistrationFormType;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /** @covers \App\Form\RegistrationFormType */
-class RegistrationFormTypeTest extends TestCase
+final class RegistrationFormTypeTest extends TestCase
 {
+    private RegistrationFormType $registrationFormType;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $translator = $this->prophesize(TranslatorInterface::class);
+        $this->registrationFormType = new RegistrationFormType($translator->reveal());
+    }
+
     /** @covers \App\Form\RegistrationFormType::buildForm */
     public function testBuildForm(): void
     {
-        $translator = $this->prophesize(TranslatorInterface::class);
-        $registrationFormType = new RegistrationFormType($translator->reveal());
-
         $builder = $this->prophesize(FormBuilderInterface::class);
         $builder->add(
             Argument::type('string'),
@@ -28,6 +36,15 @@ class RegistrationFormTypeTest extends TestCase
             ->willReturn($builder)
             ->shouldBeCalledTimes(3);
 
-        $registrationFormType->buildForm($builder->reveal(), []);
+        $this->registrationFormType->buildForm($builder->reveal(), []);
+    }
+
+    /** @covers \App\Form\RegistrationFormType::configureOptions */
+    public function testConfigureOptions(): void
+    {
+        $resolver = $this->prophesize(OptionsResolver::class);
+        $resolver->setDefaults(Argument::type('array'))->shouldBeCalledOnce();
+
+        $this->registrationFormType->configureOptions($resolver->reveal());
     }
 }

@@ -20,7 +20,7 @@ abstract class FunctionalTestBase extends WebTestCase
     protected ReferenceRepository $fixtures;
     protected KernelBrowser $client;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $abstractExecutor = $this->loadFixtures(
             [

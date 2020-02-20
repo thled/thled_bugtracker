@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /** @covers \App\Service\RegistrationService */
-class RegistrationServiceTest extends TestCase
+final class RegistrationServiceTest extends TestCase
 {
     /** @covers \App\Service\RegistrationService::encodePasswordInUser */
     public function testEncodePasswordInUser(): void

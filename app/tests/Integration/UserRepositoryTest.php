@@ -9,7 +9,7 @@ use App\Repository\UserRepository;
 use LogicException;
 
 /** @covers \App\Repository\UserRepository */
-class UserRepositoryTest extends IntegrationTestBase
+final class UserRepositoryTest extends IntegrationTestBase
 {
     private UserRepository $userRepo;
 
