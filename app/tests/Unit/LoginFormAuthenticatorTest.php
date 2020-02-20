@@ -226,4 +226,17 @@ final class LoginFormAuthenticatorTest extends TestCase
             ],
         ];
     }
+
+    /** @covers \App\Security\LoginFormAuthenticator::getLoginUrl */
+    public function testGetLoginUrl(): void
+    {
+        $targetUrl = '/login';
+        $this->urlGenerator->generate('login')->willReturn($targetUrl);
+
+        $request = $this->prophesize(Request::class);
+
+        $response = $this->loginFormAuthenticator->start($request->reveal());
+
+        self::assertSame($targetUrl, $response->getTargetUrl());
+    }
 }
