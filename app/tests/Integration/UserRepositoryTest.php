@@ -7,6 +7,8 @@ namespace App\Tests\Integration;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use LogicException;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /** @covers \App\Repository\UserRepository */
 final class UserRepositoryTest extends IntegrationTestBase
@@ -39,6 +41,16 @@ final class UserRepositoryTest extends IntegrationTestBase
         $upgradedPassword = $userWithUpgradedPassword->getPassword();
 
         self::assertSame($newEncodedPassword, $upgradedPassword);
+    }
+
+    /** @covers \App\Repository\UserRepository::upgradePassword */
+    public function testUpgradePasswordThrowsUnsupportedUserException(): void
+    {
+        $user = $this->prophesize(UserInterface::class);
+
+        $this->expectException(UnsupportedUserException::class);
+
+        $this->userRepo->upgradePassword($user->reveal(), '');
     }
 
     /** @covers \App\Repository\UserRepository::save */

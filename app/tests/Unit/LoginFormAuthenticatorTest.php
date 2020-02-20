@@ -136,9 +136,7 @@ final class LoginFormAuthenticatorTest extends TestCase
         $this->csrfTokenManager->isTokenValid(Argument::type(CsrfToken::class))
             ->willReturn(false);
 
-        $this->expectExceptionObject(
-            new InvalidCsrfTokenException('CSRF token is invalid.'),
-        );
+        $this->expectException(InvalidCsrfTokenException::class);
 
         $this->loginFormAuthenticator->getUser(self::CREDENTIALS, $userProvider->reveal());
     }
