@@ -1,7 +1,7 @@
 {% from 'navigation/navbar_items.html.twig' import menuItem, menuDropdown %}
 
 <ul class="navbar-nav mr-auto">
-    {{ menuItem('header.dashboard', path('bug_add')) }}
+    {{ menuItem('header.dashboard', path('index')) }}
 
     {{ menuDropdown('header.bugs.name', {
         'header.bugs.show': '#',

@@ -50,3 +50,7 @@ register:
     password_length: 'Your password should be at least {{ limit }} characters.'
     login: 'Already have an account? <a href="%path%">Sign in</a>'
     read_terms: 'Read <a href="%path%">Terms</a>'
+
+bug:
+    title: 'Issue a Bug'
+    lead: 'Add a new Bug report by filling out the following form.'
