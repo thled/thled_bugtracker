@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
@@ -17,7 +19,7 @@ class Project
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private ?int $id;
 
     /** @ORM\Column(type="string", length=5) */
     private string $projectId = '';
@@ -26,10 +28,19 @@ class Project
     private string $name = '';
 
     /**
-     * @var array<string>
-     * @ORM\Column(type="json")
+     * @var Collection<Bug>
+     * @ORM\OneToMany(
+     *     targetEntity="App\Entity\Bug",
+     *     mappedBy="project",
+     *     orphanRemoval=true
+     * )
      */
-    private array $versions = [];
+    private Collection $bugs;
+
+    public function __construct()
+    {
+        $this->bugs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -60,17 +71,30 @@ class Project
         return $this;
     }
 
-    /** @return array<string> */
-    public function getVersions(): array
+    /** @return Collection<Bug> */
+    public function getBugs(): Collection
     {
-        $versions = $this->versions;
-
-        return array_unique($versions);
+        return $this->bugs;
     }
 
-    public function addVersions(string $version): self
+    public function addBug(Bug $bug): self
     {
-        $this->versions[] = $version;
+        if (!$this->bugs->contains($bug)) {
+            $this->bugs[] = $bug;
+            $bug->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBug(Bug $bug): self
+    {
+        if ($this->bugs->contains($bug)) {
+            $this->bugs->removeElement($bug);
+//            if ($bug->getProject() === $this) {
+//                $bug->setProject(null);
+//            }
+        }
 
         return $this;
     }

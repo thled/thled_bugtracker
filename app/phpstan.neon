@@ -6,3 +6,4 @@ parameters:
         objectManagerLoader: '%rootDir%/../../../build/phpstan/doctrine-orm-bootstrap.php'
     excludes_analyse:
         - '%rootDir%/../../../src/Migrations/*'
+    checkGenericClassInNonGenericObjectType: false

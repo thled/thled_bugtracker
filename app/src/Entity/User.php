@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -16,6 +19,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface
 {
+    use TimestampableEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -39,6 +44,27 @@ class User implements UserInterface
 
     /** @ORM\Column(type="string") */
     private string $password = '';
+
+    /**
+     * @var Collection<Comment>
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="author")
+     */
+    private Collection $comments;
+
+    /**
+     * @var Collection<Bug>
+     * @ORM\OneToMany(targetEntity="App\Entity\Bug", mappedBy="reporter")
+     */
+    private Collection $reportedBugs;
+
+    /** @ORM\OneToOne(targetEntity="App\Entity\Bug", mappedBy="assignee") */
+    private ?Bug $assignedBug;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+        $this->reportedBugs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -102,5 +128,78 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /** @return Collection<Comment> */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+//            if ($comment->getAuthor() === $this) {
+//                $comment->setAuthor(null);
+//            }
+        }
+
+        return $this;
+    }
+
+    /** @return Collection<Bug> */
+    public function getReportedBugs(): Collection
+    {
+        return $this->reportedBugs;
+    }
+
+    public function addReportedBug(Bug $reportedBug): self
+    {
+        if (!$this->reportedBugs->contains($reportedBug)) {
+            $this->reportedBugs[] = $reportedBug;
+            $reportedBug->setReporter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReportedBug(Bug $reportedBug): self
+    {
+        if ($this->reportedBugs->contains($reportedBug)) {
+            $this->reportedBugs->removeElement($reportedBug);
+//            if ($reportedBug->getReporter() === $this) {
+//                $reportedBug->setReporter(null);
+//            }
+        }
+
+        return $this;
+    }
+
+    public function getAssignedBug(): ?Bug
+    {
+        return $this->assignedBug;
+    }
+
+    public function setAssignedBug(?Bug $assignedBug): self
+    {
+        $this->assignedBug = $assignedBug;
+
+//        $newAssignee = $assignedBug === null ? null : $this;
+//        if ($assignedBug->getAssignee() !== $newAssignee) {
+//            $assignedBug->setAssignee($newAssignee);
+//        }
+
+        return $this;
     }
 }

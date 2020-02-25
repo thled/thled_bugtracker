@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
-use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
@@ -15,10 +14,7 @@ final class Version20200123083256 extends AbstractMigration
         return 'Add User table';
     }
 
-    /**
-     * @throws \Doctrine\DBAL\DBALException
-     * @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
-     */
+    /** @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter */
     public function up(Schema $schema): void
     {
         $this->abortIf(
@@ -38,10 +34,7 @@ final class Version20200123083256 extends AbstractMigration
         $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649E7927C74 ON "user" (email)');
     }
 
-    /**
-     * @throws DBALException
-     * @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
-     */
+    /** @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter */
     public function down(Schema $schema): void
     {
         $this->abortIf(
