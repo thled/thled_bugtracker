@@ -55,22 +55,30 @@ To meet my intention to showcase my programming skills, the software needs to fu
 ### Elements of a Bug
 
 - Meta
+  - Bug ID
   - Project
+    - Choose
+  - (Version)
     - Choose or create
-  - Version
+  - (Component)
     - Choose or create
-  - Component
-    - Choose or create
+  - Priority
+    - High
+    - Normal
+    - Low
+  - Due Date
+  - Updated Date
+  - Creation Date
 - Content
   - Title
-  - Description
-    - Common
-    - Current State
-    - Target State
-  - Media
+  - Summary
+  - Steps to reproduce
+  - Expected Result
+  - Actual Result
+  - (Media)
   - Comments
 - Participants
-  - Author
+  - Reporter
   - Assignee
 - State
   - Status
@@ -92,7 +100,7 @@ To meet my intention to showcase my programming skills, the software needs to fu
     - Create Bugs
   - Developer
     - Create Bugs
-    - Assign to Bug (1)
+    - Assign to Bug
 
 ## Code Quality
 
