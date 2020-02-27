@@ -42,6 +42,11 @@ class Project
         $this->bugs = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return sprintf('%s (%s)', $this->getName(), $this->getProjectId());
+    }
+
     public function getId(): ?int
     {
         return $this->id;

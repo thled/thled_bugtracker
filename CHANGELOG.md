@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - "Issue a Bug" page.
 - Tests for several classes.
 - Bug and related Project, Comment entities.
+- form for adding new Bugs.
 
 ### Changed
 

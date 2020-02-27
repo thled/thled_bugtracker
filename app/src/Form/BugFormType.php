@@ -6,7 +6,6 @@ namespace App\Form;
 
 use App\Entity\Bug;
 use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -31,23 +30,8 @@ final class BugFormType extends AbstractType
             ->add('reproduce')
             ->add('expected')
             ->add('actual')
-            ->add(
-                'reporter',
-                EntityType::class,
-                [
-                    'class' => User::class,
-                    'choice_label' => [$this, 'userToString'],
-                    'disabled' => true,
-                ],
-            )
-            ->add(
-                'assignee',
-                EntityType::class,
-                [
-                    'class' => User::class,
-                    'choice_label' => [$this, 'userToString'],
-                ],
-            );
+            ->add('reporter', null, ['disabled' => true])
+            ->add('assignee');
     }
 
     public function userToString(User $user): string
