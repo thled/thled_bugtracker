@@ -64,7 +64,6 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implem
      * @param mixed|array<string> $credentials
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.DisallowMixedTypeHint.DisallowedMixedTypeHint
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
-     * @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
      */
     public function getUser($credentials, UserProviderInterface $userProvider): UserInterface
     {
@@ -100,7 +99,6 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implem
         return $credentials['password'];
     }
 
-    /** @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter */
     public function onAuthenticationSuccess(
         Request $request,
         TokenInterface $token,
