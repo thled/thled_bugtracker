@@ -81,26 +81,4 @@ class Project
     {
         return $this->bugs;
     }
-
-    public function addBug(Bug $bug): self
-    {
-        if (!$this->bugs->contains($bug)) {
-            $this->bugs[] = $bug;
-            $bug->setProject($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBug(Bug $bug): self
-    {
-        if ($this->bugs->contains($bug)) {
-            $this->bugs->removeElement($bug);
-//            if ($bug->getProject() === $this) {
-//                $bug->setProject(null);
-//            }
-        }
-
-        return $this;
-    }
 }

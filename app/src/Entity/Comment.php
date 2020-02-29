@@ -23,7 +23,7 @@ class Comment
     private string $content = '';
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
     private User $author;
@@ -33,12 +33,6 @@ class Comment
      * @ORM\JoinColumn(nullable=false)
      */
     private Bug $bug;
-
-    public function __construct()
-    {
-        $this->author = new User();
-        $this->bug = new Bug();
-    }
 
     public function getId(): ?int
     {

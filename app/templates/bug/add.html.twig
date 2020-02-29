@@ -9,5 +9,22 @@
 {% endblock %}
 
 {% block main_content %}
-    {{ form(form) }}
+    {{ form_start(form) }}
+
+    {{ form_row(form.project) }}
+    {{ form_row(form.status) }}
+    {{ form_row(form.priority) }}
+    {{ form_row(form.due) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.summary) }}
+    {{ form_row(form.reproduce) }}
+    {{ form_row(form.expected) }}
+    {{ form_row(form.actual) }}
+    {{ form_row(form.reporter) }}
+    {{ form_row(form.assignee) }}
+
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a href="{{ path('index') }}" class="btn btn-secondary">Cancel</a>
+
+    {{ form_end(form) }}
 {% endblock %}

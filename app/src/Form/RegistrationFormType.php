@@ -31,7 +31,6 @@ final class RegistrationFormType extends AbstractType
     /**
      * @param array<mixed> $options
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.DisallowMixedTypeHint.DisallowedMixedTypeHint
-     * @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

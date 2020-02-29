@@ -9,6 +9,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 /** @ORM\Entity(repositoryClass="App\Repository\BugRepository") */
 class Bug
@@ -17,13 +19,12 @@ class Bug
 
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid", unique=true)
      */
-    private ?int $id;
+    private UuidInterface $id;
 
     /** @ORM\Column(type="integer") */
-    private int $bugId = 0;
+    private int $bugId;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Project", inversedBy="bugs")
@@ -32,31 +33,28 @@ class Bug
     private Project $project;
 
     /** @ORM\Column(type="smallint") */
-    private int $priority = 1;
+    private int $status;
+
+    /** @ORM\Column(type="smallint") */
+    private int $priority;
 
     /** @ORM\Column(type="date_immutable") */
     private DateTimeImmutable $due;
 
     /** @ORM\Column(type="string", length=128) */
-    private string $title = '';
+    private string $title;
 
     /** @ORM\Column(type="text") */
-    private string $summary = '';
+    private string $summary;
 
     /** @ORM\Column(type="text") */
-    private string $reproduce = '';
+    private string $reproduce;
 
     /** @ORM\Column(type="text") */
-    private string $expected = '';
+    private string $expected;
 
     /** @ORM\Column(type="text") */
-    private string $actual = '';
-
-    /**
-     * @var Collection<Comment>
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="bug")
-     */
-    private Collection $comments;
+    private string $actual;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="reportedBugs")
@@ -70,18 +68,45 @@ class Bug
      */
     private User $assignee;
 
-    /** @ORM\Column(type="smallint") */
-    private int $status = 0;
+    /**
+     * @var Collection<Comment>
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="bug")
+     */
+    private Collection $comments;
 
-    public function __construct()
-    {
-        $this->project = new Project();
-        $this->comments = new ArrayCollection();
-        $this->reporter = new User();
-        $this->assignee = new User();
+    /** @param array<Comment> $comments */
+    public function __construct(
+        int $bugId,
+        Project $project,
+        DateTimeImmutable $due,
+        User $reporter,
+        User $assignee,
+        int $status = 0,
+        int $priority = 0,
+        string $title = '',
+        string $summary = '',
+        string $reproduce = '',
+        string $expected = '',
+        string $actual = '',
+        array $comments = []
+    ) {
+        $this->id = Uuid::uuid4();
+        $this->bugId = $bugId;
+        $this->project = $project;
+        $this->status = $status;
+        $this->priority = $priority;
+        $this->due = $due;
+        $this->title = $title;
+        $this->summary = $summary;
+        $this->reproduce = $reproduce;
+        $this->expected = $expected;
+        $this->actual = $actual;
+        $this->comments = new ArrayCollection($comments);
+        $this->reporter = $reporter;
+        $this->assignee = $assignee;
     }
 
-    public function getId(): ?int
+    public function getId(): UuidInterface
     {
         return $this->id;
     }
@@ -91,23 +116,9 @@ class Bug
         return $this->bugId;
     }
 
-    public function setBugId(int $bugId): self
-    {
-        $this->bugId = $bugId;
-
-        return $this;
-    }
-
     public function getProject(): Project
     {
         return $this->project;
-    }
-
-    public function setProject(Project $project): self
-    {
-        $this->project = $project;
-
-        return $this;
     }
 
     public function getPriority(): int
@@ -115,23 +126,9 @@ class Bug
         return $this->priority;
     }
 
-    public function setPriority(int $priority): self
-    {
-        $this->priority = $priority;
-
-        return $this;
-    }
-
     public function getDue(): DateTimeImmutable
     {
         return $this->due;
-    }
-
-    public function setDue(DateTimeImmutable $due): self
-    {
-        $this->due = $due;
-
-        return $this;
     }
 
     public function getTitle(): string
@@ -139,23 +136,9 @@ class Bug
         return $this->title;
     }
 
-    public function setTitle(string $title): self
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
     public function getSummary(): string
     {
         return $this->summary;
-    }
-
-    public function setSummary(string $summary): self
-    {
-        $this->summary = $summary;
-
-        return $this;
     }
 
     public function getReproduce(): string
@@ -163,23 +146,9 @@ class Bug
         return $this->reproduce;
     }
 
-    public function setReproduce(string $reproduce): self
-    {
-        $this->reproduce = $reproduce;
-
-        return $this;
-    }
-
     public function getExpected(): string
     {
         return $this->expected;
-    }
-
-    public function setExpected(string $expected): self
-    {
-        $this->expected = $expected;
-
-        return $this;
     }
 
     public function getActual(): string
@@ -187,51 +156,9 @@ class Bug
         return $this->actual;
     }
 
-    public function setActual(string $actual): self
-    {
-        $this->actual = $actual;
-
-        return $this;
-    }
-
-    /** @return Collection<Comment> */
-    public function getComments(): Collection
-    {
-        return $this->comments;
-    }
-
-    public function addComment(Comment $comment): self
-    {
-        if (!$this->comments->contains($comment)) {
-            $this->comments[] = $comment;
-            $comment->setBug($this);
-        }
-
-        return $this;
-    }
-
-    public function removeComment(Comment $comment): self
-    {
-        if ($this->comments->contains($comment)) {
-            $this->comments->removeElement($comment);
-//            if ($comment->getBug() === $this) {
-//                $comment->setBug(null);
-//            }
-        }
-
-        return $this;
-    }
-
     public function getReporter(): User
     {
         return $this->reporter;
-    }
-
-    public function setReporter(User $reporter): self
-    {
-        $this->reporter = $reporter;
-
-        return $this;
     }
 
     public function getAssignee(): User
@@ -239,22 +166,14 @@ class Bug
         return $this->assignee;
     }
 
-    public function setAssignee(User $assignee): self
-    {
-        $this->assignee = $assignee;
-
-        return $this;
-    }
-
     public function getStatus(): int
     {
         return $this->status;
     }
 
-    public function setStatus(int $status): self
+    /** @return Collection<Comment> */
+    public function getComments(): Collection
     {
-        $this->status = $status;
-
-        return $this;
+        return $this->comments;
     }
 }
