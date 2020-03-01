@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\DataTransferObject;
+namespace App\Form\DataTransferObject;
 
 use App\Entity\Project;
 use App\Entity\User;
 use DateTimeImmutable;
 
-final class CreateBugData
+final class CreateBugDto
 {
     public ?Project $project = null;
     public ?int $status = null;

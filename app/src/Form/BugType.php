@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace App\Form;
 
-use App\DataTransferObject\CreateBugData;
 use App\Entity\Project;
 use App\Entity\User;
+use App\Form\DataTransferObject\CreateBugDto;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,13 +26,6 @@ final class BugType extends AbstractType
     {
         $builder
             ->add(
-                'status',
-                TextType::class,
-                [
-                    'label' => 'bug.form.status',
-                ],
-            )
-            ->add(
                 'project',
                 EntityType::class,
                 [
@@ -41,8 +35,15 @@ final class BugType extends AbstractType
                 ],
             )
             ->add(
+                'status',
+                IntegerType::class,
+                [
+                    'label' => 'bug.form.status',
+                ],
+            )
+            ->add(
                 'priority',
-                TextType::class,
+                IntegerType::class,
                 [
                     'label' => 'bug.form.priority',
                 ],
@@ -118,6 +119,6 @@ final class BugType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefault('data_class', CreateBugData::class);
+        $resolver->setDefault('data_class', CreateBugDto::class);
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\Bug;
+use App\Entity\Project;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
@@ -19,5 +20,17 @@ final class BugRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Bug::class);
+    }
+
+    public function findLatestBugOfProject(Project $project): ?Bug
+    {
+        $qb = $this->createQueryBuilder('b')
+            ->andWhere('b.project = :project')
+            ->orderBy('b.bugId', 'DESC')
+            ->setMaxResults(1)
+            ->setParameter('project', $project);
+        $q = $qb->getQuery();
+
+        return $q->getOneOrNullResult();
     }
 }

@@ -22,8 +22,8 @@ final class RegistrationController extends BaseController
     ): Response {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
 
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $passwordPlain = $form->get('plainPassword')->getData();
             $registration->encodePasswordInUser($user, $passwordPlain);

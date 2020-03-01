@@ -10,8 +10,8 @@ use Generator;
 final class ApplicationAvailabilityTest extends FunctionalTestBase
 {
     private const ADMIN = 'admin@example.com';
-    private const DEV = 'dev0@example.com';
     private const PO = 'po0@example.com';
+    private const DEV = 'dev0@example.com';
 
     /** @dataProvider urlProviderAnonymous */
     public function testPageIsSuccessfulAnonymous(string $url): void
