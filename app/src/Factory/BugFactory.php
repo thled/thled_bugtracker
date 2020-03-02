@@ -8,15 +8,15 @@ use App\DataTransferObject\CreateBugDto;
 use App\Entity\Bug;
 use App\Entity\Project;
 use App\Entity\User;
-use App\Repository\BugRepository;
+use App\Repository\BugRepositoryInterface;
 use DateTimeImmutable;
 use LogicException;
 
-final class BugFactory
+final class BugFactory implements BugFactoryInterface
 {
-    private BugRepository $bugRepo;
+    private BugRepositoryInterface $bugRepo;
 
-    public function __construct(BugRepository $bugRepo)
+    public function __construct(BugRepositoryInterface $bugRepo)
     {
         $this->bugRepo = $bugRepo;
     }
