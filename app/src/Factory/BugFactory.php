@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Factory;
 
+use App\DataTransferObject\CreateBugDto;
 use App\Entity\Bug;
 use App\Entity\Project;
 use App\Entity\User;
-use App\Form\DataTransferObject\CreateBugDto;
 use App\Repository\BugRepository;
 use DateTimeImmutable;
 use LogicException;

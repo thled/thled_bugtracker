@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\DataTransferObject\CreateBugDto;
 use App\Factory\BugFactory;
 use App\Form\BugType;
-use App\Form\DataTransferObject\CreateBugDto;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

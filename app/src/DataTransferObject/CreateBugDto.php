@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Form\DataTransferObject;
+namespace App\DataTransferObject;
 
 use App\Entity\Project;
 use App\Entity\User;
