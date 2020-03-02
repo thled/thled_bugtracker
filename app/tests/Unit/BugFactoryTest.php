@@ -13,23 +13,30 @@ use App\Repository\BugRepositoryInterface;
 use DateTimeImmutable;
 use LogicException;
 use PHPUnit\Framework\TestCase;
+use Prophecy\Argument;
+use Prophecy\Prophecy\ObjectProphecy;
 
 /** @covers \App\Factory\BugFactory */
 final class BugFactoryTest extends TestCase
 {
     private BugFactory $bugFactory;
+    private ObjectProphecy $bugRepo;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $bugRepo = $this->prophesize(BugRepositoryInterface::class);
-        $this->bugFactory = new BugFactory($bugRepo->reveal());
+        $this->bugRepo = $this->prophesize(BugRepositoryInterface::class);
+        $this->bugFactory = new BugFactory($this->bugRepo->reveal());
     }
 
     /** @covers \App\Factory\BugFactory::createFromCreateBugDto */
     public function testCreateFromCreateBugDto(): void
     {
+        $this->bugRepo
+            ->findLatestBugOfProject(Argument::type(Project::class))
+            ->willReturn(null);
+
         $bugDto = $this->createBugDto();
 
         $bug = $this->bugFactory->createFromCreateBugDto($bugDto);
@@ -55,9 +62,12 @@ final class BugFactoryTest extends TestCase
         return $bugDto;
     }
 
-    private function assertBugIsCreated(Bug $bug, CreateBugDto $bugDto): void
-    {
-        self::assertSame(1, $bug->getBugId());
+    private function assertBugIsCreated(
+        Bug $bug,
+        CreateBugDto $bugDto,
+        int $bugId = 1
+    ): void {
+        self::assertSame($bugId, $bug->getBugId());
         self::assertSame($bugDto->project, $bug->getProject());
         self::assertSame($bugDto->status, $bug->getStatus());
         self::assertSame($bugDto->priority, $bug->getPriority());
@@ -69,6 +79,23 @@ final class BugFactoryTest extends TestCase
         self::assertSame($bugDto->actual, $bug->getActual());
         self::assertSame($bugDto->reporter, $bug->getReporter());
         self::assertSame($bugDto->assignee, $bug->getAssignee());
+    }
+
+    /** @covers \App\Factory\BugFactory::createFromCreateBugDto */
+    public function testCreateFromCreateBugDtoAsSecondBug(): void
+    {
+        $firstBug = $this->prophesize(Bug::class);
+        $firstBug->getBugId()->willReturn(1);
+
+        $this->bugRepo
+            ->findLatestBugOfProject(Argument::type(Project::class))
+            ->willReturn($firstBug->reveal());
+
+        $bugDto = $this->createBugDto();
+
+        $bug = $this->bugFactory->createFromCreateBugDto($bugDto);
+
+        $this->assertBugIsCreated($bug, $bugDto, 2);
     }
 
     /** @covers \App\Factory\BugFactory::createFromCreateBugDto */
