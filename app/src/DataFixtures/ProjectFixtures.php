@@ -45,7 +45,7 @@ final class ProjectFixtures extends Fixture
     {
         $this->manager->persist($project);
 
-        $this->setReference(
+        $this->addReference(
             sprintf(
                 'project-%s',
                 $projectId,

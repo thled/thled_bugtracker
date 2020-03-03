@@ -9,7 +9,7 @@ use LogicException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-class BaseController extends AbstractController
+abstract class BaseController extends AbstractController
 {
     protected function getUser(): User
     {

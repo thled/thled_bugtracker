@@ -98,7 +98,7 @@ final class UserFixtures extends Fixture
 
         $nameAndDomain = explode('@', $email);
         $name = reset($nameAndDomain);
-        $this->setReference(
+        $this->addReference(
             sprintf(
                 'user-%s',
                 $name,
