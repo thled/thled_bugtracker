@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use DateTime;
 use DateTimeImmutable;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\Config\Definition\Exception\InvalidTypeException;
 
 /** @ORM\Entity(repositoryClass="App\Repository\BugRepository") */
 class Bug
@@ -78,7 +81,7 @@ class Bug
     public function __construct(
         int $bugId,
         Project $project,
-        DateTimeImmutable $due,
+        DateTimeInterface $due,
         User $reporter,
         User $assignee,
         int $status = 0,
@@ -95,7 +98,7 @@ class Bug
         $this->project = $project;
         $this->status = $status;
         $this->priority = $priority;
-        $this->due = $due;
+        $this->due = $this->castToDateTimeImmutable($due);
         $this->title = $title;
         $this->summary = $summary;
         $this->reproduce = $reproduce;
@@ -104,6 +107,19 @@ class Bug
         $this->comments = new ArrayCollection($comments);
         $this->reporter = $reporter;
         $this->assignee = $assignee;
+    }
+
+    private function castToDateTimeImmutable(DateTimeInterface $due): DateTimeImmutable
+    {
+        if ($due instanceof DateTimeImmutable) {
+            return $due;
+        }
+
+        if ($due instanceof DateTime) {
+            return DateTimeImmutable::createFromMutable($due);
+        }
+
+        throw new InvalidTypeException('Due has an invalid type.');
     }
 
     public function getId(): UuidInterface
@@ -126,7 +142,7 @@ class Bug
         return $this->priority;
     }
 
-    public function getDue(): DateTimeImmutable
+    public function getDue(): DateTimeInterface
     {
         return $this->due;
     }

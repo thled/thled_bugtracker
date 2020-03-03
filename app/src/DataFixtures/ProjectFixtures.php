@@ -5,17 +5,12 @@ declare(strict_types=1);
 namespace App\DataFixtures;
 
 use App\Entity\Project;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-final class ProjectFixtures extends Fixture
+final class ProjectFixtures extends BaseFixture
 {
-    private ObjectManager $manager;
-
-    public function load(ObjectManager $manager): void
+    public function loadData(ObjectManager $manager): void
     {
-        $this->manager = $manager;
-
         $amountOfProjects = 3;
         $this->createProjects($amountOfProjects);
 

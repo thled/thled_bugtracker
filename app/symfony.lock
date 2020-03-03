@@ -120,6 +120,9 @@
     "egulias/email-validator": {
         "version": "2.1.14"
     },
+    "fzaninotto/faker": {
+        "version": "v1.9.1"
+    },
     "gedmo/doctrine-extensions": {
         "version": "v2.4.39"
     },

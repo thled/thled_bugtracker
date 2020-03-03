@@ -7,15 +7,12 @@ namespace App\DataFixtures;
 use App\Entity\Bug;
 use App\Entity\Project;
 use App\Entity\User;
-use DateTimeImmutable;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use LogicException;
 
-final class BugFixtures extends Fixture implements DependentFixtureInterface
+final class BugFixtures extends BaseFixture implements DependentFixtureInterface
 {
-    private ObjectManager $manager;
-
     /** @return array<class-string> */
     public function getDependencies(): array
     {
@@ -25,10 +22,8 @@ final class BugFixtures extends Fixture implements DependentFixtureInterface
         ];
     }
 
-    public function load(ObjectManager $manager): void
+    public function loadData(ObjectManager $manager): void
     {
-        $this->manager = $manager;
-
         $amountOfBugs = 3;
         $amountOfProjects = 2;
         $this->createBugsForProjects($amountOfBugs, $amountOfProjects);
@@ -61,7 +56,7 @@ final class BugFixtures extends Fixture implements DependentFixtureInterface
         int $reporterId,
         int $assigneeId
     ): void {
-        $due = new DateTimeImmutable();
+        $due = $this->faker->dateTimeBetween('+5 days', '+10 days');
 
         /** @var User $reporter */
         $reporter = $this->getReference(sprintf('user-po%d', $reporterId));
@@ -71,11 +66,13 @@ final class BugFixtures extends Fixture implements DependentFixtureInterface
 
         $status = 1;
         $priority = 1;
-        $title = '';
-        $summary = '';
-        $reproduce = '';
-        $expected = '';
-        $actual = '';
+        $title = ucfirst($this->createRandomTitle());
+        $summary = $this->createRandomSummary();
+
+        $reproduce = $this->createRandomStepsToReproduce();
+
+        $expected = $this->faker->sentence();
+        $actual = $this->faker->sentence();
 
         $comments = [];
 
@@ -96,5 +93,39 @@ final class BugFixtures extends Fixture implements DependentFixtureInterface
         );
 
         $this->manager->persist($bug);
+    }
+
+    private function createRandomTitle(): string
+    {
+        $title = $this->faker->words($this->faker->numberBetween(1, 5), true);
+        if (is_string($title)) {
+            return $title;
+        }
+
+        throw new LogicException('Faker returns the wrong type.');
+    }
+
+    private function createRandomStepsToReproduce(): string
+    {
+        $stepsToReproduce = $this->faker->sentences($this->faker->numberBetween(3, 5));
+        if (!is_array($stepsToReproduce)) {
+            throw new LogicException('Faker returns the wrong type.');
+        }
+
+        foreach ($stepsToReproduce as $key => $step) {
+            $stepsToReproduce[$key] = sprintf('%d. %s', $key + 1, $step);
+        }
+
+        return implode("\n", $stepsToReproduce);
+    }
+
+    private function createRandomSummary(): string
+    {
+        $summary = $this->faker->paragraphs($this->faker->numberBetween(1, 3), true);
+        if (is_string($summary)) {
+            return $summary;
+        }
+
+        throw new LogicException('Faker returns the wrong type.');
     }
 }
