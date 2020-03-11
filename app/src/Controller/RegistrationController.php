@@ -6,7 +6,7 @@ namespace App\Controller;
 
 use App\DataTransferObject\RegisterUserDto;
 use App\Factory\UserFactoryInterface;
-use App\Form\RegistrationFormType;
+use App\Form\RegistrationType;
 use App\Repository\UserRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +21,7 @@ final class RegistrationController extends BaseController
         UserRepositoryInterface $userRepo
     ): Response {
         $registerUser = new RegisterUserDto();
-        $form = $this->createForm(RegistrationFormType::class, $registerUser);
+        $form = $this->createForm(RegistrationType::class, $registerUser);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

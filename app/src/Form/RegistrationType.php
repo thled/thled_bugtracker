@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class RegistrationFormType extends AbstractType
+final class RegistrationType extends AbstractType
 {
     /**
      * @param array<mixed> $options

@@ -2,28 +2,28 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Unit;
+namespace App\Tests\Unit\Form;
 
 use App\DataTransferObject\RegisterUserDto;
-use App\Form\RegistrationFormType;
+use App\Form\RegistrationType;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/** @covers \App\Form\RegistrationFormType */
-final class RegistrationFormTypeTest extends TestCase
+/** @covers \App\Form\RegistrationType */
+final class RegistrationTypeTest extends TestCase
 {
-    private RegistrationFormType $registrationFormType;
+    private RegistrationType $registrationFormType;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->registrationFormType = new RegistrationFormType();
+        $this->registrationFormType = new RegistrationType();
     }
 
-    /** @covers \App\Form\RegistrationFormType::buildForm */
+    /** @covers \App\Form\RegistrationType::buildForm */
     public function testBuildForm(): void
     {
         $builder = $this->prophesize(FormBuilderInterface::class);
@@ -38,7 +38,7 @@ final class RegistrationFormTypeTest extends TestCase
         $this->registrationFormType->buildForm($builder->reveal(), []);
     }
 
-    /** @covers \App\Form\RegistrationFormType::configureOptions */
+    /** @covers \App\Form\RegistrationType::configureOptions */
     public function testConfigureOptions(): void
     {
         $resolver = $this->prophesize(OptionsResolver::class);

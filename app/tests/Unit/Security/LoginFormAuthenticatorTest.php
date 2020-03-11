@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Unit;
+namespace App\Tests\Unit\Security;
 
 use App\Security\LoginFormAuthenticator;
 use PHPUnit\Framework\TestCase;

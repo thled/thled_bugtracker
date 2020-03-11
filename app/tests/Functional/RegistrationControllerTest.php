@@ -20,9 +20,9 @@ final class RegistrationControllerTest extends FunctionalTestBase
         $this->client->submitForm(
             'Register',
             [
-                'registration_form[email]' => self::EMAIL,
-                'registration_form[plainPassword]' => self::PASSWORD,
-                'registration_form[agreeTerms]' => '1',
+                'registration[email]' => self::EMAIL,
+                'registration[plainPassword]' => self::PASSWORD,
+                'registration[agreeTerms]' => '1',
             ],
         );
 
