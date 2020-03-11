@@ -27,6 +27,7 @@ user:
         not_blank: 'Email is required.'
         max: 'Email cannot be longer than 180 characters.'
         email: 'Email needs to be a valid email address.'
+        unique: 'There is already an account with this email.'
 
 login:
     login: 'Login'
@@ -47,7 +48,9 @@ register:
     should_agree: 'You should agree to our terms.'
     password: 'Password'
     enter_password: 'Please enter a password.'
-    password_length: 'Your password should be at least {{ limit }} characters.'
+    password_length:
+        min: 'Your password should be at least {{ limit }} characters.'
+        max: 'Your password should be not longer than {{ limit }} characters.'
     login: 'Already have an account? <a href="%path%">Sign in</a>'
     read_terms: 'Read <a href="%path%">Terms</a>'
 

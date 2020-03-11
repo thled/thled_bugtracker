@@ -15,5 +15,7 @@ use App\Entity\Project;
  */
 interface BugRepositoryInterface
 {
+    public function save(Bug $bug): void;
+
     public function findLatestBugOfProject(Project $project): ?Bug;
 }

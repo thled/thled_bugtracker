@@ -22,6 +22,12 @@ final class BugRepository extends ServiceEntityRepository implements BugReposito
         parent::__construct($registry, Bug::class);
     }
 
+    public function save(Bug $bug): void
+    {
+        $this->_em->persist($bug);
+        $this->_em->flush();
+    }
+
     public function findLatestBugOfProject(Project $project): ?Bug
     {
         $qb = $this->createQueryBuilder('b')

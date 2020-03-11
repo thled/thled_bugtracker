@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional;
 
+use App\DataFixtures\BugFixtures;
 use App\DataFixtures\ProjectFixtures;
 use App\DataFixtures\UserFixtures;
 use App\Entity\User;
@@ -31,8 +32,9 @@ abstract class FunctionalTestBase extends WebTestCase
     {
         $abstractExecutor = $this->loadFixtures(
             [
-                UserFixtures::class,
+                BugFixtures::class,
                 ProjectFixtures::class,
+                UserFixtures::class,
             ],
         );
         if ($abstractExecutor instanceof AbstractExecutor) {

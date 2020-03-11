@@ -44,7 +44,7 @@ final class BugFixtures extends BaseFixture implements DependentFixtureInterface
         $project = $this->getReference(sprintf('project-P%d', $projectId));
 
         for ($bugId = 0; $bugId < $amountOfBugs; $bugId++) {
-            $reporterId = 1;
+            $reporterId = 0;
             $assigneeId = ($projectId * $amountOfBugs) + $bugId;
             $this->createBugForProject($bugId, $project, $reporterId, $assigneeId);
         }
@@ -92,7 +92,7 @@ final class BugFixtures extends BaseFixture implements DependentFixtureInterface
             $comments,
         );
 
-        $this->manager->persist($bug);
+        $this->persistAndReference($bug, $bugId, $project->getProjectId());
     }
 
     private function createRandomTitle(): string
@@ -100,6 +100,16 @@ final class BugFixtures extends BaseFixture implements DependentFixtureInterface
         $title = $this->faker->words($this->faker->numberBetween(1, 5), true);
         if (is_string($title)) {
             return $title;
+        }
+
+        throw new LogicException('Faker returns the wrong type.');
+    }
+
+    private function createRandomSummary(): string
+    {
+        $summary = $this->faker->paragraphs($this->faker->numberBetween(1, 3), true);
+        if (is_string($summary)) {
+            return $summary;
         }
 
         throw new LogicException('Faker returns the wrong type.');
@@ -119,13 +129,11 @@ final class BugFixtures extends BaseFixture implements DependentFixtureInterface
         return implode("\n", $stepsToReproduce);
     }
 
-    private function createRandomSummary(): string
+    private function persistAndReference(Bug $bug, int $bugId, string $projectId): void
     {
-        $summary = $this->faker->paragraphs($this->faker->numberBetween(1, 3), true);
-        if (is_string($summary)) {
-            return $summary;
-        }
+        $this->manager->persist($bug);
 
-        throw new LogicException('Faker returns the wrong type.');
+        $referenceName = sprintf('bug-%s-%s', $projectId, $bugId);
+        $this->setReference($referenceName, $bug);
     }
 }

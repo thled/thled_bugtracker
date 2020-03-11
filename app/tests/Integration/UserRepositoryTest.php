@@ -25,16 +25,26 @@ final class UserRepositoryTest extends IntegrationTestBase
     /** @covers \App\Repository\UserRepository::upgradePassword */
     public function testUpgradePassword(): void
     {
-        $user = $this->userRepo->find(1);
-        if (!$user instanceof User) {
-            throw new LogicException('No user found.');
-        }
+        $user = $this->getAdmin();
         $newEncodedPassword = '321nimda';
 
         $this->userRepo->upgradePassword($user, $newEncodedPassword);
 
+        $this->assertPasswordUpgraded($newEncodedPassword, $user);
+    }
+
+    private function getAdmin(): User
+    {
+        /** @var User $userFixture */
+        $userFixture = $this->fixtures->getReference('user-admin');
+
+        return $this->userRepo->get($userFixture->getId());
+    }
+
+    private function assertPasswordUpgraded(string $newEncodedPassword, User $user): void
+    {
         $this->entityManager->clear();
-        $userWithUpgradedPassword = $this->userRepo->find(1);
+        $userWithUpgradedPassword = $this->userRepo->find($user->getId());
         if (!$userWithUpgradedPassword instanceof User) {
             throw new LogicException('No user found.');
         }
@@ -56,9 +66,8 @@ final class UserRepositoryTest extends IntegrationTestBase
     /** @covers \App\Repository\UserRepository::save */
     public function testSave(): void
     {
-        $user = new User();
         $email = 'foobar@example.com';
-        $user->setEmail($email);
+        $user = new User($email);
 
         $this->userRepo->save($user);
 

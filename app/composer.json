@@ -104,13 +104,15 @@
             "cp .env.docker .env.local",
             "@composer install",
             "@php bin/console doctrine:migrations:migrate --no-interaction",
-            "@php bin/console doctrine:fixtures:load --no-interaction"
+            "@php bin/console doctrine:fixtures:load --no-interaction",
+            "@php bin/console cache:clear"
         ],
         "reset": [
             "@php bin/console doctrine:database:drop --force",
             "@php bin/console doctrine:database:create",
             "@php bin/console doctrine:migrations:migrate --no-interaction",
-            "@php bin/console doctrine:fixtures:load --no-interaction"
+            "@php bin/console doctrine:fixtures:load --no-interaction",
+            "@php bin/console cache:clear"
         ],
         "ci": [
             "@lint",

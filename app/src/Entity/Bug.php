@@ -10,22 +10,11 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Config\Definition\Exception\InvalidTypeException;
 
 /** @ORM\Entity(repositoryClass="App\Repository\BugRepository") */
-class Bug
+class Bug extends BaseEntity
 {
-    use TimestampableEntity;
-
-    /**
-     * @ORM\Id()
-     * @ORM\Column(type="uuid", unique=true)
-     */
-    private UuidInterface $id;
-
     /** @ORM\Column(type="integer") */
     private int $bugId;
 
@@ -93,7 +82,8 @@ class Bug
         string $actual = '',
         array $comments = []
     ) {
-        $this->id = Uuid::uuid4();
+        parent::__construct();
+
         $this->bugId = $bugId;
         $this->project = $project;
         $this->status = $status;
@@ -120,11 +110,6 @@ class Bug
         }
 
         throw new InvalidTypeException('Due has an invalid type.');
-    }
-
-    public function getId(): UuidInterface
-    {
-        return $this->id;
     }
 
     public function getBugId(): int
@@ -187,9 +172,9 @@ class Bug
         return $this->status;
     }
 
-    /** @return Collection<Comment> */
-    public function getComments(): Collection
+    /** @return array<Comment> */
+    public function getComments(): array
     {
-        return $this->comments;
+        return $this->comments->toArray();
     }
 }

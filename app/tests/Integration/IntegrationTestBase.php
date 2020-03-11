@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Integration;
 
+use App\DataFixtures\BugFixtures;
+use App\DataFixtures\ProjectFixtures;
 use App\DataFixtures\UserFixtures;
 use Doctrine\Common\DataFixtures\Executor\AbstractExecutor;
 use Doctrine\Common\DataFixtures\ReferenceRepository;
@@ -22,6 +24,8 @@ abstract class IntegrationTestBase extends KernelTestCase
     {
         $abstractExecutor = $this->loadFixtures(
             [
+                BugFixtures::class,
+                ProjectFixtures::class,
                 UserFixtures::class,
             ],
         );

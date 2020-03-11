@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit;
 
+use App\DataTransferObject\RegisterUserDto;
 use App\Form\RegistrationFormType;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 /** @covers \App\Form\RegistrationFormType */
 final class RegistrationFormTypeTest extends TestCase
@@ -20,8 +20,7 @@ final class RegistrationFormTypeTest extends TestCase
     {
         parent::setUp();
 
-        $translator = $this->prophesize(TranslatorInterface::class);
-        $this->registrationFormType = new RegistrationFormType($translator->reveal());
+        $this->registrationFormType = new RegistrationFormType();
     }
 
     /** @covers \App\Form\RegistrationFormType::buildForm */
@@ -43,7 +42,8 @@ final class RegistrationFormTypeTest extends TestCase
     public function testConfigureOptions(): void
     {
         $resolver = $this->prophesize(OptionsResolver::class);
-        $resolver->setDefaults(Argument::type('array'))->shouldBeCalledOnce();
+        $resolver->setDefault('data_class', RegisterUserDto::class)
+            ->shouldBeCalledOnce();
 
         $this->registrationFormType->configureOptions($resolver->reveal());
     }

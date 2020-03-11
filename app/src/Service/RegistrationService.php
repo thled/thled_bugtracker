@@ -7,7 +7,7 @@ namespace App\Service;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-final class RegistrationService
+final class RegistrationService implements RegistrationServiceInterface
 {
     private UserPasswordEncoderInterface $passwordEncoder;
 

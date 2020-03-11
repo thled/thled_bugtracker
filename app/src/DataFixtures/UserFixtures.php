@@ -79,11 +79,9 @@ final class UserFixtures extends BaseFixture
         string $plainPassword,
         array $roles
     ): void {
-        $user = new User();
-        $user->setEmail($email);
+        $user = new User($email, $roles);
         $encodedPassword = $this->passwordEncoder->encodePassword($user, $plainPassword);
         $user->setPassword($encodedPassword);
-        $user->setRoles($roles);
 
         $this->persistAndReference($user, $email);
     }
@@ -94,12 +92,7 @@ final class UserFixtures extends BaseFixture
 
         $nameAndDomain = explode('@', $email);
         $name = reset($nameAndDomain);
-        $this->addReference(
-            sprintf(
-                'user-%s',
-                $name,
-            ),
-            $user,
-        );
+        $referenceName = sprintf('user-%s', $name);
+        $this->addReference($referenceName, $user);
     }
 }

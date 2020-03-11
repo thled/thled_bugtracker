@@ -18,11 +18,12 @@ final class RegistrationServiceTest extends TestCase
         $passwordEncoder = $this->prophesize(UserPasswordEncoderInterface::class);
         $registrationService = new RegistrationService($passwordEncoder->reveal());
 
-        $user = new User();
         $plainPassword = 'admin123';
-        $encodedPassword = '321nimda';
+        $user = new User($plainPassword);
 
+        $encodedPassword = '321nimda';
         $passwordEncoder->encodePassword($user, $plainPassword)->willReturn($encodedPassword);
+
         $registrationService->encodePasswordInUser($user, $plainPassword);
 
         $userPassword = $user->getPassword();

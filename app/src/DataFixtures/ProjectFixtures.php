@@ -28,10 +28,7 @@ final class ProjectFixtures extends BaseFixture
 
     private function createProject(string $projectId, string $name): void
     {
-        $project = new Project();
-        $project
-            ->setProjectId($projectId)
-            ->setName($name);
+        $project = new Project($projectId, $name);
 
         $this->persistAndReference($project, $projectId);
     }
@@ -40,12 +37,7 @@ final class ProjectFixtures extends BaseFixture
     {
         $this->manager->persist($project);
 
-        $this->addReference(
-            sprintf(
-                'project-%s',
-                $projectId,
-            ),
-            $project,
-        );
+        $referenceName = sprintf('project-%s', $projectId);
+        $this->addReference($referenceName, $project);
     }
 }

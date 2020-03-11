@@ -7,25 +7,15 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /** @ORM\Entity(repositoryClass="App\Repository\ProjectRepository") */
-class Project
+class Project extends BaseEntity
 {
-    use TimestampableEntity;
-
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private ?int $id;
-
     /** @ORM\Column(type="string", length=5) */
-    private string $projectId = '';
+    private string $projectId;
 
     /** @ORM\Column(type="string", length=128) */
-    private string $name = '';
+    private string $name;
 
     /**
      * @var Collection<Bug>
@@ -37,9 +27,17 @@ class Project
      */
     private Collection $bugs;
 
-    public function __construct()
-    {
-        $this->bugs = new ArrayCollection();
+    /** @param array<Bug> $bugs */
+    public function __construct(
+        string $projectId,
+        string $name = '',
+        array $bugs = []
+    ) {
+        parent::__construct();
+
+        $this->projectId = $projectId;
+        $this->name = $name;
+        $this->bugs = new ArrayCollection($bugs);
     }
 
     public function __toString(): string
@@ -47,21 +45,9 @@ class Project
         return sprintf('%s (%s)', $this->getName(), $this->getProjectId());
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
     public function getProjectId(): string
     {
         return $this->projectId;
-    }
-
-    public function setProjectId(string $projectId): self
-    {
-        $this->projectId = $projectId;
-
-        return $this;
     }
 
     public function getName(): string
@@ -69,16 +55,9 @@ class Project
         return $this->name;
     }
 
-    public function setName(string $name): self
+    /** @return array<Bug> */
+    public function getBugs(): array
     {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /** @return Collection<Bug> */
-    public function getBugs(): Collection
-    {
-        return $this->bugs;
+        return $this->bugs->toArray();
     }
 }

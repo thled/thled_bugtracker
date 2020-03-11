@@ -5,22 +5,12 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /** @ORM\Entity(repositoryClass="App\Repository\CommentRepository") */
-class Comment
+class Comment extends BaseEntity
 {
-    use TimestampableEntity;
-
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private ?int $id;
-
     /** @ORM\Column(type="text") */
-    private string $content = '';
+    private string $content;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
@@ -34,9 +24,13 @@ class Comment
      */
     private Bug $bug;
 
-    public function getId(): ?int
+    public function __construct(User $author, Bug $bug, string $content = '')
     {
-        return $this->id;
+        parent::__construct();
+
+        $this->content = $content;
+        $this->author = $author;
+        $this->bug = $bug;
     }
 
     public function getContent(): string
@@ -44,34 +38,13 @@ class Comment
         return $this->content;
     }
 
-    public function setContent(string $content): self
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-
     public function getAuthor(): User
     {
         return $this->author;
     }
 
-    public function setAuthor(User $author): self
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
     public function getBug(): Bug
     {
         return $this->bug;
-    }
-
-    public function setBug(Bug $bug): self
-    {
-        $this->bug = $bug;
-
-        return $this;
     }
 }

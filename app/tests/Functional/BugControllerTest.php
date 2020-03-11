@@ -12,13 +12,10 @@ use DateTimeImmutable;
 /** @covers \App\Controller\BugController */
 class BugControllerTest extends FunctionalTestBase
 {
-    private const PO = 'po0@example.com';
-    private const DEV = 'dev0@example.com';
-
     /** @covers \App\Controller\BugController::add */
     public function testAdd(): void
     {
-        $this->logIn(self::PO);
+        $this->logIn('po0@example.com');
         $this->client->request('GET', '/bug/add');
 
         $bugToAdd = $this->createBug();
@@ -29,17 +26,14 @@ class BugControllerTest extends FunctionalTestBase
 
     private function createBug(): Bug
     {
-        $projectRepo = $this->entityManager->getRepository(Project::class);
-        $userRepo = $this->entityManager->getRepository(User::class);
-
         $bugId = 1;
         /** @var Project $project */
-        $project = $projectRepo->find(1);
+        $project = $this->fixtures->getReference('project-P2');
         $due = new DateTimeImmutable();
         /** @var User $reporter */
-        $reporter = $userRepo->findOneBy(['email' => self::PO]);
+        $reporter = $this->fixtures->getReference('user-po0');
         /** @var User $assignee */
-        $assignee = $userRepo->findOneBy(['email' => self::DEV]);
+        $assignee = $this->fixtures->getReference('user-dev6');
 
         return new Bug(
             $bugId,
@@ -71,6 +65,27 @@ class BugControllerTest extends FunctionalTestBase
         );
     }
 
+    private function assertBugIsCreated(Bug $bugToAdd): void
+    {
+        $bugAdded = $this->findBugInDb($bugToAdd);
+        if (!$bugAdded instanceof Bug) {
+            self::fail('Cannot find Bug in DB.');
+        }
+
+        self::assertSame($bugToAdd->getBugId(), $bugAdded->getBugId());
+        self::assertTrue($bugToAdd->getProject()->getId()->equals($bugAdded->getProject()->getId()));
+        self::assertSame($bugToAdd->getStatus(), $bugAdded->getStatus());
+        self::assertSame($bugToAdd->getPriority(), $bugAdded->getPriority());
+        self::assertSame($bugToAdd->getDue()->format('Ymd'), $bugAdded->getDue()->format('Ymd'));
+        self::assertSame($bugToAdd->getTitle(), $bugAdded->getTitle());
+        self::assertSame($bugToAdd->getSummary(), $bugAdded->getSummary());
+        self::assertSame($bugToAdd->getReproduce(), $bugAdded->getReproduce());
+        self::assertSame($bugToAdd->getExpected(), $bugAdded->getExpected());
+        self::assertSame($bugToAdd->getActual(), $bugAdded->getActual());
+        self::assertTrue($bugToAdd->getReporter()->getId()->equals($bugAdded->getReporter()->getId()));
+        self::assertTrue($bugToAdd->getAssignee()->getId()->equals($bugAdded->getAssignee()->getId()));
+    }
+
     private function findBugInDb(Bug $bugToAdd): ?Bug
     {
         $bugRepo = $this->entityManager->getRepository(Bug::class);
@@ -81,26 +96,5 @@ class BugControllerTest extends FunctionalTestBase
                 'bugId' => $bugToAdd->getBugId(),
             ],
         );
-    }
-
-    private function assertBugIsCreated(Bug $bugToAdd): void
-    {
-        $bugAdded = $this->findBugInDb($bugToAdd);
-        if (!$bugAdded instanceof Bug) {
-            self::fail('Cannot find Bug in DB.');
-        }
-
-        self::assertSame($bugToAdd->getBugId(), $bugAdded->getBugId());
-        self::assertSame($bugToAdd->getProject()->getId(), $bugAdded->getProject()->getId());
-        self::assertSame($bugToAdd->getStatus(), $bugAdded->getStatus());
-        self::assertSame($bugToAdd->getPriority(), $bugAdded->getPriority());
-        self::assertSame($bugToAdd->getDue()->format('Ymd'), $bugAdded->getDue()->format('Ymd'));
-        self::assertSame($bugToAdd->getTitle(), $bugAdded->getTitle());
-        self::assertSame($bugToAdd->getSummary(), $bugAdded->getSummary());
-        self::assertSame($bugToAdd->getReproduce(), $bugAdded->getReproduce());
-        self::assertSame($bugToAdd->getExpected(), $bugAdded->getExpected());
-        self::assertSame($bugToAdd->getActual(), $bugAdded->getActual());
-        self::assertSame($bugToAdd->getReporter()->getId(), $bugAdded->getReporter()->getId());
-        self::assertSame($bugToAdd->getAssignee()->getId(), $bugAdded->getAssignee()->getId());
     }
 }
