@@ -22,7 +22,7 @@ final class SecurityControllerTest extends FunctionalTestBase
         $this->client->submitForm(
             'Sign in',
             [
-                'email' => $user->getEmail(),
+                'email' => $user->getUsername(),
                 'password' => self::PASSWORD,
             ],
         );

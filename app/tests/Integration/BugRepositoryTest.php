@@ -28,6 +28,7 @@ final class BugRepositoryTest extends IntegrationTestBase
         $this->userRepo = $this->entityManager->getRepository(User::class);
     }
 
+    /** @covers \App\Repository\BugRepository::save */
     public function testSave(): void
     {
         $bugId = 1;

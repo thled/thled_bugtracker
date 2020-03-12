@@ -16,7 +16,7 @@ use Ramsey\Uuid\UuidInterface;
  * @method Project[]    findAll()
  * @method Project[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-final class ProjectRepository extends ServiceEntityRepository
+final class ProjectRepository extends ServiceEntityRepository implements ProjectRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
