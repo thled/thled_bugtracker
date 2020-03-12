@@ -53,10 +53,7 @@ final class UserRepository extends ServiceEntityRepository implements
         $user = $this->find($userId);
         if (!$user instanceof User) {
             throw new RecordNotFoundException(
-                sprintf(
-                    'No user found with ID "%s".',
-                    $userId->toString(),
-                ),
+                sprintf('No user found with ID "%s".', $userId->toString()),
             );
         }
 
