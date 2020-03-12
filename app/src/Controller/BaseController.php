@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 abstract class BaseController extends AbstractController
 {
+    /** @codeCoverageIgnore */
     protected function getUser(): User
     {
         if (!$this->isSecurityBundleAvailable()) {
@@ -33,7 +34,7 @@ abstract class BaseController extends AbstractController
         return $user;
     }
 
-    protected function isSecurityBundleAvailable(): bool
+    private function isSecurityBundleAvailable(): bool
     {
         return $this->container->has('security.token_storage');
     }

@@ -4,26 +4,26 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Form;
 
-use App\DataTransferObject\RegisterUserDto;
-use App\Form\RegistrationType;
+use App\DataTransferObject\CreateBugDto;
+use App\Form\BugType;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/** @covers \App\Form\RegistrationType */
-final class RegistrationTypeTest extends TestCase
+/** @covers \App\Form\BugType */
+final class BugTypeTest extends TestCase
 {
-    private RegistrationType $registrationType;
+    private BugType $bugType;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->registrationType = new RegistrationType();
+        $this->bugType = new BugType();
     }
 
-    /** @covers \App\Form\RegistrationType::buildForm */
+    /** @covers \App\Form\BugType::buildForm */
     public function testBuildForm(): void
     {
         $builder = $this->prophesize(FormBuilderInterface::class);
@@ -33,18 +33,18 @@ final class RegistrationTypeTest extends TestCase
             Argument::type('array'),
         )
             ->willReturn($builder)
-            ->shouldBeCalledTimes(3);
+            ->shouldBeCalledTimes(11);
 
-        $this->registrationType->buildForm($builder->reveal(), []);
+        $this->bugType->buildForm($builder->reveal(), []);
     }
 
-    /** @covers \App\Form\RegistrationType::configureOptions */
+    /** @covers \App\Form\BugType::configureOptions */
     public function testConfigureOptions(): void
     {
         $resolver = $this->prophesize(OptionsResolver::class);
-        $resolver->setDefault('data_class', RegisterUserDto::class)
+        $resolver->setDefault('data_class', CreateBugDto::class)
             ->shouldBeCalledOnce();
 
-        $this->registrationType->configureOptions($resolver->reveal());
+        $this->bugType->configureOptions($resolver->reveal());
     }
 }

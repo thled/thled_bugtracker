@@ -22,6 +22,20 @@ final class ProjectRepositoryTest extends IntegrationTestBase
     }
 
     /** @covers \App\Repository\ProjectRepository::get */
+    public function testGet(): void
+    {
+        $projectFromDb = $this->projectRepo->findOneBy(['projectId' => 'P0']);
+        if (!$projectFromDb instanceof Project) {
+            self::fail('Cannot find project in DB.');
+        }
+        $projectId = $projectFromDb->getId();
+
+        $project = $this->projectRepo->get($projectId);
+
+        self::assertSame($projectId, $project->getId());
+    }
+
+    /** @covers \App\Repository\ProjectRepository::get */
     public function testGetThrowsRecordNotFoundException(): void
     {
         $projectId = Uuid::uuid4();
