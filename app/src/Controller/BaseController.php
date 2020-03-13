@@ -9,9 +9,9 @@ use LogicException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
+/** @codeCoverageIgnore */
 abstract class BaseController extends AbstractController
 {
-    /** @codeCoverageIgnore */
     protected function getUser(): User
     {
         if (!$this->isSecurityBundleAvailable()) {

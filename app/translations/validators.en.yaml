@@ -1,0 +1,13 @@
+register:
+    email:
+        not_blank: 'Email is required.'
+        max: 'Email cannot be longer than 180 characters.'
+        email: 'Email needs to be a valid email address.'
+        unique: 'There is already an account with this email.'
+    password:
+        not_blank: 'Please enter a password.'
+        length:
+            min: 'Your password should be at least {{ limit }} characters.'
+            max: 'Your password should be not longer than {{ limit }} characters.'
+    agree_terms:
+        agree: 'You should agree to our terms.'

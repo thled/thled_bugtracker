@@ -22,13 +22,6 @@ footer:
     privacy: 'Privacy Policy'
     copyright: '© 2020-%year% Thomas Le Duc'
 
-user:
-    email:
-        not_blank: 'Email is required.'
-        max: 'Email cannot be longer than 180 characters.'
-        email: 'Email needs to be a valid email address.'
-        unique: 'There is already an account with this email.'
-
 login:
     login: 'Login'
     logged_in: 'You are logged in as'
@@ -44,13 +37,8 @@ login:
 register:
     register: 'Register'
     email: 'Email'
-    agree_terms: 'Agree Terms'
-    should_agree: 'You should agree to our terms.'
     password: 'Password'
-    enter_password: 'Please enter a password.'
-    password_length:
-        min: 'Your password should be at least {{ limit }} characters.'
-        max: 'Your password should be not longer than {{ limit }} characters.'
+    agree_terms: 'Agree Terms'
     login: 'Already have an account? <a href="%path%">Sign in</a>'
     read_terms: 'Read <a href="%path%">Terms</a>'
 
