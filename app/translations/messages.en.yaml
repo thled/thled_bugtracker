@@ -45,3 +45,18 @@ register:
 bug:
     title: 'Issue a Bug'
     lead: 'Add a new Bug report by filling out the following form.'
+    form:
+        project: 'Project'
+        status: 'Status'
+        priority: 'Priority'
+        due: 'Due Date'
+        title: 'Title'
+        summary: 'Summary'
+        reproduce: 'Steps to reproduce'
+        expected: 'Expected'
+        actual: 'Actual'
+        reporter: 'Reporter'
+        assignee: 'Assignee'
+        due_placeholder_year: 'Year'
+        due_placeholder_month: 'Month'
+        due_placeholder_day: 'Day'

@@ -12,16 +12,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Roles for authorization.
 - Dynamic highlighting of navigation items.
 - Code coverage with report functionality from Codecov.
-- "Issue a Bug" page.
-- Tests for several classes.
 - Bug and related Project, Comment entities.
-- Form for adding new Bugs.
+- "Issue a Bug" page with form for adding new Bugs.
+- Tests for several classes.
 - Feature Flag for HTML5 validation in forms.
 
 ### Changed
 
 - Main frontend style.
 - Copyright year to update automatically.
+- Entities to use UUID instead of incremental ID.
+- Forms use DTOs instead of entities.
 
 ## [0.7.0] - 2020-02-06
 
