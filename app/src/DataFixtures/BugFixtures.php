@@ -56,32 +56,26 @@ final class BugFixtures extends BaseFixture implements DependentFixtureInterface
         int $reporterId,
         int $assigneeId
     ): void {
-        $due = $this->faker->dateTimeBetween('+5 days', '+10 days');
-
         /** @var User $reporter */
         $reporter = $this->getReference(sprintf('user-po%d', $reporterId));
-
         /** @var User $assignee */
         $assignee = $this->getReference(sprintf('user-dev%d', $assigneeId));
-
+        $due = $this->faker->dateTimeBetween('+5 days', '+10 days');
         $status = 1;
         $priority = 1;
         $title = ucfirst($this->createRandomTitle());
         $summary = $this->createRandomSummary();
-
         $reproduce = $this->createRandomStepsToReproduce();
-
         $expected = $this->faker->sentence();
         $actual = $this->faker->sentence();
-
         $comments = [];
 
         $bug = new Bug(
             $bugId,
             $project,
-            $due,
             $reporter,
             $assignee,
+            $due,
             $status,
             $priority,
             $title,

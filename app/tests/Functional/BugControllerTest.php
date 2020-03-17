@@ -10,7 +10,7 @@ use App\Entity\User;
 use DateTimeImmutable;
 
 /** @covers \App\Controller\BugController */
-class BugControllerTest extends FunctionalTestBase
+final class BugControllerTest extends FunctionalTestBase
 {
     /** @covers \App\Controller\BugController::add */
     public function testAdd(): void
@@ -29,18 +29,18 @@ class BugControllerTest extends FunctionalTestBase
         $bugId = 1;
         /** @var Project $project */
         $project = $this->fixtures->getReference('project-P2');
-        $due = new DateTimeImmutable();
         /** @var User $reporter */
         $reporter = $this->fixtures->getReference('user-po0');
         /** @var User $assignee */
         $assignee = $this->fixtures->getReference('user-dev6');
+        $due = new DateTimeImmutable();
 
         return new Bug(
             $bugId,
             $project,
-            $due,
             $reporter,
             $assignee,
+            $due,
         );
     }
 
@@ -97,4 +97,12 @@ class BugControllerTest extends FunctionalTestBase
             ],
         );
     }
+
+//    public function testAddValidation(): void
+//    {
+//        $this->logIn('po0@example.com');
+//        $this->client->request('GET', '/bug/add');
+//
+// todo: finish
+//    }
 }

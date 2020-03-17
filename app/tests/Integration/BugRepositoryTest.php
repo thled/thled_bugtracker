@@ -33,15 +33,15 @@ final class BugRepositoryTest extends IntegrationTestBase
     {
         $bugId = 1;
         $project = $this->getProject();
-        $due = new DateTimeImmutable();
         $reporter = $this->getUser('user-po0');
         $assignee = $this->getUser('user-dev6');
+        $due = new DateTimeImmutable();
         $bug = new Bug(
             $bugId,
             $project,
-            $due,
             $reporter,
             $assignee,
+            $due,
         );
 
         $this->bugRepo->save($bug);

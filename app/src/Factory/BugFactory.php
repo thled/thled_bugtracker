@@ -24,13 +24,11 @@ final class BugFactory implements BugFactoryInterface
     public function createFromCreateBugDto(CreateBugDto $bugDto): Bug
     {
         $project = $bugDto->project;
-        $due = $bugDto->due;
         $reporter = $bugDto->reporter;
         $assignee = $bugDto->assignee;
 
         if (
             (!$project instanceof Project) ||
-            (!$due instanceof DateTimeImmutable) ||
             (!$reporter instanceof User) ||
             (!$assignee instanceof User)
         ) {
@@ -39,12 +37,17 @@ final class BugFactory implements BugFactoryInterface
 
         $bugId = $this->getNextBugIdOfProject($project);
 
+        $due = $bugDto->due;
+        if (!$due instanceof DateTimeImmutable) {
+            $due = (new DateTimeImmutable())->setTimestamp(0);
+        }
+
         return new Bug(
             $bugId,
             $project,
-            $due,
             $reporter,
             $assignee,
+            $due,
             $bugDto->status ?? 0,
             $bugDto->priority ?? 0,
             $bugDto->title ?? '',

@@ -10,4 +10,13 @@ register:
             min: 'Your password should be at least {{ limit }} characters.'
             max: 'Your password should be not longer than {{ limit }} characters.'
     agree_terms:
-        agree: 'You should agree to our terms.'
+        is_true: 'You should agree to our terms.'
+bug:
+    status:
+        choice: 'Choose a valid status.'
+    priority:
+        choice: 'Choose a valid priority.'
+    title:
+        max: 'Title cannot be longer than 128 characters.'
+    assignee:
+        not_blank: 'It must be assigned to a User.'

@@ -70,9 +70,9 @@ class Bug extends BaseEntity
     public function __construct(
         int $bugId,
         Project $project,
-        DateTimeInterface $due,
         User $reporter,
         User $assignee,
+        DateTimeInterface $due,
         int $status = 0,
         int $priority = 0,
         string $title = '',

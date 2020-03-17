@@ -7,7 +7,7 @@ namespace App\DataTransferObject;
 use App\Validator\UniqueUser;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class RegisterUserDto
+final class RegisterUserDto
 {
     /**
      * @Assert\NotBlank(message="register.email.not_blank")
@@ -24,6 +24,6 @@ class RegisterUserDto
      */
     public ?string $plainPassword = null;
 
-    /** @Assert\IsTrue(message="register.agree_terms.agree") */
+    /** @Assert\IsTrue(message="register.agree_terms.is_true") */
     public ?bool $agreeTerms = null;
 }
