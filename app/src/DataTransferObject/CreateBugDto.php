@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class CreateBugDto
 {
-    /** @Assert\NotBlank() */
+    /** @Assert\NotBlank(message="bug.project.not_blank") */
     public ?Project $project = null;
 
     /** @Assert\Choice(choices={0, 1, 2, 3}, message="bug.status.choice") */

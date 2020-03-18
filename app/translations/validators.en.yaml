@@ -12,6 +12,8 @@ register:
     agree_terms:
         is_true: 'You should agree to our terms.'
 bug:
+    project:
+        not_blank: 'It must be assigned to a Project.'
     status:
         choice: 'Choose a valid status.'
     priority:
