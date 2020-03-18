@@ -6,8 +6,9 @@
          bootstrap="config/bootstrap.php"
          executionOrder="depends,defects"
          forceCoversAnnotation="true"
-         beStrictAboutCoversAnnotation="true"
+         beStrictAboutCoversAnnotation="false"
          beStrictAboutOutputDuringTests="true"
+         beStrictAboutTestsThatDoNotTestAnything="true"
          beStrictAboutTodoAnnotatedTests="true"
          verbose="true"
 >
@@ -32,8 +33,19 @@
     </testsuites>
 
     <filter>
-        <whitelist>
-            <directory>src</directory>
+        <whitelist
+                addUncoveredFilesFromWhitelist="true"
+                processUncoveredFilesFromWhitelist="true"
+        >
+            <directory suffix=".php">src</directory>
+            <exclude>
+                <directory suffix=".php">src/DataFixtures</directory>
+                <directory suffix=".php">src/DataTransferObject</directory>
+                <directory suffix=".php">src/Doctrine</directory>
+                <directory suffix=".php">src/Entity</directory>
+                <directory suffix=".php">src/Migrations</directory>
+                <file>src/Kernel.php</file>
+            </exclude>
         </whitelist>
     </filter>
 

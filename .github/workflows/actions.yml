@@ -47,3 +47,13 @@ jobs:
     - name: Run CI
       working-directory: ./app
       run: composer run-script ci
+
+    - name: Generate coverage report
+      working-directory: ./app
+      run: composer run-script tests-coverage
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./app/coverage.xml

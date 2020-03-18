@@ -21,8 +21,7 @@ security:
                     - App\Security\LoginFormAuthenticator
             logout:
                 path: logout
-                # where to redirect after logout
-                # target: app_any_route
+                target: login
             remember_me:
                 secret: '%kernel.secret%'
 
@@ -32,7 +31,21 @@ security:
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
 
+    role_hierarchy:
+        ROLE_ADMIN:
+            - ROLE_INVITE_PO
+            - ROLE_INVITE_DEV
+        ROLE_PO:
+            - ROLE_INVITE_DEV
+            - ROLE_CREATE_PROJECT
+            - ROLE_CREATE_BUG
+        ROLE_DEV:
+            - ROLE_CREATE_BUG
+            - ROLE_ASSIGN
+
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: IS_AUTHENTICATED_REMEMBERED }

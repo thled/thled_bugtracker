@@ -64,6 +64,8 @@
 
 ## Code Quality
 
+[![PHPStan][phpstan-badge]][phpstan] [![Codecov][codecov-badge]][codecov]
+
 Master [![Pipeline][pipeline-badge]][pipeline],
 Develop [![Pipeline Develop][pipeline-dev-badge]][pipeline-dev]
 
@@ -92,16 +94,40 @@ Manual tools should be executed regularly while developing and automatic tools a
 - PHPStan: `$ composer analyse`
 - PHP_CodeSniffer: `$ composer lint`
 - SonarCloud (triggered by pushing to Master branch)
+- Codecov (triggered by pushing)
 
 ## Tests
 
-- Run whole test suite: `$ docker-compose exec app bin/phpunit`
+### Usage
+
+- Run whole test suite: `$ composer tests`
+- Run unit tests: `$ composer unit`
+- Run integration tests: `$ composer integration`
+- Run functional tests: `$ composer functional`
+
+### Writing tests
+
+#### Configuration
+
+- PHPUnit is used as testing framework.
+- Prophecy is used as object mocking framework.
+- There are three types of tests:
+  - Unit Tests: Testing methods in isolation. (E.g. Service classes)
+  - Integration Tests: Testing modules without stubbing/mocking dependencies like a database. (E.g. Repository classes)
+  - Functional Tests: Testing frontend behavior. (E.g. Controller classes)
+
+#### Philosophy
+
+- Seek for high code coverage (>90%).
+- Do not test private/protected methods.
+- Do not test objects which have no logic like Entities and Models/DTOs.
+- It is not necessary to stub/mock third party libraries and objects without logic like mentioned before.
 
 ## Contribute
 
 Please do contribute! Issues and pull requests are welcome.
 
-[version-badge]: https://img.shields.io/badge/version-0.4.0-blue.svg
+[version-badge]: https://img.shields.io/badge/version-0.7.0-blue.svg
 [changelog]: ./CHANGELOG.md
 [license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [license]: ./LICENSE
@@ -118,5 +144,9 @@ Please do contribute! Issues and pull requests are welcome.
 [sonarcloud-code-smells]: https://sonarcloud.io/api/project_badges/measure?project=thled_thled_bugtracker&metric=code_smells
 [sonarcloud-duplicated-lines]: https://sonarcloud.io/api/project_badges/measure?project=thled_thled_bugtracker&metric=duplicated_lines_density
 [sonarcloud-dashboard]: https://sonarcloud.io/dashboard?id=thled_thled_bugtracker
+[phpstan-badge]: https://img.shields.io/badge/PHPStan-level%208-brightgreen.svg
+[phpstan]: https://github.com/phpstan/phpstan
+[codecov-badge]: https://codecov.io/gh/thled/thled_bugtracker/branch/master/graph/badge.svg
+[codecov]: https://codecov.io/gh/thled/thled_bugtracker
 [docker]: https://docs.docker.com/install/
 [docker-compose]: https://docs.docker.com/compose/install/

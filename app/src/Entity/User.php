@@ -4,57 +4,93 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table("`user`")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-class User implements UserInterface
+class User extends BaseEntity implements UserInterface
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private ?int $id = null;
-
-    /**
-     * @Assert\NotBlank(message="user.email.not_blank")
-     * @Assert\Length(max="180", maxMessage="user.email.max")
-     * @Assert\Email(message="user.email.email")
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
-    private string $email = '';
+    /** @ORM\Column(type="string", length=180, unique=true) */
+    private string $email;
 
     /**
      * @var array<string>
      * @ORM\Column(type="json")
      */
-    private array $roles = [];
+    private array $roles;
 
     /** @ORM\Column(type="string") */
-    private string $password = '';
+    private string $password;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    /**
+     * @var Collection<Bug>
+     * @ORM\OneToMany(targetEntity="App\Entity\Bug", mappedBy="reporter")
+     */
+    private Collection $reportedBugs;
 
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
+    /** @ORM\OneToOne(targetEntity="App\Entity\Bug", mappedBy="assignee") */
+    private ?Bug $assignedBug;
 
-    public function setEmail(string $email): self
-    {
+    /**
+     * @param array<string> $roles
+     * @param array<Bug> $reportedBugs
+     */
+    public function __construct(
+        string $email,
+        array $roles = [],
+        string $password = '',
+        array $reportedBugs = [],
+        ?Bug $assignedBug = null
+    ) {
+        parent::__construct();
+
         $this->email = $email;
+        $this->roles = $roles;
+        $this->password = $password;
+        $this->reportedBugs = new ArrayCollection($reportedBugs);
+        $this->assignedBug = $assignedBug;
+    }
 
-        return $this;
+    /**
+     * Serialize/Unserialize methods are needed
+     * because Doctrine has issues with typed properties (PHP7.4).
+     * Especially if they are private (and I want them to be private).
+     * (related: https://github.com/symfony/symfony/issues/35660 and
+     * https://github.com/doctrine/common/pull/882)
+     *
+     * @return array<mixed>
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.DisallowMixedTypeHint.DisallowedMixedTypeHint
+     */
+    public function __serialize(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'password' => $this->getPassword(),
+            'username' => $this->getUsername(),
+            'roles' => $this->getRoles(),
+        ];
+    }
+
+    /**
+     * @param array<mixed> $data
+     * @phpcsSuppress SlevomatCodingStandard.TypeHints.DisallowMixedTypeHint.DisallowedMixedTypeHint
+     */
+    public function __unserialize(array $data): void
+    {
+        $this->id = $data['id'];
+        $this->password = $data['password'];
+        $this->email = $data['username'];
+        $this->roles = $data['roles'];
+    }
+
+    public function __toString(): string
+    {
+        return $this->getUsername();
     }
 
     public function getUsername(): string
@@ -70,14 +106,6 @@ class User implements UserInterface
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
-    }
-
-    /** @param array<string> $roles */
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
-
-        return $this;
     }
 
     public function getPassword(): string
@@ -102,5 +130,16 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /** @return array<Bug> */
+    public function getReportedBugs(): array
+    {
+        return $this->reportedBugs->toArray();
+    }
+
+    public function getAssignedBug(): ?Bug
+    {
+        return $this->assignedBug;
     }
 }

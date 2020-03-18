@@ -1,27 +1,62 @@
-user:
-    email:
-        not_blank: Email is required.
-        max: Email cannot be longer than 180 characters.
-        email: Email needs to be a valid email address.
+website:
+    title: 'THlEd BUGTRACKER'
+
+header:
+    dashboard: 'Dashboard'
+    projects: 'Projects'
+    bugs:
+        name: 'Bugs'
+        show: 'Show Bugs'
+        issue: 'Issue a Bug'
+    account:
+        name: 'Account'
+        profile: 'Profile'
+        settings: 'Settings'
+        logout: 'Logout'
+    search: 'Search'
+
+footer:
+    contact: 'Contact'
+    disclaimer: 'Disclaimer'
+    terms: 'Terms of Use'
+    privacy: 'Privacy Policy'
+    copyright: '© 2020-%year% Thomas Le Duc'
 
 login:
-    login: Login
-    logged_in: You are logged in as
-    logout: Logout
-    title: THlEd BUGTRACKER Login
-    email: Email address
-    password: Password
-    sign_in: Sign in
-    remember_me: Remember me
-    forgot_password: Forgot your <a href="%path%">Password</a>?
-    register: No Account? <a href="%path%">Sign up</a>
-    demo: Sign in as <a href="%path%">Demo User</a>
+    login: 'Login'
+    logged_in: 'You are logged in as'
+    logout: 'Logout'
+    email: 'Email address'
+    password: 'Password'
+    sign_in: 'Sign in'
+    remember_me: 'Remember me'
+    forgot_password: 'Forgot your <a href="%path%">Password</a>?'
+    register: 'No Account? <a href="%path%">Sign up</a>'
+    demo: 'Sign in as <a href="%path%">Demo User</a>'
 
 register:
-    register: Register
-    email: Email
-    agree_terms: Agree Terms
-    should_agree: You should agree to our terms.
-    password: Password
-    enter_password: Please enter a password.
-    password_length: Your password should be at least {{ limit }} characters.
+    register: 'Register'
+    email: 'Email'
+    password: 'Password'
+    agree_terms: 'Agree Terms'
+    login: 'Already have an account? <a href="%path%">Sign in</a>'
+    read_terms: 'Read <a href="%path%">Terms</a>'
+
+bug:
+    title: 'Issue a Bug'
+    lead: 'Add a new Bug report by filling out the following form.'
+    form:
+        project: 'Project'
+        status: 'Status'
+        priority: 'Priority'
+        due: 'Due Date'
+        title: 'Title'
+        summary: 'Summary'
+        reproduce: 'Steps to reproduce'
+        expected: 'Expected'
+        actual: 'Actual'
+        reporter: 'Reporter'
+        assignee: 'Assignee'
+        due_placeholder_year: 'Year'
+        due_placeholder_month: 'Month'
+        due_placeholder_day: 'Day'

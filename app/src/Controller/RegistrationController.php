@@ -4,30 +4,30 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\User;
-use App\Form\RegistrationFormType;
-use App\Service\RegistrationService;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\DataTransferObject\RegisterUserDto;
+use App\Factory\UserFactoryInterface;
+use App\Form\RegistrationType;
+use App\Repository\UserRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class RegistrationController extends AbstractController
+final class RegistrationController extends BaseController
 {
     /** @Route("/register", name="register") */
     public function register(
         Request $request,
-        RegistrationService $registration
+        UserFactoryInterface $userFactory,
+        UserRepositoryInterface $userRepo
     ): Response {
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $registerUser = new RegisterUserDto();
+        $form = $this->createForm(RegistrationType::class, $registerUser);
+
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-            $passwordPlain = $form->get('plainPassword')->getData();
-            $registration->encodePasswordInUser($user, $passwordPlain);
+            $user = $userFactory->createFromRegisterUserDto($registerUser);
 
-            $registration->saveUser($user);
+            $userRepo->save($user);
 
             return $this->redirectToRoute('login');
         }

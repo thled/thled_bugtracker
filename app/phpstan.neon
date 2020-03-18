@@ -6,3 +6,6 @@ parameters:
         objectManagerLoader: '%rootDir%/../../../build/phpstan/doctrine-orm-bootstrap.php'
     excludes_analyse:
         - '%rootDir%/../../../src/Migrations/*'
+    checkGenericClassInNonGenericObjectType: false
+    ignoreErrors:
+        - '#^Access to an undefined property Symfony\\Component\\Validator\\Constraint::\$message.$#'

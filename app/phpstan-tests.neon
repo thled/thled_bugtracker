@@ -6,3 +6,6 @@ parameters:
         objectManagerLoader: '%rootDir%/../../../build/phpstan/doctrine-orm-bootstrap.php'
     autoload_files:
         - '%rootDir%/../../../bin/.phpunit/phpunit-7.5-0/vendor/autoload.php'
+    ignoreErrors:
+#        - '#^Service "[^"]+" is private.$#'
+        - '#^Access to an undefined property Prophecy\\Prophecy\\ObjectProphecy<[^"]+>::[^"]+.$#'

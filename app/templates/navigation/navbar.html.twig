@@ -1,0 +1,25 @@
+{% from 'navigation/_navbar_items.html.twig' import menuItem, menuDropdown %}
+
+<ul class="navbar-nav mr-auto">
+    {{ menuItem('header.dashboard', path('index')) }}
+
+    {{ menuDropdown('header.bugs.name', {
+        'header.bugs.show': '#',
+        'header.bugs.issue': path('bug_add')
+    }) }}
+
+    {{ menuItem('header.projects', "#") }}
+
+    {{ menuDropdown('header.account.name', {
+        'header.account.profile': '#',
+        'header.account.settings': '#',
+        'divider': '',
+        'header.account.logout': path('logout')
+    }) }}
+</ul>
+<form class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-brand my-2 my-sm-0" type="submit">
+        {{ 'header.search'|trans }}
+    </button>
+</form>

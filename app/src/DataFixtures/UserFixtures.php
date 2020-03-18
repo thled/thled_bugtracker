@@ -5,24 +5,20 @@ declare(strict_types=1);
 namespace App\DataFixtures;
 
 use App\Entity\User;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-final class UserFixtures extends Fixture
+final class UserFixtures extends BaseFixture
 {
     private UserPasswordEncoderInterface $passwordEncoder;
-    private ObjectManager $manager;
 
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->passwordEncoder = $passwordEncoder;
     }
 
-    public function load(ObjectManager $manager): void
+    public function loadData(ObjectManager $manager): void
     {
-        $this->manager = $manager;
-
         $this->createAdmin();
 
         $amountOfProjectOwners = 2;
@@ -83,11 +79,9 @@ final class UserFixtures extends Fixture
         string $plainPassword,
         array $roles
     ): void {
-        $user = new User();
-        $user->setEmail($email);
+        $user = new User($email, $roles);
         $encodedPassword = $this->passwordEncoder->encodePassword($user, $plainPassword);
         $user->setPassword($encodedPassword);
-        $user->setRoles($roles);
 
         $this->persistAndReference($user, $email);
     }
@@ -98,12 +92,7 @@ final class UserFixtures extends Fixture
 
         $nameAndDomain = explode('@', $email);
         $name = reset($nameAndDomain);
-        $this->setReference(
-            sprintf(
-                'user-%s',
-                $name,
-            ),
-            $user,
-        );
+        $referenceName = sprintf('user-%s', $name);
+        $this->addReference($referenceName, $user);
     }
 }

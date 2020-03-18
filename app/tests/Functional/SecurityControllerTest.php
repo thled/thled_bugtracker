@@ -6,10 +6,12 @@ namespace App\Tests\Functional;
 
 use App\Entity\User;
 
-class SecurityControllerTest extends FunctionalTestBase
+/** @covers \App\Controller\SecurityController */
+final class SecurityControllerTest extends FunctionalTestBase
 {
-    private const PLAIN_PASSWORD = 'admin123';
+    private const PASSWORD = 'admin123';
 
+    /** @covers \App\Controller\SecurityController::login */
     public function testLogin(): void
     {
         $this->client->request('GET', '/login');
@@ -20,11 +22,24 @@ class SecurityControllerTest extends FunctionalTestBase
         $this->client->submitForm(
             'Sign in',
             [
-                'email' => $user->getEmail(),
-                'password' => self::PLAIN_PASSWORD,
+                'email' => $user->getUsername(),
+                'password' => self::PASSWORD,
             ],
         );
 
         self::assertTrue($this->client->getResponse()->isRedirect('/'));
+    }
+
+    /** @covers \App\Controller\SecurityController::logout */
+    public function testLogout(): void
+    {
+        /** @var User $adminUser */
+        $adminUser = $this->fixtures->getReference('user-admin');
+        $this->logIn($adminUser);
+
+        $this->client->request('GET', '/logout');
+
+        $this->client->request('GET', '/');
+        self::assertTrue($this->client->getResponse()->isRedirect('/login'));
     }
 }
