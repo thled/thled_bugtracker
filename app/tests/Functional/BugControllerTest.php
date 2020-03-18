@@ -15,7 +15,9 @@ final class BugControllerTest extends FunctionalTestBase
     /** @covers \App\Controller\BugController::add */
     public function testAdd(): void
     {
-        $this->logIn('po0@example.com');
+        /** @var User $poUser */
+        $poUser = $this->fixtures->getReference('user-po0');
+        $this->logIn($poUser);
         $this->client->request('GET', '/bug/add');
 
         $bugToAdd = $this->createBug();
@@ -101,7 +103,9 @@ final class BugControllerTest extends FunctionalTestBase
     /** @covers \App\Controller\BugController::add */
     public function testAddValidation(): void
     {
-        $this->logIn('po0@example.com');
+        /** @var User $poUser */
+        $poUser = $this->fixtures->getReference('user-po0');
+        $this->logIn($poUser);
         $this->client->request('GET', '/bug/add');
 
         $blankProject = '';

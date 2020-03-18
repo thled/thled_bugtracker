@@ -8,11 +8,9 @@ use App\DataFixtures\BugFixtures;
 use App\DataFixtures\ProjectFixtures;
 use App\DataFixtures\UserFixtures;
 use App\Entity\User;
-use App\Repository\UserRepository;
 use Doctrine\Common\DataFixtures\Executor\AbstractExecutor;
 use Doctrine\Common\DataFixtures\ReferenceRepository;
 use Doctrine\Persistence\ObjectManager;
-use InvalidArgumentException;
 use Liip\TestFixturesBundle\Test\FixturesTrait;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -45,12 +43,9 @@ abstract class FunctionalTestBase extends WebTestCase
         $this->entityManager = self::$container->get('doctrine')->getManager();
     }
 
-    protected function logIn(string $username): void
+    protected function logIn(User $user): void
     {
-        $user = $this->getUser($username);
-
         $firewallName = 'main';
-
         $token = new UsernamePasswordToken(
             $user,
             null,
@@ -61,20 +56,6 @@ abstract class FunctionalTestBase extends WebTestCase
         $session = $this->getAndUpdateSessionWithToken($token);
 
         $this->addNewCookieWithSessionToClient($session);
-    }
-
-    private function getUser(string $email): User
-    {
-        /** @var UserRepository $userRepo */
-        $userRepo = $this->entityManager->getRepository(User::class);
-        $user = $userRepo->findOneBy(['email' => $email]);
-        if (!$user instanceof User) {
-            throw new InvalidArgumentException(
-                sprintf('No User for email "%s".', $email),
-            );
-        }
-
-        return $user;
     }
 
     private function getAndUpdateSessionWithToken(UsernamePasswordToken $token): Session

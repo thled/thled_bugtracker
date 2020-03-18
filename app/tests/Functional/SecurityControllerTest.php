@@ -33,7 +33,9 @@ final class SecurityControllerTest extends FunctionalTestBase
     /** @covers \App\Controller\SecurityController::logout */
     public function testLogout(): void
     {
-        $this->logIn('admin@example.com');
+        /** @var User $adminUser */
+        $adminUser = $this->fixtures->getReference('user-admin');
+        $this->logIn($adminUser);
 
         $this->client->request('GET', '/logout');
 
