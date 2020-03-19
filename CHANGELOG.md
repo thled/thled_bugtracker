@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- "Overview of Bugs" page with list of all Bugs.
+
 ## [0.8.0] - 2020-03-18
 
 ### Added
