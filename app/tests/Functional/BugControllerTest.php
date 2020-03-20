@@ -12,12 +12,76 @@ use DateTimeImmutable;
 /** @covers \App\Controller\BugController */
 final class BugControllerTest extends FunctionalTestBase
 {
+    /** @covers \App\Controller\BugController::list */
+    public function testListAmount(): void
+    {
+        $this->logInAsPo();
+
+        $this->client->request('GET', '/bug/list');
+
+        $this->assertAmountOfBugs();
+    }
+
+    private function assertAmountOfBugs(): void
+    {
+        $crawler = $this->client->getCrawler();
+        $tableRows = $crawler->filter('table tbody tr');
+        self::assertCount(
+            6,
+            $tableRows,
+            'Bug list does not contain right amount of Bugs.',
+        );
+    }
+
+    /** @covers \App\Controller\BugController::list */
+    public function testListBugProps(): void
+    {
+        $this->logInAsPo();
+
+        $this->client->request('GET', '/bug/list');
+
+        $this->assertBugProps();
+    }
+
+    private function assertBugProps(): void
+    {
+        /** @var Bug $bug */
+        $bug = $this->fixtures->getReference('bug-P0-0');
+        $content = $this->client->getResponse()->getContent();
+
+        $id = sprintf(
+            '%s-%s',
+            $bug->getProject()->getProjectId(),
+            $bug->getBugId(),
+        );
+        self::assertContains($id, $content, 'Bug list does not contain #.');
+        self::assertContains($bug->getTitle(), $content, 'Bug list does not contain title.');
+        self::assertContains(
+            $bug->getAssignee()->getUsername(),
+            $content,
+            'Bug list does not contain assignee.',
+        );
+        self::assertContains(
+            (string)$bug->getStatus(),
+            $content,
+            'Bug list does not contain status.',
+        );
+        self::assertContains(
+            (string)$bug->getPriority(),
+            $content,
+            'Bug list does not contain priority.',
+        );
+        self::assertContains(
+            $bug->getDue()->format('m/d, &#039;y'),
+            $content,
+            'Bug list does not contain due date.',
+        );
+    }
+
     /** @covers \App\Controller\BugController::add */
     public function testAdd(): void
     {
-        /** @var User $poUser */
-        $poUser = $this->fixtures->getReference('user-po0');
-        $this->logIn($poUser);
+        $this->logInAsPo();
         $this->client->request('GET', '/bug/add');
 
         $bugToAdd = $this->createBug();
@@ -103,9 +167,7 @@ final class BugControllerTest extends FunctionalTestBase
     /** @covers \App\Controller\BugController::add */
     public function testAddValidation(): void
     {
-        /** @var User $poUser */
-        $poUser = $this->fixtures->getReference('user-po0');
-        $this->logIn($poUser);
+        $this->logInAsPo();
         $this->client->request('GET', '/bug/add');
 
         $blankProject = '';
