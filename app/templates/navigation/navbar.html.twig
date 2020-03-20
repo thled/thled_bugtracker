@@ -4,7 +4,7 @@
     {{ menuItem('header.dashboard', path('index')) }}
 
     {{ menuDropdown('header.bugs.name', {
-        'header.bugs.show': '#',
+        'header.bugs.show': path('bug_list'),
         'header.bugs.issue': path('bug_add')
     }) }}
 

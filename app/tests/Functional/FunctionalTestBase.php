@@ -73,4 +73,25 @@ abstract class FunctionalTestBase extends WebTestCase
         $cookie = new Cookie($session->getName(), $session->getId());
         $this->client->getCookieJar()->set($cookie);
     }
+
+    protected function logInAsAdmin(): void
+    {
+        /** @var User $adminUser */
+        $adminUser = $this->fixtures->getReference('user-admin');
+        $this->logIn($adminUser);
+    }
+
+    protected function logInAsPo(): void
+    {
+        /** @var User $poUser */
+        $poUser = $this->fixtures->getReference('user-po0');
+        $this->logIn($poUser);
+    }
+
+    protected function logInAsDev(): void
+    {
+        /** @var User $devUser */
+        $devUser = $this->fixtures->getReference('user-dev0');
+        $this->logIn($devUser);
+    }
 }
