@@ -2,7 +2,9 @@
 
 [![Version][version-badge]][changelog]
 [![MIT License][license-badge]][license]
+[![Symfony][symfony-badge]][symfony]
 [![Pipeline][pipeline-badge]][pipeline]
+[![Codecov][codecov-badge]][codecov]
 [![Quality Gate Status][sonarcloud-quality-gate-badge]][sonarcloud-dashboard]
 
 ## Requirements
@@ -96,18 +98,24 @@ Manual tools should be executed regularly while developing and automatic tools a
 - SonarCloud (triggered by pushing to Master branch)
 - Codecov (triggered by pushing)
 
-## Tests
+## Developing
 
-### Usage
+### Workflow
+
+This project uses a custom workflow named ["THlEd-FLOW"][thled-flow] which is based on ["GitHub flow"][github-flow].
+
+### Tests
+
+#### Usage
 
 - Run whole test suite: `$ composer tests`
 - Run unit tests: `$ composer unit`
 - Run integration tests: `$ composer integration`
 - Run functional tests: `$ composer functional`
 
-### Writing tests
+#### Writing tests
 
-#### Configuration
+##### Setup
 
 - PHPUnit is used as testing framework.
 - Prophecy is used as object mocking framework.
@@ -116,21 +124,23 @@ Manual tools should be executed regularly while developing and automatic tools a
   - Integration Tests: Testing modules without stubbing/mocking dependencies like a database. (E.g. Repository classes)
   - Functional Tests: Testing frontend behavior. (E.g. Controller classes)
 
-#### Philosophy
+##### Philosophy
 
 - Seek for high code coverage (>90%).
 - Do not test private/protected methods.
 - Do not test objects which have no logic like Entities and Models/DTOs.
-- It is not necessary to stub/mock third party libraries and objects without logic like mentioned before.
+- It is not necessary to stub/mock third party libraries and objects without logic like the ones mentioned before.
 
 ## Contribute
 
 Please do contribute! Issues and pull requests are welcome.
 
-[version-badge]: https://img.shields.io/badge/version-0.7.0-blue.svg
+[version-badge]: https://img.shields.io/badge/version-0.8.0-blue.svg
 [changelog]: ./CHANGELOG.md
 [license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [license]: ./LICENSE
+[symfony-badge]: https://img.shields.io/badge/Symfony-5.0-blue.svg
+[symfony]: https://symfony.com/releases/5.0
 [pipeline-badge]: https://github.com/thled/thled_bugtracker/workflows/ci-pipeline/badge.svg?branch=master
 [pipeline]: https://github.com/thled/thled_bugtracker/actions?query=workflow%3A%22ci-pipeline%22+branch%3Amaster
 [pipeline-dev-badge]: https://github.com/thled/thled_bugtracker/workflows/ci-pipeline/badge.svg?branch=develop
@@ -150,3 +160,5 @@ Please do contribute! Issues and pull requests are welcome.
 [codecov]: https://codecov.io/gh/thled/thled_bugtracker
 [docker]: https://docs.docker.com/install/
 [docker-compose]: https://docs.docker.com/compose/install/
+[thled-flow]: https://gist.github.com/thled/c4c689a279107fcbac2bdee2d27548df
+[github-flow]: https://guides.github.com/introduction/flow/

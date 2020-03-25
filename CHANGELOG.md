@@ -10,6 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - "Overview of Bugs" page with list of all Bugs.
+- "Developing" section in Readme with link to THlED-FLOW as workflow.
+
+### Changed
+
+- Codecov configuration to force 90% coverage and not more than 1% coverage loss per PR.
+- Workflow to use THlEd-FLOW and therefor remove Develop branch.
 
 ## [0.8.0] - 2020-03-18
 
