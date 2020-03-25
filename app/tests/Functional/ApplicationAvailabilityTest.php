@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional;
 
-use App\Entity\User;
 use Generator;
 
 /** @coversNothing */
@@ -28,9 +27,7 @@ final class ApplicationAvailabilityTest extends FunctionalTestBase
     /** @dataProvider urlProviderAdmin */
     public function testPageIsSuccessfulAdmin(string $url): void
     {
-        /** @var User $adminUser */
-        $adminUser = $this->fixtures->getReference('user-admin');
-        $this->logIn($adminUser);
+        $this->logInAsAdmin();
 
         $this->client->request('GET', $url);
 
@@ -48,9 +45,7 @@ final class ApplicationAvailabilityTest extends FunctionalTestBase
     /** @dataProvider urlProviderPo */
     public function testPageIsSuccessfulPo(string $url): void
     {
-        /** @var User $poUser */
-        $poUser = $this->fixtures->getReference('user-po0');
-        $this->logIn($poUser);
+        $this->logInAsPo();
 
         $this->client->request('GET', $url);
 
@@ -68,9 +63,7 @@ final class ApplicationAvailabilityTest extends FunctionalTestBase
     /** @dataProvider urlProviderDev */
     public function testPageIsSuccessfulDev(string $url): void
     {
-        /** @var User $devUser */
-        $devUser = $this->fixtures->getReference('user-dev0');
-        $this->logIn($devUser);
+        $this->logInAsDev();
 
         $this->client->request('GET', $url);
 

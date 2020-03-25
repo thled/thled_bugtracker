@@ -43,8 +43,19 @@ register:
     read_terms: 'Read <a href="%path%">Terms</a>'
 
 bug:
-    title: 'Issue a Bug'
-    lead: 'Add a new Bug report by filling out the following form.'
+    list:
+        title: 'Overview of Bugs'
+        lead: 'See all Bugs related to you and your projects. You can use the filters to narrow down the list. Use the search in the header bar to find specific bugs easily.'
+        table:
+            bug_id: '#'
+            title: 'Title'
+            assignee: 'Assignee'
+            status: 'Status'
+            priority: 'Prio'
+            due: 'Due'
+    add:
+        title: 'Issue a Bug'
+        lead: 'Add a new Bug report by filling out the following form.'
     form:
         project: 'Project'
         status: 'Status'
@@ -60,3 +71,5 @@ bug:
         due_placeholder_year: 'Year'
         due_placeholder_month: 'Month'
         due_placeholder_day: 'Day'
+    edit:
+        title: 'View/Edit Bug'

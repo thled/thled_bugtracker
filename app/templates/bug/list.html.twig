@@ -1,0 +1,44 @@
+{% extends 'main.html.twig' %}
+
+{% block main_title %}
+    {{ 'bug.list.title'|trans }}
+{% endblock %}
+
+{% block main_lead %}
+    {{ 'bug.list.lead'|trans }}
+{% endblock %}
+
+{% block main_content %}
+    <div class="table-responsive-lg">
+        <table class="table table-hover">
+            <caption>List of bugs</caption>
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">{{ 'bug.list.table.bug_id'|trans }}</th>
+                <th scope="col">{{ 'bug.list.table.title'|trans }}</th>
+                <th scope="col">{{ 'bug.list.table.assignee'|trans }}</th>
+                <th scope="col">{{ 'bug.list.table.status'|trans }}</th>
+                <th scope="col">{{ 'bug.list.table.priority'|trans }}</th>
+                <th scope="col">{{ 'bug.list.table.due'|trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for bug in bugs %}
+                {# Link row: https://stackoverflow.com/a/57591579 #}
+                <tr style="transform: rotate(0);">
+                    <th scope="row">
+                        <a href="{{ path('bug_edit', {'bug': bug.id}) }}" class="stretched-link">
+                            {{ bug.project.projectId }}-{{ bug.bugId }}
+                        </a>
+                    </th>
+                    <td>{{ bug.title }}</td>
+                    <td>{{ bug.assignee }}</td>
+                    <td>{{ bug.status }}</td>
+                    <td>{{ bug.priority }}</td>
+                    <td>{{ bug.due|date('m/d, \'y') }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

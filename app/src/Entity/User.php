@@ -63,6 +63,7 @@ class User extends BaseEntity implements UserInterface
      * (related: https://github.com/symfony/symfony/issues/35660 and
      * https://github.com/doctrine/common/pull/882)
      *
+     * @inheritDoc
      * @return array<mixed>
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.DisallowMixedTypeHint.DisallowedMixedTypeHint
      */
@@ -77,6 +78,7 @@ class User extends BaseEntity implements UserInterface
     }
 
     /**
+     * @inheritDoc
      * @param array<mixed> $data
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.DisallowMixedTypeHint.DisallowedMixedTypeHint
      */
