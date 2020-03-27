@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Factory;
 
-use App\DataTransferObject\RegisterUserDto;
+use App\DataTransferObject\UserRegisterDto;
 use App\Factory\UserFactory;
 use App\Service\RegistrationServiceInterface;
 use LogicException;
@@ -25,19 +25,19 @@ final class UserFactoryTest extends TestCase
         $this->userFactory = new UserFactory($this->registration->reveal());
     }
 
-    /** @covers \App\Factory\UserFactory::createFromRegisterUserDto */
-    public function testCreateFromRegisterUserDto(): void
+    /** @covers \App\Factory\UserFactory::createFromDto */
+    public function testCreateFromDto(): void
     {
         $userDto = $this->createUserDto();
 
-        $user = $this->userFactory->createFromRegisterUserDto($userDto);
+        $user = $this->userFactory->createFromDto($userDto);
 
         self::assertSame($userDto->email, $user->getUsername());
     }
 
-    private function createUserDto(): RegisterUserDto
+    private function createUserDto(): UserRegisterDto
     {
-        $userDto = new RegisterUserDto();
+        $userDto = new UserRegisterDto();
         $userDto->email = 'foo@example.com';
         $userDto->plainPassword = 'pa$$word';
         $userDto->agreeTerms = true;
@@ -45,13 +45,13 @@ final class UserFactoryTest extends TestCase
         return $userDto;
     }
 
-    /** @covers \App\Factory\UserFactory::createFromRegisterUserDto */
-    public function testCreateFromRegisterUserDtoThrowsLogicException(): void
+    /** @covers \App\Factory\UserFactory::createFromDto */
+    public function testCreateFromDtoThrowsLogicException(): void
     {
-        $userDto = new RegisterUserDto();
+        $userDto = new UserRegisterDto();
 
         $this->expectException(LogicException::class);
 
-        $this->userFactory->createFromRegisterUserDto($userDto);
+        $this->userFactory->createFromDto($userDto);
     }
 }

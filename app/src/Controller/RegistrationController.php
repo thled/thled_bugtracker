@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\DataTransferObject\RegisterUserDto;
+use App\DataTransferObject\UserRegisterDto;
 use App\Factory\UserFactoryInterface;
 use App\Form\RegistrationType;
 use App\Repository\UserRepositoryInterface;
@@ -20,12 +20,12 @@ final class RegistrationController extends BaseController
         UserFactoryInterface $userFactory,
         UserRepositoryInterface $userRepo
     ): Response {
-        $registerUser = new RegisterUserDto();
+        $registerUser = new UserRegisterDto();
         $form = $this->createForm(RegistrationType::class, $registerUser);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $user = $userFactory->createFromRegisterUserDto($registerUser);
+            $user = $userFactory->createFromDto($registerUser);
 
             $userRepo->save($user);
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Form;
 
-use App\DataTransferObject\RegisterUserDto;
+use App\DataTransferObject\UserRegisterDto;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -40,6 +40,6 @@ final class RegistrationType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefault('data_class', RegisterUserDto::class);
+        $resolver->setDefault('data_class', UserRegisterDto::class);
     }
 }

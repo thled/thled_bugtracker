@@ -4,26 +4,26 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Form;
 
-use App\DataTransferObject\CreateBugDto;
-use App\Form\BugType;
+use App\DataTransferObject\BugCreateDto;
+use App\Form\BugCreateType;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/** @covers \App\Form\BugType */
+/** @covers \App\Form\BugCreateType */
 final class BugTypeTest extends TestCase
 {
-    private BugType $bugType;
+    private BugCreateType $bugType;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->bugType = new BugType();
+        $this->bugType = new BugCreateType();
     }
 
-    /** @covers \App\Form\BugType::buildForm */
+    /** @covers \App\Form\BugCreateType::buildForm */
     public function testBuildForm(): void
     {
         $builder = $this->prophesize(FormBuilderInterface::class);
@@ -38,11 +38,11 @@ final class BugTypeTest extends TestCase
         $this->bugType->buildForm($builder->reveal(), []);
     }
 
-    /** @covers \App\Form\BugType::configureOptions */
+    /** @covers \App\Form\BugCreateType::configureOptions */
     public function testConfigureOptions(): void
     {
         $resolver = $this->prophesize(OptionsResolver::class);
-        $resolver->setDefault('data_class', CreateBugDto::class)
+        $resolver->setDefault('data_class', BugCreateDto::class)
             ->shouldBeCalledOnce();
 
         $this->bugType->configureOptions($resolver->reveal());

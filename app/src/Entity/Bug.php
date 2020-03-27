@@ -94,9 +94,9 @@ class Bug extends BaseEntity
         $this->reproduce = $reproduce;
         $this->expected = $expected;
         $this->actual = $actual;
-        $this->comments = new ArrayCollection($comments);
         $this->reporter = $reporter;
         $this->assignee = $assignee;
+        $this->comments = new ArrayCollection($comments);
     }
 
     private function castToDateTimeImmutable(DateTimeInterface $due): DateTimeImmutable
@@ -122,9 +122,28 @@ class Bug extends BaseEntity
         return $this->project;
     }
 
+    public function getStatus(): int
+    {
+        return $this->status;
+    }
+
+    public function setStatus(int $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
     public function getPriority(): int
     {
         return $this->priority;
+    }
+
+    public function setPriority(int $priority): self
+    {
+        $this->priority = $priority;
+
+        return $this;
     }
 
     public function getDue(): DateTimeInterface
@@ -132,9 +151,25 @@ class Bug extends BaseEntity
         return $this->due;
     }
 
+    public function setDue(DateTimeInterface $due): self
+    {
+        $this->due = $due instanceof DateTimeImmutable ? $due : new DateTimeImmutable(
+            $due->format(DateTime::ATOM),
+        );
+
+        return $this;
+    }
+
     public function getTitle(): string
     {
         return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
     }
 
     public function getSummary(): string
@@ -142,9 +177,23 @@ class Bug extends BaseEntity
         return $this->summary;
     }
 
+    public function setSummary(string $summary): self
+    {
+        $this->summary = $summary;
+
+        return $this;
+    }
+
     public function getReproduce(): string
     {
         return $this->reproduce;
+    }
+
+    public function setReproduce(string $reproduce): self
+    {
+        $this->reproduce = $reproduce;
+
+        return $this;
     }
 
     public function getExpected(): string
@@ -152,9 +201,23 @@ class Bug extends BaseEntity
         return $this->expected;
     }
 
+    public function setExpected(string $expected): self
+    {
+        $this->expected = $expected;
+
+        return $this;
+    }
+
     public function getActual(): string
     {
         return $this->actual;
+    }
+
+    public function setActual(string $actual): self
+    {
+        $this->actual = $actual;
+
+        return $this;
     }
 
     public function getReporter(): User
@@ -167,9 +230,11 @@ class Bug extends BaseEntity
         return $this->assignee;
     }
 
-    public function getStatus(): int
+    public function setAssignee(User $assignee): self
     {
-        return $this->status;
+        $this->assignee = $assignee;
+
+        return $this;
     }
 
     /** @return array<Comment> */

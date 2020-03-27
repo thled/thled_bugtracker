@@ -9,7 +9,7 @@ use Generator;
 /** @coversNothing */
 final class ApplicationAvailabilityTest extends FunctionalTestBase
 {
-    /** @dataProvider urlProviderAnonymous */
+    /** @dataProvider provideAnonymousUrls */
     public function testPageIsSuccessfulAnonymous(string $url): void
     {
         $this->client->request('GET', $url);
@@ -18,13 +18,13 @@ final class ApplicationAvailabilityTest extends FunctionalTestBase
     }
 
     /** @return Generator<array<string>> */
-    public function urlProviderAnonymous(): Generator
+    public function provideAnonymousUrls(): Generator
     {
         yield ['/login'];
         yield ['/register'];
     }
 
-    /** @dataProvider urlProviderAdmin */
+    /** @dataProvider provideAdminUrls */
     public function testPageIsSuccessfulAdmin(string $url): void
     {
         $this->logInAsAdmin();
@@ -35,14 +35,14 @@ final class ApplicationAvailabilityTest extends FunctionalTestBase
     }
 
     /** @return Generator<array<string>> */
-    public function urlProviderAdmin(): Generator
+    public function provideAdminUrls(): Generator
     {
         yield ['/login'];
         yield ['/register'];
         yield ['/'];
     }
 
-    /** @dataProvider urlProviderPo */
+    /** @dataProvider providePoUrls */
     public function testPageIsSuccessfulPo(string $url): void
     {
         $this->logInAsPo();
@@ -53,14 +53,14 @@ final class ApplicationAvailabilityTest extends FunctionalTestBase
     }
 
     /** @return Generator<array<string>> */
-    public function urlProviderPo(): Generator
+    public function providePoUrls(): Generator
     {
         yield ['/login'];
         yield ['/register'];
         yield ['/'];
     }
 
-    /** @dataProvider urlProviderDev */
+    /** @dataProvider provideDevUrls */
     public function testPageIsSuccessfulDev(string $url): void
     {
         $this->logInAsDev();
@@ -71,7 +71,7 @@ final class ApplicationAvailabilityTest extends FunctionalTestBase
     }
 
     /** @return Generator<array<string>> */
-    public function urlProviderDev(): Generator
+    public function provideDevUrls(): Generator
     {
         yield ['/login'];
         yield ['/register'];

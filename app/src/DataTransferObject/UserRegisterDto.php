@@ -7,7 +7,7 @@ namespace App\DataTransferObject;
 use App\Validator\UniqueUser;
 use Symfony\Component\Validator\Constraints as Assert;
 
-final class RegisterUserDto
+final class UserRegisterDto
 {
     /**
      * @Assert\NotBlank(message="register.email.not_blank")

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Factory;
 
-use App\DataTransferObject\CreateBugDto;
+use App\DataTransferObject\BugCreateDto;
 use App\Entity\Bug;
 use App\Entity\Project;
 use App\Entity\User;
@@ -30,8 +30,8 @@ final class BugFactoryTest extends TestCase
         $this->bugFactory = new BugFactory($this->bugRepo->reveal());
     }
 
-    /** @covers \App\Factory\BugFactory::createFromCreateBugDto */
-    public function testCreateFromCreateBugDto(): void
+    /** @covers \App\Factory\BugFactory::createFromDto */
+    public function testCreateFromDto(): void
     {
         $this->bugRepo
             ->findLatestBugOfProject(Argument::type(Project::class))
@@ -39,14 +39,14 @@ final class BugFactoryTest extends TestCase
 
         $bugDto = $this->createBugDto();
 
-        $bug = $this->bugFactory->createFromCreateBugDto($bugDto);
+        $bug = $this->bugFactory->createFromDto($bugDto);
 
         $this->assertBugIsCreated($bug, $bugDto);
     }
 
-    private function createBugDto(): CreateBugDto
+    private function createBugDto(): BugCreateDto
     {
-        $bugDto = new CreateBugDto();
+        $bugDto = new BugCreateDto();
         $bugDto->project = $this->prophesize(Project::class)->reveal();
         $bugDto->status = 1;
         $bugDto->priority = 2;
@@ -64,7 +64,7 @@ final class BugFactoryTest extends TestCase
 
     private function assertBugIsCreated(
         Bug $bug,
-        CreateBugDto $bugDto,
+        BugCreateDto $bugDto,
         int $bugId = 1
     ): void {
         self::assertSame($bugId, $bug->getBugId());
@@ -81,8 +81,8 @@ final class BugFactoryTest extends TestCase
         self::assertSame($bugDto->assignee, $bug->getAssignee());
     }
 
-    /** @covers \App\Factory\BugFactory::createFromCreateBugDto */
-    public function testCreateFromCreateBugDtoAsSecondBug(): void
+    /** @covers \App\Factory\BugFactory::createFromDto */
+    public function testCreateFromDtoAsSecondBug(): void
     {
         $firstBug = $this->prophesize(Bug::class);
         $firstBug->getBugId()->willReturn(1);
@@ -93,18 +93,18 @@ final class BugFactoryTest extends TestCase
 
         $bugDto = $this->createBugDto();
 
-        $bug = $this->bugFactory->createFromCreateBugDto($bugDto);
+        $bug = $this->bugFactory->createFromDto($bugDto);
 
         $this->assertBugIsCreated($bug, $bugDto, 2);
     }
 
-    /** @covers \App\Factory\BugFactory::createFromCreateBugDto */
-    public function testCreateFromCreateBugDtoThrowsLogicException(): void
+    /** @covers \App\Factory\BugFactory::createFromDto */
+    public function testCreateFromDtoThrowsLogicException(): void
     {
-        $bugDto = new CreateBugDto();
+        $bugDto = new BugCreateDto();
 
         $this->expectException(LogicException::class);
 
-        $this->bugFactory->createFromCreateBugDto($bugDto);
+        $this->bugFactory->createFromDto($bugDto);
     }
 }

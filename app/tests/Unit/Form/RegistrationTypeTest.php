@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Form;
 
-use App\DataTransferObject\RegisterUserDto;
+use App\DataTransferObject\UserRegisterDto;
 use App\Form\RegistrationType;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
@@ -42,7 +42,7 @@ final class RegistrationTypeTest extends TestCase
     public function testConfigureOptions(): void
     {
         $resolver = $this->prophesize(OptionsResolver::class);
-        $resolver->setDefault('data_class', RegisterUserDto::class)
+        $resolver->setDefault('data_class', UserRegisterDto::class)
             ->shouldBeCalledOnce();
 
         $this->registrationType->configureOptions($resolver->reveal());
