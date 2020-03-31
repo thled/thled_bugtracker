@@ -12,8 +12,8 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 /**
  * @method Bug|null find($id, $lockMode = null, $lockVersion = null)
  * @method Bug|null findOneBy(array $criteria, array $orderBy = null)
- * @method Bug[]    findAll()
- * @method Bug[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Bug[] findAll()
+ * @method Bug[] findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 final class BugRepository extends ServiceEntityRepository implements BugRepositoryInterface
 {

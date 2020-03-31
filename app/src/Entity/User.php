@@ -56,6 +56,11 @@ class User extends BaseEntity implements UserInterface
         $this->assignedBug = $assignedBug;
     }
 
+    public function __toString(): string
+    {
+        return $this->getUsername();
+    }
+
     /**
      * Serialize/Unserialize methods are needed
      * because Doctrine has issues with typed properties (PHP7.4).
@@ -88,11 +93,6 @@ class User extends BaseEntity implements UserInterface
         $this->password = $data['password'];
         $this->email = $data['username'];
         $this->roles = $data['roles'];
-    }
-
-    public function __toString(): string
-    {
-        return $this->getUsername();
     }
 
     public function getUsername(): string

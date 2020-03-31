@@ -92,11 +92,13 @@
                 <element value="public constants"/>
                 <element value="protected constants"/>
                 <element value="private constants"/>
-                <element value="public properties, protected properties, private properties"/>
-                <element value="constructor"/>
+                <element value="public properties, public static properties"/>
+                <element value="protected properties, protected static properties"/>
+                <element value="private properties, private static properties"/>
+                <element value="constructor, static constructors"/>
+                <element value="destructor"/>
                 <element value="magic methods"/>
-                <element value="public methods, protected methods, private methods,
-                 public static methods, protected static methods, private static methods"/>
+                <element value="public methods, protected methods, private methods, public abstract methods, public static abstract methods, protected abstract methods, protected static abstract methods, public static methods, protected static methods, private static methods, private methods"/>
             </property>
         </properties>
     </rule>
