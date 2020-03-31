@@ -48,7 +48,7 @@ final class LoginFormAuthenticatorTest extends TestCase
     }
 
     /**
-     * @covers       \App\Security\LoginFormAuthenticator::supports
+     * @covers \App\Security\LoginFormAuthenticator::supports
      * @dataProvider providerRoutes
      */
     public function testSupports(string $route, string $method, bool $expectedSupport): void
