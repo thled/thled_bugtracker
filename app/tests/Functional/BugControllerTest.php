@@ -52,24 +52,24 @@ final class BugControllerTest extends FunctionalTestBase
             $bug->getProject()->getProjectId(),
             $bug->getBugId(),
         );
-        self::assertContains($id, $content, 'Bug list does not contain #.');
-        self::assertContains($bug->getTitle(), $content, 'Bug list does not contain title.');
-        self::assertContains(
+        self::assertStringContainsString($id, $content, 'Bug list does not contain #.');
+        self::assertStringContainsString($bug->getTitle(), $content, 'Bug list does not contain title.');
+        self::assertStringContainsString(
             $bug->getAssignee()->getUsername(),
             $content,
             'Bug list does not contain assignee.',
         );
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$bug->getStatus(),
             $content,
             'Bug list does not contain status.',
         );
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$bug->getPriority(),
             $content,
             'Bug list does not contain priority.',
         );
-        self::assertContains(
+        self::assertStringContainsString(
             $bug->getDue()->format('m/d, &#039;y'),
             $content,
             'Bug list does not contain due date.',
@@ -223,35 +223,35 @@ final class BugControllerTest extends FunctionalTestBase
     private function assertViolations(): void
     {
         $violationBlankProject = 'It must be assigned to a Project.';
-        self::assertContains(
+        self::assertStringContainsString(
             $violationBlankProject,
             $this->client->getResponse()->getContent(),
             sprintf('Validation for "%s" violation failed.', $violationBlankProject),
         );
 
         $violationNonExistingStatus = 'Choose a valid status.';
-        self::assertContains(
+        self::assertStringContainsString(
             $violationNonExistingStatus,
             $this->client->getResponse()->getContent(),
             sprintf('Validation for "%s" violation failed.', $violationNonExistingStatus),
         );
 
         $violationNonExistingPriority = 'Choose a valid priority.';
-        self::assertContains(
+        self::assertStringContainsString(
             $violationNonExistingPriority,
             $this->client->getResponse()->getContent(),
             sprintf('Validation for "%s" violation failed.', $violationNonExistingPriority),
         );
 
         $violationTooLongTitle = 'Title cannot be longer than 128 characters.';
-        self::assertContains(
+        self::assertStringContainsString(
             $violationTooLongTitle,
             $this->client->getResponse()->getContent(),
             sprintf('Validation for "%s" violation failed.', $violationTooLongTitle),
         );
 
         $violationBlankAssignee = 'It must be assigned to a User.';
-        self::assertContains(
+        self::assertStringContainsString(
             $violationBlankAssignee,
             $this->client->getResponse()->getContent(),
             sprintf('Validation for "%s" violation failed.', $violationBlankAssignee),

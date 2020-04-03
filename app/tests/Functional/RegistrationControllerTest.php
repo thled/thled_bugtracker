@@ -55,7 +55,7 @@ final class RegistrationControllerTest extends FunctionalTestBase
 
         $this->client->submitForm('Register', $fieldValues);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $violation,
             $this->client->getResponse()->getContent(),
             sprintf('Validation for "%s" violation failed.', $violation),
