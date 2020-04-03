@@ -112,6 +112,7 @@ This project uses a custom workflow named ["THlEd-FLOW"][thled-flow] which is ba
 - Run unit tests: `$ composer unit`
 - Run integration tests: `$ composer integration`
 - Run functional tests: `$ composer functional`
+- Run code coverage: `$ composer code-coverage` (then open `app/coverage/index.html`)
 
 #### Writing tests
 
@@ -127,8 +128,11 @@ This project uses a custom workflow named ["THlEd-FLOW"][thled-flow] which is ba
 ##### Philosophy
 
 - Seek for high code coverage (>90%).
-- Do not test private/protected methods.
+- Every test must have a `@covers` annotation for the class it covers to not accidentally cover classes which are not under test.
+- Code coverage should be reached by Unit Tests. Exceptions are Controllers and Repositories which are tested by Functional Tests and Integration Tests respectively.
+- Do not test private/protected methods explicitly.
 - Do not test objects which have no logic like Entities and Models/DTOs.
+- Do not test code which will not run in production like DataFixtures.
 - It is not necessary to stub/mock third party libraries and objects without logic like the ones mentioned before.
 
 ## Contribute

@@ -11,6 +11,8 @@ use App\Entity\User;
 use App\Factory\BugFactory;
 use App\Repository\BugRepositoryInterface;
 use DateTimeImmutable;
+use DateTimeInterface;
+use InvalidArgumentException;
 use LogicException;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
@@ -30,7 +32,6 @@ final class BugFactoryTest extends TestCase
         $this->bugFactory = new BugFactory($this->bugRepo->reveal());
     }
 
-    /** @covers \App\Factory\BugFactory::createFromDto */
     public function testCreateFromDto(): void
     {
         $this->bugRepo
@@ -41,7 +42,7 @@ final class BugFactoryTest extends TestCase
 
         $bug = $this->bugFactory->createFromDto($bugDto);
 
-        $this->assertBugIsCreated($bug, $bugDto);
+        $this->assertBugCreated($bug, $bugDto);
     }
 
     private function createBugDto(): BugCreateDto
@@ -62,16 +63,23 @@ final class BugFactoryTest extends TestCase
         return $bugDto;
     }
 
-    private function assertBugIsCreated(
+    private function assertBugCreated(
         Bug $bug,
         BugCreateDto $bugDto,
         int $bugId = 1
     ): void {
+        if (!$bugDto->due instanceof DateTimeInterface) {
+            throw new InvalidArgumentException('BugDto must have a due.');
+        }
+
         self::assertSame($bugId, $bug->getBugId());
         self::assertSame($bugDto->project, $bug->getProject());
         self::assertSame($bugDto->status, $bug->getStatus());
         self::assertSame($bugDto->priority, $bug->getPriority());
-        self::assertSame($bugDto->due, $bug->getDue());
+        self::assertSame(
+            $bugDto->due->format('Y-m-d'),
+            $bug->getDue()->format('Y-m-d'),
+        );
         self::assertSame($bugDto->title, $bug->getTitle());
         self::assertSame($bugDto->summary, $bug->getSummary());
         self::assertSame($bugDto->reproduce, $bug->getReproduce());
@@ -81,7 +89,6 @@ final class BugFactoryTest extends TestCase
         self::assertSame($bugDto->assignee, $bug->getAssignee());
     }
 
-    /** @covers \App\Factory\BugFactory::createFromDto */
     public function testCreateFromDtoAsSecondBug(): void
     {
         $firstBug = $this->prophesize(Bug::class);
@@ -95,10 +102,30 @@ final class BugFactoryTest extends TestCase
 
         $bug = $this->bugFactory->createFromDto($bugDto);
 
-        $this->assertBugIsCreated($bug, $bugDto, 2);
+        $this->assertBugCreated($bug, $bugDto, 2);
     }
 
-    /** @covers \App\Factory\BugFactory::createFromDto */
+    public function testCreateFromDtoNoDue(): void
+    {
+        $bugDto = $this->createBugDto();
+        $bugDto->due = null;
+
+        $this->bugRepo
+            ->findLatestBugOfProject(Argument::type(Project::class))
+            ->willReturn(null);
+
+
+        $bug = $this->bugFactory->createFromDto($bugDto);
+
+
+        $noDue = '1970-01-01';
+        self::assertSame(
+            $noDue,
+            $bug->getDue()->format('Y-m-d'),
+            'Bug was not correctly created with no due.',
+        );
+    }
+
     public function testCreateFromDtoThrowsLogicException(): void
     {
         $bugDto = new BugCreateDto();

@@ -82,15 +82,6 @@ abstract class BugBaseType extends AbstractType
                 ],
             )
             ->add(
-                'reporter',
-                EntityType::class,
-                [
-                    'label' => 'bug.form.reporter',
-                    'class' => User::class,
-                    'disabled' => true,
-                ],
-            )
-            ->add(
                 'assignee',
                 EntityType::class,
                 [

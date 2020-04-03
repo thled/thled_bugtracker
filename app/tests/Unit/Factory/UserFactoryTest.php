@@ -25,7 +25,6 @@ final class UserFactoryTest extends TestCase
         $this->userFactory = new UserFactory($this->registration->reveal());
     }
 
-    /** @covers \App\Factory\UserFactory::createFromDto */
     public function testCreateFromDto(): void
     {
         $userDto = $this->createUserDto();
@@ -45,7 +44,6 @@ final class UserFactoryTest extends TestCase
         return $userDto;
     }
 
-    /** @covers \App\Factory\UserFactory::createFromDto */
     public function testCreateFromDtoThrowsLogicException(): void
     {
         $userDto = new UserRegisterDto();

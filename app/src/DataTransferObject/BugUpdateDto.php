@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace App\DataTransferObject;
 
-use App\Entity\Project;
 use App\Entity\User;
 use DateTimeInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 final class BugUpdateDto
 {
-    public ?Project $project = null;
-
     /** @Assert\Choice(choices={0, 1, 2, 3}, message="bug.status.choice") */
     public ?int $status = null;
 
@@ -26,7 +23,6 @@ final class BugUpdateDto
     public ?string $reproduce = null;
     public ?string $expected = null;
     public ?string $actual = null;
-    public ?User $reporter = null;
 
     /** @Assert\NotBlank(message="bug.assignee.not_blank") */
     public ?User $assignee = null;

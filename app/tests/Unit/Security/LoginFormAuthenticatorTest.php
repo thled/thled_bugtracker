@@ -47,10 +47,7 @@ final class LoginFormAuthenticatorTest extends TestCase
         );
     }
 
-    /**
-     * @covers \App\Security\LoginFormAuthenticator::supports
-     * @dataProvider providerRoutes
-     */
+    /** @dataProvider providerRoutes */
     public function testSupports(string $route, string $method, bool $expectedSupport): void
     {
         $request = $this->prophesize(Request::class);
@@ -89,7 +86,6 @@ final class LoginFormAuthenticatorTest extends TestCase
         ];
     }
 
-    /** @covers \App\Security\LoginFormAuthenticator::getCredentials */
     public function testGetCredentials(): void
     {
         $request = $this->prophesize(Request::class);
@@ -109,7 +105,6 @@ final class LoginFormAuthenticatorTest extends TestCase
         self::assertSame(self::CREDENTIALS, $actualCredentials);
     }
 
-    /** @covers \App\Security\LoginFormAuthenticator::getUser */
     public function testGetUser(): void
     {
         $userProvider = $this->prophesize(UserProviderInterface::class);
@@ -128,7 +123,6 @@ final class LoginFormAuthenticatorTest extends TestCase
         self::assertSame($expectedUser->reveal(), $user);
     }
 
-    /** @covers \App\Security\LoginFormAuthenticator::getUser */
     public function testGetUserThrowsInvalidCsrfTokenException(): void
     {
         $userProvider = $this->prophesize(UserProviderInterface::class);
@@ -141,10 +135,7 @@ final class LoginFormAuthenticatorTest extends TestCase
         $this->loginFormAuthenticator->getUser(self::CREDENTIALS, $userProvider->reveal());
     }
 
-    /**
-     * @covers \App\Security\LoginFormAuthenticator::checkCredentials
-     * @dataProvider providePasswordValidity
-     */
+    /** @dataProvider providePasswordValidity */
     public function testCheckCredentials(bool $isPasswordValid, bool $expectedPasswordValid): void
     {
         $user = $this->prophesize(UserInterface::class);
@@ -175,7 +166,6 @@ final class LoginFormAuthenticatorTest extends TestCase
         ];
     }
 
-    /** @covers \App\Security\LoginFormAuthenticator::getPassword */
     public function testGetPassword(): void
     {
         $password = $this->loginFormAuthenticator->getPassword(self::CREDENTIALS);
@@ -183,10 +173,7 @@ final class LoginFormAuthenticatorTest extends TestCase
         self::assertSame(self::CREDENTIALS['password'], $password);
     }
 
-    /**
-     * @covers \App\Security\LoginFormAuthenticator::onAuthenticationSuccess
-     * @dataProvider provideTargetUrl
-     */
+    /** @dataProvider provideTargetUrl */
     public function testOnAuthenticationSuccess(
         ?string $targetUrl,
         string $expectedTargetUrl
@@ -225,7 +212,6 @@ final class LoginFormAuthenticatorTest extends TestCase
         ];
     }
 
-    /** @covers \App\Security\LoginFormAuthenticator::getLoginUrl */
     public function testGetLoginUrl(): void
     {
         $targetUrl = '/login';

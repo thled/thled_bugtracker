@@ -20,7 +20,7 @@ abstract class IntegrationTestBase extends KernelTestCase
     protected ReferenceRepository $fixtures;
     protected ObjectManager $entityManager;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $abstractExecutor = $this->loadFixtures(
             [

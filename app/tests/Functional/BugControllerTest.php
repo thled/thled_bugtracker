@@ -12,7 +12,6 @@ use DateTimeImmutable;
 /** @covers \App\Controller\BugController */
 final class BugControllerTest extends FunctionalTestBase
 {
-    /** @covers \App\Controller\BugController::list */
     public function testListAmount(): void
     {
         $this->logInAsPo();
@@ -33,7 +32,6 @@ final class BugControllerTest extends FunctionalTestBase
         );
     }
 
-    /** @covers \App\Controller\BugController::list */
     public function testListBugProps(): void
     {
         $this->logInAsPo();
@@ -78,16 +76,18 @@ final class BugControllerTest extends FunctionalTestBase
         );
     }
 
-    /** @covers \App\Controller\BugController::add */
     public function testAdd(): void
     {
         $this->logInAsPo();
         $this->client->request('GET', '/bug/add');
 
         $bugToAdd = $this->createBug();
-        $this->submitFormWithBug($bugToAdd);
 
-        $this->assertBugIsCreated($bugToAdd);
+
+        $this->submitCreateFormWithBug($bugToAdd);
+
+
+        $this->assertBugInDb($bugToAdd);
     }
 
     private function createBug(): Bug
@@ -110,7 +110,7 @@ final class BugControllerTest extends FunctionalTestBase
         );
     }
 
-    private function submitFormWithBug(Bug $bugToAdd): void
+    private function submitCreateFormWithBug(Bug $bugToAdd): void
     {
         $this->client->submitForm(
             'Create',
@@ -131,25 +131,28 @@ final class BugControllerTest extends FunctionalTestBase
         );
     }
 
-    private function assertBugIsCreated(Bug $bugToAdd): void
+    private function assertBugInDb(Bug $bug): void
     {
-        $bugAdded = $this->findBugInDb($bugToAdd);
-        if (!$bugAdded instanceof Bug) {
+        $bugDb = $this->findBugInDb($bug);
+        if (!$bugDb instanceof Bug) {
             self::fail('Cannot find Bug in DB.');
         }
 
-        self::assertSame($bugToAdd->getBugId(), $bugAdded->getBugId());
-        self::assertTrue($bugToAdd->getProject()->getId()->equals($bugAdded->getProject()->getId()));
-        self::assertSame($bugToAdd->getStatus(), $bugAdded->getStatus());
-        self::assertSame($bugToAdd->getPriority(), $bugAdded->getPriority());
-        self::assertSame($bugToAdd->getDue()->format('Ymd'), $bugAdded->getDue()->format('Ymd'));
-        self::assertSame($bugToAdd->getTitle(), $bugAdded->getTitle());
-        self::assertSame($bugToAdd->getSummary(), $bugAdded->getSummary());
-        self::assertSame($bugToAdd->getReproduce(), $bugAdded->getReproduce());
-        self::assertSame($bugToAdd->getExpected(), $bugAdded->getExpected());
-        self::assertSame($bugToAdd->getActual(), $bugAdded->getActual());
-        self::assertTrue($bugToAdd->getReporter()->getId()->equals($bugAdded->getReporter()->getId()));
-        self::assertTrue($bugToAdd->getAssignee()->getId()->equals($bugAdded->getAssignee()->getId()));
+        self::assertSame($bug->getBugId(), $bugDb->getBugId());
+        self::assertTrue($bug->getProject()->getId()->equals($bugDb->getProject()->getId()));
+        self::assertSame($bug->getStatus(), $bugDb->getStatus());
+        self::assertSame($bug->getPriority(), $bugDb->getPriority());
+        self::assertSame(
+            $bug->getDue()->format('Ymd'),
+            $bugDb->getDue()->format('Ymd'),
+        );
+        self::assertSame($bug->getTitle(), $bugDb->getTitle());
+        self::assertSame($bug->getSummary(), $bugDb->getSummary());
+        self::assertSame($bug->getReproduce(), $bugDb->getReproduce());
+        self::assertSame($bug->getExpected(), $bugDb->getExpected());
+        self::assertSame($bug->getActual(), $bugDb->getActual());
+        self::assertTrue($bug->getReporter()->getId()->equals($bugDb->getReporter()->getId()));
+        self::assertTrue($bug->getAssignee()->getId()->equals($bugDb->getAssignee()->getId()));
     }
 
     private function findBugInDb(Bug $bugToAdd): ?Bug
@@ -164,7 +167,6 @@ final class BugControllerTest extends FunctionalTestBase
         );
     }
 
-    /** @covers \App\Controller\BugController::add */
     public function testAddValidation(): void
     {
         $this->logInAsPo();
@@ -178,6 +180,27 @@ final class BugControllerTest extends FunctionalTestBase
             The validator should mark this as invalid.
             Another sentence too reach the limit.';
         $blankAssignee = '';
+
+
+        $this->submitCreateFormWithInvalidInputs(
+            $blankProject,
+            $nonExistingStatus,
+            $nonExistingPriority,
+            $tooLongTitle,
+            $blankAssignee,
+        );
+
+
+        $this->assertViolations();
+    }
+
+    private function submitCreateFormWithInvalidInputs(
+        string $blankProject,
+        int $nonExistingStatus,
+        int $nonExistingPriority,
+        string $tooLongTitle,
+        string $blankAssignee
+    ): void {
         $this->client->submitForm(
             'Create',
             [
@@ -195,8 +218,6 @@ final class BugControllerTest extends FunctionalTestBase
                 'bug_create[assignee]' => $blankAssignee,
             ],
         );
-
-        $this->assertViolations();
     }
 
     private function assertViolations(): void
@@ -234,6 +255,44 @@ final class BugControllerTest extends FunctionalTestBase
             $violationBlankAssignee,
             $this->client->getResponse()->getContent(),
             sprintf('Validation for "%s" violation failed.', $violationBlankAssignee),
+        );
+    }
+
+    public function testEdit(): void
+    {
+        $this->logInAsPo();
+
+        /** @var Bug $bug */
+        $bug = $this->fixtures->getReference('bug-P1-1');
+        $this->client->request('GET', '/bug/edit/' . $bug->getId());
+
+        $newTitle = 'newTitle';
+
+
+        $this->submitEditFormWithBugAndNewTitle($bug, $newTitle);
+
+
+        $bug->setTitle($newTitle);
+        $this->assertBugInDb($bug);
+    }
+
+    private function submitEditFormWithBugAndNewTitle(Bug $bug, string $newTitle): void
+    {
+        $this->client->submitForm(
+            'Update',
+            [
+                'bug_edit[status]' => $bug->getStatus(),
+                'bug_edit[priority]' => $bug->getPriority(),
+                'bug_edit[due][month]' => (int)$bug->getDue()->format('m'),
+                'bug_edit[due][day]' => (int)$bug->getDue()->format('d'),
+                'bug_edit[due][year]' => (int)$bug->getDue()->format('Y'),
+                'bug_edit[title]' => $newTitle,
+                'bug_edit[summary]' => $bug->getSummary(),
+                'bug_edit[reproduce]' => $bug->getReproduce(),
+                'bug_edit[expected]' => $bug->getExpected(),
+                'bug_edit[actual]' => $bug->getActual(),
+                'bug_edit[assignee]' => $bug->getAssignee()->getId(),
+            ],
         );
     }
 }
