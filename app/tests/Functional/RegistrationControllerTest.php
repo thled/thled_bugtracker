@@ -53,11 +53,17 @@ final class RegistrationControllerTest extends FunctionalTestBase
             $fieldValues['registration[agreeTerms]'] = '1';
         }
 
+
         $this->client->submitForm('Register', $fieldValues);
 
+
+        $content = $this->client->getResponse()->getContent();
+        if (!is_string($content)) {
+            self::fail('No response content.');
+        }
         self::assertStringContainsString(
             $violation,
-            $this->client->getResponse()->getContent(),
+            $content,
             sprintf('Validation for "%s" violation failed.', $violation),
         );
     }
