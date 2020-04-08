@@ -137,8 +137,8 @@
             "@phpstan-src",
             "@phpstan-tests"
         ],
-        "phpstan-src": "@php vendor/bin/phpstan analyse -c phpstan.neon src --level max --no-progress",
-        "phpstan-tests": "@php vendor/bin/phpstan analyse -c phpstan-tests.neon tests --level max --no-progress"
+        "phpstan-src": "@php vendor/bin/phpstan analyse --configuration phpstan.neon --no-progress",
+        "phpstan-tests": "@php vendor/bin/phpstan analyse --configuration phpstan-tests.neon --no-progress"
     },
     "conflict": {
         "symfony/symfony": "*"

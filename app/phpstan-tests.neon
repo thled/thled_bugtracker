@@ -1,11 +1,14 @@
 parameters:
+    level: 'max'
+    paths:
+        - 'tests'
     symfony:
-        container_xml_path: '%rootDir%/../../../var/cache/test/App_KernelTestDebugContainer.xml'
-        console_application_loader: '%rootDir%/../../../build/phpstan/console-loader.php'
+        container_xml_path: './var/cache/test/App_KernelTestDebugContainer.xml'
+        console_application_loader: './build/phpstan/console-loader.php'
     doctrine:
-        objectManagerLoader: '%rootDir%/../../../build/phpstan/doctrine-orm-bootstrap.php'
+        objectManagerLoader: './build/phpstan/doctrine-orm-bootstrap.php'
     autoload_files:
-        - '%rootDir%/../../../bin/.phpunit/phpunit-7.5-0/vendor/autoload.php'
+        - './bin/.phpunit/phpunit-8.3-0/vendor/autoload.php'
     ignoreErrors:
 #        - '#^Service "[^"]+" is private.$#'
         - '#^Access to an undefined property Prophecy\\Prophecy\\ObjectProphecy<[^"]+>::[^"]+.$#'
