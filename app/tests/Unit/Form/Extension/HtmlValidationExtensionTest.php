@@ -13,7 +13,6 @@ use Symfony\Component\Form\FormView;
 /** @covers \App\Form\Extension\HtmlValidationExtension */
 final class HtmlValidationExtensionTest extends TestCase
 {
-    /** @covers \App\Form\Extension\HtmlValidationExtension::getExtendedTypes */
     public function testGetExtendedTypes(): void
     {
         $extendedTypes = HtmlValidationExtension::getExtendedTypes();
@@ -21,7 +20,6 @@ final class HtmlValidationExtensionTest extends TestCase
         self::assertSame([FormType::class], $extendedTypes);
     }
 
-    /** @covers \App\Form\Extension\HtmlValidationExtension::buildView */
     public function testBuildViewWithValidation(): void
     {
         $htmlValidationExtension = new HtmlValidationExtension(true);
@@ -38,7 +36,6 @@ final class HtmlValidationExtensionTest extends TestCase
         self::assertNotTrue(array_key_exists('novalidate', $view->vars['attr']));
     }
 
-    /** @covers \App\Form\Extension\HtmlValidationExtension::buildView */
     public function testBuildViewWithoutValidation(): void
     {
         $htmlValidationExtension = new HtmlValidationExtension(false);

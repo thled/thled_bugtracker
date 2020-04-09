@@ -18,7 +18,6 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 /** @covers \App\Validator\UniqueUserValidator */
 final class UniqueUserValidatorTest extends TestCase
 {
-    /** @covers \App\Validator\UniqueUserValidator::validate */
     public function testValidateAddViolation(): void
     {
         $value = 'foo@example.com';
@@ -71,7 +70,6 @@ final class UniqueUserValidatorTest extends TestCase
     }
 
     /**
-     * @covers \App\Validator\UniqueUserValidator::validate
      * @dataProvider provideNoViolation
      * @param stdClass|string $value
      */

@@ -1,11 +1,14 @@
 parameters:
+    level: 'max'
+    paths:
+        - 'src'
     symfony:
-        container_xml_path: '%rootDir%/../../../var/cache/dev/App_KernelDevDebugContainer.xml'
-        console_application_loader: '%rootDir%/../../../build/phpstan/console-loader.php'
+        container_xml_path: './var/cache/dev/App_KernelDevDebugContainer.xml'
+        console_application_loader: './build/phpstan/console-loader.php'
     doctrine:
-        objectManagerLoader: '%rootDir%/../../../build/phpstan/doctrine-orm-bootstrap.php'
+        objectManagerLoader: './build/phpstan/doctrine-orm-bootstrap.php'
     excludes_analyse:
-        - '%rootDir%/../../../src/Migrations/*'
+        - './src/Migrations/*'
     checkGenericClassInNonGenericObjectType: false
     ignoreErrors:
         - '#^Access to an undefined property Symfony\\Component\\Validator\\Constraint::\$message.$#'

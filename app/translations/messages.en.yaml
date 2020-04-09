@@ -53,9 +53,6 @@ bug:
             status: 'Status'
             priority: 'Prio'
             due: 'Due'
-    add:
-        title: 'Issue a Bug'
-        lead: 'Add a new Bug report by filling out the following form.'
     form:
         project: 'Project'
         status: 'Status'
@@ -71,5 +68,9 @@ bug:
         due_placeholder_year: 'Year'
         due_placeholder_month: 'Month'
         due_placeholder_day: 'Day'
+    add:
+        title: 'Issue a Bug'
+        lead: 'Add a new Bug report by filling out the following form.'
     edit:
         title: 'View/Edit Bug'
+        lead: 'Edit the Bug report by filling out the following form.'

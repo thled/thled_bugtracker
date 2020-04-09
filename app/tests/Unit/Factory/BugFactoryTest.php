@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Factory;
 
-use App\DataTransferObject\CreateBugDto;
+use App\DataTransferObject\BugCreateDto;
 use App\Entity\Bug;
 use App\Entity\Project;
 use App\Entity\User;
 use App\Factory\BugFactory;
 use App\Repository\BugRepositoryInterface;
 use DateTimeImmutable;
+use DateTimeInterface;
+use InvalidArgumentException;
 use LogicException;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
@@ -30,8 +32,7 @@ final class BugFactoryTest extends TestCase
         $this->bugFactory = new BugFactory($this->bugRepo->reveal());
     }
 
-    /** @covers \App\Factory\BugFactory::createFromCreateBugDto */
-    public function testCreateFromCreateBugDto(): void
+    public function testCreateFromDto(): void
     {
         $this->bugRepo
             ->findLatestBugOfProject(Argument::type(Project::class))
@@ -39,14 +40,14 @@ final class BugFactoryTest extends TestCase
 
         $bugDto = $this->createBugDto();
 
-        $bug = $this->bugFactory->createFromCreateBugDto($bugDto);
+        $bug = $this->bugFactory->createFromDto($bugDto);
 
-        $this->assertBugIsCreated($bug, $bugDto);
+        $this->assertBugCreated($bug, $bugDto);
     }
 
-    private function createBugDto(): CreateBugDto
+    private function createBugDto(): BugCreateDto
     {
-        $bugDto = new CreateBugDto();
+        $bugDto = new BugCreateDto();
         $bugDto->project = $this->prophesize(Project::class)->reveal();
         $bugDto->status = 1;
         $bugDto->priority = 2;
@@ -62,16 +63,23 @@ final class BugFactoryTest extends TestCase
         return $bugDto;
     }
 
-    private function assertBugIsCreated(
+    private function assertBugCreated(
         Bug $bug,
-        CreateBugDto $bugDto,
+        BugCreateDto $bugDto,
         int $bugId = 1
     ): void {
+        if (!$bugDto->due instanceof DateTimeInterface) {
+            throw new InvalidArgumentException('BugDto must have a due.');
+        }
+
         self::assertSame($bugId, $bug->getBugId());
         self::assertSame($bugDto->project, $bug->getProject());
         self::assertSame($bugDto->status, $bug->getStatus());
         self::assertSame($bugDto->priority, $bug->getPriority());
-        self::assertSame($bugDto->due, $bug->getDue());
+        self::assertSame(
+            $bugDto->due->format('Y-m-d'),
+            $bug->getDue()->format('Y-m-d'),
+        );
         self::assertSame($bugDto->title, $bug->getTitle());
         self::assertSame($bugDto->summary, $bug->getSummary());
         self::assertSame($bugDto->reproduce, $bug->getReproduce());
@@ -81,8 +89,7 @@ final class BugFactoryTest extends TestCase
         self::assertSame($bugDto->assignee, $bug->getAssignee());
     }
 
-    /** @covers \App\Factory\BugFactory::createFromCreateBugDto */
-    public function testCreateFromCreateBugDtoAsSecondBug(): void
+    public function testCreateFromDtoAsSecondBug(): void
     {
         $firstBug = $this->prophesize(Bug::class);
         $firstBug->getBugId()->willReturn(1);
@@ -93,18 +100,38 @@ final class BugFactoryTest extends TestCase
 
         $bugDto = $this->createBugDto();
 
-        $bug = $this->bugFactory->createFromCreateBugDto($bugDto);
+        $bug = $this->bugFactory->createFromDto($bugDto);
 
-        $this->assertBugIsCreated($bug, $bugDto, 2);
+        $this->assertBugCreated($bug, $bugDto, 2);
     }
 
-    /** @covers \App\Factory\BugFactory::createFromCreateBugDto */
-    public function testCreateFromCreateBugDtoThrowsLogicException(): void
+    public function testCreateFromDtoNoDue(): void
     {
-        $bugDto = new CreateBugDto();
+        $bugDto = $this->createBugDto();
+        $bugDto->due = null;
+
+        $this->bugRepo
+            ->findLatestBugOfProject(Argument::type(Project::class))
+            ->willReturn(null);
+
+
+        $bug = $this->bugFactory->createFromDto($bugDto);
+
+
+        $noDue = '1970-01-01';
+        self::assertSame(
+            $noDue,
+            $bug->getDue()->format('Y-m-d'),
+            'Bug was not correctly created with no due.',
+        );
+    }
+
+    public function testCreateFromDtoThrowsLogicException(): void
+    {
+        $bugDto = new BugCreateDto();
 
         $this->expectException(LogicException::class);
 
-        $this->bugFactory->createFromCreateBugDto($bugDto);
+        $this->bugFactory->createFromDto($bugDto);
     }
 }

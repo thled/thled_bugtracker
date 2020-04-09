@@ -19,7 +19,7 @@ final class BugRepositoryTest extends IntegrationTestBase
     private ProjectRepository $projectRepo;
     private UserRepository $userRepo;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -28,7 +28,6 @@ final class BugRepositoryTest extends IntegrationTestBase
         $this->userRepo = $this->entityManager->getRepository(User::class);
     }
 
-    /** @covers \App\Repository\BugRepository::save */
     public function testSave(): void
     {
         $bugId = 1;
@@ -66,7 +65,6 @@ final class BugRepositoryTest extends IntegrationTestBase
         return $this->userRepo->get($reporterFixture->getId());
     }
 
-    /** @covers \App\Repository\BugRepository::findLatestBugOfProject */
     public function testFindLatestBugOfProject(): void
     {
         /** @var Project $project */
@@ -82,7 +80,6 @@ final class BugRepositoryTest extends IntegrationTestBase
         self::assertTrue($expectedLatestBug->getId()->equals($latestBug->getId()));
     }
 
-    /** @covers \App\Repository\BugRepository::findLatestBugOfProject */
     public function testFindLatestBugOfProjectWithoutBugs(): void
     {
         /** @var Project $project */

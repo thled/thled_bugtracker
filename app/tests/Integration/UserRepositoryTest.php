@@ -17,14 +17,13 @@ final class UserRepositoryTest extends IntegrationTestBase
 {
     private UserRepository $userRepo;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->userRepo = $this->entityManager->getRepository(User::class);
     }
 
-    /** @covers \App\Repository\UserRepository::save */
     public function testSave(): void
     {
         $email = 'foobar@example.com';
@@ -36,7 +35,6 @@ final class UserRepositoryTest extends IntegrationTestBase
         self::assertInstanceOf(User::class, $savedUser);
     }
 
-    /** @covers \App\Repository\UserRepository::upgradePassword */
     public function testUpgradePassword(): void
     {
         $user = $this->getAdmin();
@@ -67,7 +65,6 @@ final class UserRepositoryTest extends IntegrationTestBase
         self::assertSame($newEncodedPassword, $upgradedPassword);
     }
 
-    /** @covers \App\Repository\UserRepository::upgradePassword */
     public function testUpgradePasswordThrowsUnsupportedUserException(): void
     {
         $user = $this->prophesize(UserInterface::class);
@@ -77,7 +74,6 @@ final class UserRepositoryTest extends IntegrationTestBase
         $this->userRepo->upgradePassword($user->reveal(), '');
     }
 
-    /** @covers \App\Repository\UserRepository::get */
     public function testGetThrowsRecordNotFoundException(): void
     {
         $userId = Uuid::uuid4();

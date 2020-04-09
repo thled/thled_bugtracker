@@ -14,14 +14,13 @@ final class ProjectRepositoryTest extends IntegrationTestBase
 {
     private ProjectRepository $projectRepo;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->projectRepo = $this->entityManager->getRepository(Project::class);
     }
 
-    /** @covers \App\Repository\ProjectRepository::get */
     public function testGet(): void
     {
         $projectFromDb = $this->projectRepo->findOneBy(['projectId' => 'P0']);
@@ -35,7 +34,6 @@ final class ProjectRepositoryTest extends IntegrationTestBase
         self::assertSame($projectId, $project->getId());
     }
 
-    /** @covers \App\Repository\ProjectRepository::get */
     public function testGetThrowsRecordNotFoundException(): void
     {
         $projectId = Uuid::uuid4();

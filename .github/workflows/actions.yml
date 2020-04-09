@@ -50,10 +50,10 @@ jobs:
 
     - name: Generate coverage report
       working-directory: ./app
-      run: composer run-script tests-coverage
+      run: composer run-script codecov
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
-        file: ./app/coverage.xml
+        file: ./app/coverage/coverage.xml

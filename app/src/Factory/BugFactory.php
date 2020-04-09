@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Factory;
 
-use App\DataTransferObject\CreateBugDto;
+use App\DataTransferObject\BugCreateDto;
 use App\Entity\Bug;
 use App\Entity\Project;
 use App\Entity\User;
@@ -21,7 +21,7 @@ final class BugFactory implements BugFactoryInterface
         $this->bugRepo = $bugRepo;
     }
 
-    public function createFromCreateBugDto(CreateBugDto $bugDto): Bug
+    public function createFromDto(BugCreateDto $bugDto): Bug
     {
         $project = $bugDto->project;
         $reporter = $bugDto->reporter;

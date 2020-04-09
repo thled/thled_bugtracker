@@ -11,7 +11,6 @@ final class SecurityControllerTest extends FunctionalTestBase
 {
     private const PASSWORD = 'admin123';
 
-    /** @covers \App\Controller\SecurityController::login */
     public function testLogin(): void
     {
         $this->client->request('GET', '/login');
@@ -30,7 +29,6 @@ final class SecurityControllerTest extends FunctionalTestBase
         self::assertTrue($this->client->getResponse()->isRedirect('/'));
     }
 
-    /** @covers \App\Controller\SecurityController::logout */
     public function testLogout(): void
     {
         $this->logInAsAdmin();

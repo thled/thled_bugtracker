@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\DataTransferObject\CreateBugDto;
+use App\DataTransferObject\BugCreateDto;
 use App\Entity\Bug;
-use App\Factory\BugFactoryInterface;
-use App\Form\BugType;
+use App\Facade\BugFacadeInterface;
+use App\Form\BugCreateType;
+use App\Form\BugEditType;
 use App\Repository\BugRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,18 +31,15 @@ final class BugController extends BaseController
     /** @Route("add", name="add") */
     public function add(
         Request $request,
-        BugFactoryInterface $bugFactory,
-        BugRepositoryInterface $bugRepo
+        BugFacadeInterface $bugFacade
     ): Response {
-        $bugDto = new CreateBugDto();
+        $bugDto = new BugCreateDto();
         $bugDto->reporter = $this->getUser();
-        $form = $this->createForm(BugType::class, $bugDto);
+        $form = $this->createForm(BugCreateType::class, $bugDto);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $bug = $bugFactory->createFromCreateBugDto($bugDto);
-
-            $bugRepo->save($bug);
+            $bugFacade->saveBugFromDto($bugDto);
 
             return $this->redirectToRoute('index');
         }
@@ -53,11 +51,27 @@ final class BugController extends BaseController
     }
 
     /** @Route("edit/{bug}", name="edit") */
-    public function edit(Bug $bug): Response
-    {
+    public function edit(
+        Bug $bug,
+        Request $request,
+        BugFacadeInterface $bugFacade
+    ): Response {
+        $bugDto = $bugFacade->mapBugToUpdateDto($bug);
+        $form = $this->createForm(BugEditType::class, $bugDto);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $bugFacade->updateBugFromDto($bug, $bugDto);
+
+            return $this->redirectToRoute(
+                'bug_edit',
+                ['bug' => $bug->getId()],
+            );
+        }
+
         return $this->render(
             'bug/edit.html.twig',
-            ['bugId' => $bug->getBugId()],
+            ['form' => $form->createView()],
         );
     }
 }

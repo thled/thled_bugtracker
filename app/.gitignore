@@ -1,5 +1,5 @@
 # PHPUnit code coverage
-coverage.xml
+/coverage
 
 ###> symfony/framework-bundle ###
 /.env.local
