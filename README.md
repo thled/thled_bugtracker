@@ -139,7 +139,7 @@ This project uses a custom workflow named ["THlEd-FLOW"][thled-flow] which is ba
 
 Please do contribute! Issues and pull requests are welcome.
 
-[version-badge]: https://img.shields.io/badge/version-0.8.0-blue.svg
+[version-badge]: https://img.shields.io/badge/version-0.9.0-blue.svg
 [changelog]: ./CHANGELOG.md
 [license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [license]: ./LICENSE
