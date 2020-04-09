@@ -14,13 +14,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /** @covers \App\Form\BugEditType */
 final class BugEditTypeTest extends TestCase
 {
-    private BugEditType $bugType;
+    private BugEditType $bugEditType;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->bugType = new BugEditType();
+        $this->bugEditType = new BugEditType();
     }
 
     public function testBuildForm(): void
@@ -33,7 +33,7 @@ final class BugEditTypeTest extends TestCase
         );
         $builderAdd->willReturn($builder);
 
-        $this->bugType->buildForm($builder->reveal(), []);
+        $this->bugEditType->buildForm($builder->reveal(), []);
 
         $builderAdd->shouldBeCalledTimes(9);
     }
@@ -46,7 +46,7 @@ final class BugEditTypeTest extends TestCase
             BugUpdateDto::class,
         );
 
-        $this->bugType->configureOptions($resolver->reveal());
+        $this->bugEditType->configureOptions($resolver->reveal());
 
         $resolverSetDefault->shouldBeCalledOnce();
     }
