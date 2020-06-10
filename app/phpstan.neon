@@ -10,5 +10,4 @@ parameters:
     excludes_analyse:
         - './src/Migrations/*'
     checkGenericClassInNonGenericObjectType: false
-    ignoreErrors:
-        - '#^Access to an undefined property Symfony\\Component\\Validator\\Constraint::\$message.$#'
+
