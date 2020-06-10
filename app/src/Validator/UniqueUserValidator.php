@@ -29,6 +29,10 @@ class UniqueUserValidator extends ConstraintValidator
             return;
         }
 
+        if (!$constraint instanceof UniqueUser) {
+            return;
+        }
+
         $user = $this->userRepo->findOneBy(['email' => $value]);
         if (!$user instanceof User) {
             return;
