@@ -36,6 +36,6 @@ final class SecurityControllerTest extends FunctionalTestBase
         $this->client->request('GET', '/logout');
 
         $this->client->request('GET', '/');
-        self::assertTrue($this->client->getResponse()->isRedirect('/login'));
+        self::assertResponseRedirects('/login');
     }
 }
