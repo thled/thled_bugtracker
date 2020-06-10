@@ -7,8 +7,10 @@ parameters:
         console_application_loader: './build/phpstan/console-loader.php'
     doctrine:
         objectManagerLoader: './build/phpstan/doctrine-orm-bootstrap.php'
-    autoload_files:
-        - './vendor/bin/.phpunit/phpunit-8.3-0/vendor/autoload.php'
+    bootstrapFiles:
+        - './bin/.phpunit/phpunit-9.2-0/vendor/autoload.php'
+    excludes_analyse:
+        - './tests/bootstrap.php'
     ignoreErrors:
 #        - '#^Service "[^"]+" is private.$#'
         - '#^Access to an undefined property Prophecy\\Prophecy\\ObjectProphecy<[^"]+>::[^"]+.$#'

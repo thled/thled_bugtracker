@@ -28,6 +28,8 @@ abstract class FunctionalTestBase extends WebTestCase
 
     protected function setUp(): void
     {
+        $this->client = self::createClient();
+
         $abstractExecutor = $this->loadFixtures(
             [
                 BugFixtures::class,
@@ -39,7 +41,6 @@ abstract class FunctionalTestBase extends WebTestCase
             $this->fixtures = $abstractExecutor->getReferenceRepository();
         }
 
-        $this->client = self::createClient();
         $this->entityManager = self::$container->get('doctrine')->getManager();
     }
 
