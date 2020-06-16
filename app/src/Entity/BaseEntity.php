@@ -24,7 +24,7 @@ abstract class BaseEntity
         $this->id = Uuid::uuid4();
     }
 
-    public function getId(): UuidInterface
+    final public function getId(): UuidInterface
     {
         return $this->id;
     }

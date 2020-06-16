@@ -14,7 +14,7 @@ abstract class BaseFixture extends Fixture
     protected ObjectManager $manager;
     protected Generator $faker;
 
-    public function load(ObjectManager $manager): void
+    final public function load(ObjectManager $manager): void
     {
         $this->manager = $manager;
         $this->faker = Factory::create();

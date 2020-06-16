@@ -44,7 +44,7 @@ abstract class FunctionalTestBase extends WebTestCase
         $this->entityManager = self::$container->get('doctrine')->getManager();
     }
 
-    protected function logIn(User $user): void
+    final protected function logIn(User $user): void
     {
         $firewallName = 'main';
         $token = new UsernamePasswordToken(
@@ -75,21 +75,21 @@ abstract class FunctionalTestBase extends WebTestCase
         $this->client->getCookieJar()->set($cookie);
     }
 
-    protected function logInAsAdmin(): void
+    final protected function logInAsAdmin(): void
     {
         /** @var User $adminUser */
         $adminUser = $this->fixtures->getReference('user-admin');
         $this->logIn($adminUser);
     }
 
-    protected function logInAsPo(): void
+    final protected function logInAsPo(): void
     {
         /** @var User $poUser */
         $poUser = $this->fixtures->getReference('user-po0');
         $this->logIn($poUser);
     }
 
-    protected function logInAsDev(): void
+    final protected function logInAsDev(): void
     {
         /** @var User $devUser */
         $devUser = $this->fixtures->getReference('user-dev0');
