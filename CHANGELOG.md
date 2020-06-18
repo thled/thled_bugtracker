@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Update to Symfony 5.1.
+- Additional PHPStan rules from Ergebnis.
+
 ## [0.9.0] - 2020-04-09
 
 ### Added

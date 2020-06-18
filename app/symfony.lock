@@ -114,6 +114,9 @@
     "egulias/email-validator": {
         "version": "2.1.14"
     },
+    "ergebnis/phpstan-rules": {
+        "version": "0.15.0"
+    },
     "fzaninotto/faker": {
         "version": "v1.9.1"
     },

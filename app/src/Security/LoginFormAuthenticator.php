@@ -93,6 +93,7 @@ final class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implem
      * @param mixed|array<string> $credentials
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.DisallowMixedTypeHint.DisallowedMixedTypeHint
      * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
+     * @phpstan-ignore-next-line
      */
     public function getPassword($credentials): ?string
     {

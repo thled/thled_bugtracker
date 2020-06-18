@@ -15,7 +15,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 abstract class BugBaseType extends AbstractType
 {
-    protected function addBaseFields(FormBuilderInterface $builder): void
+    final protected function addBaseFields(FormBuilderInterface $builder): void
     {
         $builder
             ->add(

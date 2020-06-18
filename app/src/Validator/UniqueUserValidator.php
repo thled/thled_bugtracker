@@ -9,7 +9,7 @@ use App\Repository\UserRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-class UniqueUserValidator extends ConstraintValidator
+final class UniqueUserValidator extends ConstraintValidator
 {
     private UserRepositoryInterface $userRepo;
 
