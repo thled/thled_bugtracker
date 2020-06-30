@@ -65,9 +65,11 @@ bug:
         actual: 'Actual'
         reporter: 'Reporter'
         assignee: 'Assignee'
+        project_placeholder: 'Select project'
         due_placeholder_year: 'Year'
         due_placeholder_month: 'Month'
         due_placeholder_day: 'Day'
+        assignee_placeholder: 'Select assignee'
     add:
         title: 'Issue a Bug'
         lead: 'Add a new Bug report by filling out the following form.'
