@@ -1,0 +1,22 @@
+{% extends 'main.html.twig' %}
+
+{% block main_title %}
+    {{ 'project.add.title'|trans }}
+{% endblock %}
+
+{% block main_lead %}
+    {{ 'project.add.lead'|trans }}
+{% endblock %}
+
+{% block main_content %}
+    {{ form_start(form) }}
+
+    {{ form_row(form.projectId) }}
+    {{ form_row(form.name) }}
+
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a href="{{ path('index') }}" class="btn btn-secondary">Cancel</a>
+
+    {{ form_end(form) }}
+{% endblock %}
+

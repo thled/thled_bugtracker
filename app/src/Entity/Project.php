@@ -55,6 +55,13 @@ class Project extends BaseEntity
         return $this->name;
     }
 
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
     /** @return array<Bug> */
     public function getBugs(): array
     {

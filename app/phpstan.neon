@@ -10,6 +10,8 @@ parameters:
     excludes_analyse:
         - './src/Kernel.php'
         - './src/Migrations/*'
+        - './src/Validator/Constraints/DtoUniqueEntity.php'
+        - './src/Validator/Constraints/DtoUniqueEntityValidator.php'
     checkGenericClassInNonGenericObjectType: false
     ignoreErrors:
         # The following ignored errors are from "ergebnis/phpstan-rules" and are too strict.

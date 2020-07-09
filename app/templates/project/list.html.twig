@@ -1,0 +1,36 @@
+{% extends 'main.html.twig' %}
+
+{% block main_title %}
+    {{ 'project.list.title'|trans }}
+{% endblock %}
+
+{% block main_lead %}
+    {{ 'project.list.lead'|trans }}
+{% endblock %}
+
+{% block main_content %}
+    <div class="table-responsive-lg">
+        <table class="table table-hover">
+            <caption>List of projects</caption>
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">{{ 'project.list.table.project_id'|trans }}</th>
+                <th scope="col">{{ 'project.list.table.name'|trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for project in projects %}
+                {# Link row: https://stackoverflow.com/a/57591579 #}
+                <tr style="transform: rotate(0);">
+                    <th scope="row">
+                        <a href="{{ path('project_edit', {'project': project.id}) }}" class="stretched-link">
+                            {{ project.projectId }}
+                        </a>
+                    </th>
+                    <td>{{ project.name }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

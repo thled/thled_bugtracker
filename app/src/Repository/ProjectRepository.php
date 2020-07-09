@@ -34,4 +34,10 @@ final class ProjectRepository extends ServiceEntityRepository implements Project
 
         return $project;
     }
+
+    public function save(Project $project): void
+    {
+        $this->_em->persist($project);
+        $this->_em->flush();
+    }
 }

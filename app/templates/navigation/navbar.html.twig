@@ -8,7 +8,10 @@
         'header.bugs.issue': path('bug_add')
     }) }}
 
-    {{ menuItem('header.projects', "#") }}
+    {{ menuDropdown('header.projects.name', {
+        'header.projects.show': path('project_list'),
+        'header.projects.issue': path('project_add')
+    }) }}
 
     {{ menuDropdown('header.account.name', {
         'header.account.profile': '#',
@@ -23,3 +26,4 @@
         {{ 'header.search'|trans }}
     </button>
 </form>
+
