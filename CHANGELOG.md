@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - "Overview of Bugs" page with list of all Bugs.
 - "Developing" section in Readme with link to THlED-FLOW as workflow.
 - Editing of Bugs.
+- Vim configuration for Vdebug.
 
 ### Changed
 
