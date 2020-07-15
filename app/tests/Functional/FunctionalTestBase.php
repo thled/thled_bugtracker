@@ -24,7 +24,7 @@ abstract class FunctionalTestBase extends WebTestCase
 
     protected ReferenceRepository $fixtures;
     protected KernelBrowser $client;
-    protected ObjectManager $entityManager;
+    protected ObjectManager $manager;
 
     protected function setUp(): void
     {
@@ -41,7 +41,7 @@ abstract class FunctionalTestBase extends WebTestCase
             $this->fixtures = $abstractExecutor->getReferenceRepository();
         }
 
-        $this->entityManager = self::$container->get('doctrine')->getManager();
+        $this->manager = self::$container->get('doctrine')->getManager();
     }
 
     final protected function logIn(User $user): void

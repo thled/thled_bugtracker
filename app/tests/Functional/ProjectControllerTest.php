@@ -93,7 +93,7 @@ final class ProjectControllerTest extends FunctionalTestBase
 
     private function getProjectInDb(Project $projectToAdd): Project
     {
-        $projectRepo = $this->entityManager->getRepository(Project::class);
+        $projectRepo = $this->manager->getRepository(Project::class);
 
         $projectDb = $projectRepo->findOneBy(['projectId' => $projectToAdd->getProjectId()]);
         if (!$projectDb instanceof Project) {

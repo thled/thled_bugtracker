@@ -25,12 +25,12 @@ final class RegistrationControllerTest extends FunctionalTestBase
             ],
         );
 
-        $this->assertUserIsCreated();
+        $this->assertUserCreated();
     }
 
-    private function assertUserIsCreated(): void
+    private function assertUserCreated(): void
     {
-        $userRepo = self::$container->get('doctrine')->getRepository(User::class);
+        $userRepo = $this->manager->getRepository(User::class);
         $registeredUser = $userRepo->findOneBy(['email' => self::EMAIL]);
 
         self::assertNotNull($registeredUser, 'Cannot find new registered user.');
