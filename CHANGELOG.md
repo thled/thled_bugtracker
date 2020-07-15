@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update to Symfony 5.1.
 - Additional PHPStan rules from Ergebnis.
 - Project management (list/create/edit).
+- Vim configuration for Vdebug.
 
 ## [0.9.0] - 2020-04-09
 
@@ -20,7 +21,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - "Overview of Bugs" page with list of all Bugs.
 - "Developing" section in Readme with link to THlED-FLOW as workflow.
 - Editing of Bugs.
-- Vim configuration for Vdebug.
 
 ### Changed
 
