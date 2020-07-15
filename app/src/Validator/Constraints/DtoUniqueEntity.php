@@ -6,10 +6,10 @@ namespace App\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-/** 
+/**
  * Assert\UniqueEntity for DTOs by https://gist.github.com/webbertakken/569409670bfc7c079e276f79260105ed
  *
- * @Annotation 
+ * @Annotation
  */
 final class DtoUniqueEntity extends Constraint
 {
