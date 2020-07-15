@@ -164,7 +164,7 @@ final class BugControllerTest extends FunctionalTestBase
 
     private function findBugInDb(Bug $bugToAdd): ?Bug
     {
-        $bugRepo = $this->entityManager->getRepository(Bug::class);
+        $bugRepo = $this->manager->getRepository(Bug::class);
 
         return $bugRepo->findOneBy(
             [
