@@ -4,16 +4,22 @@ declare(strict_types=1);
 
 namespace App\DataTransferObject;
 
-use App\Validator\UniqueUser;
+use App\Validator\Constraints\DtoUniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
-final class UserRegisterDto
+/**
+ * @DtoUniqueEntity(
+ *     entityClass="App\Entity\User",
+ *     fieldMapping={"email": "email"},
+ *     message="register.email.unique"
+ * )
+ */
+final class UserRegisterDto implements DataTransferObjectInterface
 {
     /**
      * @Assert\NotBlank(message="register.email.not_blank")
      * @Assert\Length(max="180", maxMessage="register.email.max")
      * @Assert\Email(message="register.email.email")
-     * @UniqueUser(message="register.email.unique")
      */
     public ?string $email = null;
 

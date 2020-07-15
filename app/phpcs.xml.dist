@@ -120,5 +120,7 @@
 
     <exclude-pattern>src/Kernel.php$</exclude-pattern>
     <exclude-pattern>tests/bootstrap.php$</exclude-pattern>
+    <exclude-pattern>DtoUniqueEntity.php$</exclude-pattern>
+    <exclude-pattern>DtoUniqueEntityValidator.php$</exclude-pattern>
 
 </ruleset>

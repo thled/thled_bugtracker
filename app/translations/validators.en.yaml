@@ -22,3 +22,9 @@ bug:
         max: 'Title cannot be longer than 128 characters.'
     assignee:
         not_blank: 'It must be assigned to a User.'
+project:
+    id:
+        max: 'ID cannot be longer than 5 characters.'
+        unique: 'There is already an project with this ID.'
+    name:
+        max: 'Name cannot be longer than 128 characters.'

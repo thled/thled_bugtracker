@@ -8,7 +8,7 @@ use App\Entity\User;
 use DateTimeInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-final class BugUpdateDto
+final class BugUpdateDto implements DataTransferObjectInterface
 {
     /** @Assert\Choice(choices={0, 1, 2, 3}, message="bug.status.choice") */
     public ?int $status = null;

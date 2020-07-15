@@ -63,10 +63,7 @@ final class BugController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $bugFacade->updateBugFromDto($bug, $bugDto);
 
-            return $this->redirectToRoute(
-                'bug_edit',
-                ['bug' => $bug->getId()],
-            );
+            return $this->redirectToRoute('bug_list');
         }
 
         return $this->render(

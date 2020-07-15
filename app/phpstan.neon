@@ -10,11 +10,13 @@ parameters:
     excludes_analyse:
         - './src/Kernel.php'
         - './src/Migrations/*'
+        - './src/Validator/Constraints/DtoUniqueEntity.php'
+        - './src/Validator/Constraints/DtoUniqueEntityValidator.php'
     checkGenericClassInNonGenericObjectType: false
     ignoreErrors:
         # The following ignored errors are from "ergebnis/phpstan-rules" and are too strict.
         - '#^Class "[^"]+" is not allowed to extend "[^"]+".$#'
-        - '#^Class [^"]+ is neither abstract nor final.$#'
+        #- '#^Class [^"]+ is neither abstract nor final.$#'
         - '#^Constructor in [^"]+ has parameter [^"]+ with default value.$#'
         - '#^Method [^"]+ has a nullable return type declaration.$#'
         - '#^Method [^"]+ has parameter [^"]+ with a nullable type declaration.$#'

@@ -40,7 +40,7 @@
 
 - Access the application: `localhost:80`
 - SSH into container: `$ docker-compose exec app bash`
-- SSH into node container for using Yarn: `$ docker-compose exec frontend sh`
+- SSH into node container for using Yarn: `$ docker-compose exec frontend ash`
 - Manage DB with Adminer: `localhost:8080`
   - System: `PostgreSQL`
   - Server: `db`
@@ -50,6 +50,10 @@
 - Receive mails with Mailcatcher: `http://localhost:1080`
 - Debug with xDebug:
   - Maybe adjust local IP of host with `xdebug.remote_host` in `docker/php/xdebug.ini`
+  - Vim configuration:
+    - Use Vdebug Plugin from `vim-vdebug/vdebug`
+    - Copy local rc file: `$ cp .nvimrc.dist .nvimrc`
+    - Change second part of `path_maps` to the project on host in `.nvimrc`
   - PHPStorm configuration:
     - Change debug port under `Settings/Languages/PHP/Debug` to `9001`
     - Add new server under `Settings/Languages/PHP/Servers`
@@ -62,7 +66,7 @@
 - Lint with CodeSniffer:
   - PHPStorm configuration:
     - Set path to script under `Settings/Languages/PHP/Quality_Tools/PHP_CodeSniffer` to `path/to/project/app/scripts/phpcs.sh`
-    - Activate "PHP_CodeSniffer validation" unter `Settings/Editor/Inspections/PHP/Quality_tools`
+    - Activate "PHP_CodeSniffer validation" under `Settings/Editor/Inspections/PHP/Quality_tools`
 
 ## Code Quality
 
@@ -83,9 +87,11 @@ Develop [![Pipeline Develop][pipeline-dev-badge]][pipeline-dev]
 [![Code Smells][sonarcloud-code-smells]][sonarcloud-dashboard],
 [![Duplicated Lines (%)][sonarcloud-duplicated-lines]][sonarcloud-dashboard]
 
-To ensure a high quality of the code base different tools are used to analyse, lint and fix code which does not adhere to the standards (PSR, Symfony etc.).
+To ensure a high quality of the code base different tools are used to analyse, lint and fix code
+which does not adhere to the standards (PSR, Symfony etc.).
 There are manual tools and automatic tools for this purpose.
-Manual tools should be executed regularly while developing and automatic tools are executed in the Github Actions Workflow (alias Pipeline) or externally (e.g. SonarQube/SonarCloud).
+Manual tools should be executed regularly while developing and
+automatic tools are executed in the Github Actions Workflow (alias Pipeline) or externally (e.g. SonarQube/SonarCloud).
 
 ### Manual tools
 
@@ -128,8 +134,10 @@ This project uses a custom workflow named ["THlEd-FLOW"][thled-flow] which is ba
 ##### Philosophy
 
 - Seek for high code coverage (>90%).
-- Every test must have a `@covers` annotation for the class it covers to not accidentally cover classes which are not under test.
-- Code coverage should be reached by Unit Tests. Exceptions are Controllers and Repositories which are tested by Functional Tests and Integration Tests respectively.
+- Every test must have a `@covers` annotation for the class it covers
+to not accidentally cover classes which are not under test.
+- Code coverage should be reached by Unit Tests.
+Exceptions are Controllers and Repositories which are tested by Functional Tests and Integration Tests respectively.
 - Do not test private/protected methods explicitly.
 - Do not test objects which have no logic like Entities and Models/DTOs.
 - Do not test code which will not run in production like DataFixtures.

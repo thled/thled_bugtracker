@@ -9,7 +9,7 @@ use App\Entity\User;
 use DateTimeInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-final class BugCreateDto
+final class BugCreateDto implements DataTransferObjectInterface
 {
     /** @Assert\NotBlank(message="bug.project.not_blank") */
     public ?Project $project = null;

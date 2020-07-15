@@ -16,4 +16,6 @@ use Ramsey\Uuid\UuidInterface;
 interface ProjectRepositoryInterface
 {
     public function get(UuidInterface $projectId): Project;
+
+    public function save(Project $project): void;
 }

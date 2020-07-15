@@ -3,11 +3,14 @@ website:
 
 header:
     dashboard: 'Dashboard'
-    projects: 'Projects'
     bugs:
         name: 'Bugs'
         show: 'Show Bugs'
-        issue: 'Issue a Bug'
+        issue: 'Issue Bug'
+    projects:
+        name: 'Projects'
+        show: 'Show Projects'
+        issue: 'Create Project'
     account:
         name: 'Account'
         profile: 'Profile'
@@ -76,3 +79,21 @@ bug:
     edit:
         title: 'View/Edit Bug'
         lead: 'Edit the Bug report by filling out the following form.'
+
+project:
+    list:
+        title: 'Overview of Projects'
+        lead: 'See all Projects related to you. Use the search in the header bar to find specific projects easily.'
+        table:
+            project_id: '#'
+            name: 'Name'
+    form:
+        project_id: '#'
+        name: 'Name'
+    add:
+        title: 'Create a Project'
+        lead: 'Add a new Project by filling out the following form.'
+    edit:
+        title: 'View/Edit Project'
+        lead: 'Edit the Project by filling out the following form.'
+

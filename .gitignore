@@ -1,3 +1,6 @@
 /.env
-/.vscode
-app/.idea
+.exrc
+.vimrc
+.nvimrc
+.vscode
+.idea
