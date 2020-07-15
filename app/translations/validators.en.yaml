@@ -25,5 +25,6 @@ bug:
 project:
     id:
         max: 'ID cannot be longer than 5 characters.'
+        unique: 'There is already an project with this ID.'
     name:
         max: 'Name cannot be longer than 128 characters.'
