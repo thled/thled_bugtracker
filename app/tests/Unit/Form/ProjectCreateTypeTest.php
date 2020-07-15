@@ -40,14 +40,14 @@ final class ProjectCreateTypeTest extends TestCase
             ->add(
                 'projectId',
                 Argument::type('string'),
-                Argument::type('array')
+                Argument::type('array'),
             )
             ->shouldBeCalledOnce();
         $builder
             ->add(
                 'name',
                 Argument::type('string'),
-                Argument::type('array')
+                Argument::type('array'),
             )
             ->shouldBeCalledOnce();
     }

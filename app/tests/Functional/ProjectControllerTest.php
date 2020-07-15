@@ -50,7 +50,8 @@ final class ProjectControllerTest extends FunctionalTestBase
         self::assertStringContainsString(
             $project->getProjectId(),
             $content,
-            'Project list does not contain #.');
+            'Project list does not contain #.',
+        );
         self::assertStringContainsString(
             $project->getName(),
             $content,
@@ -94,7 +95,7 @@ final class ProjectControllerTest extends FunctionalTestBase
     {
         $projectRepo = $this->entityManager->getRepository(Project::class);
 
-        $projectDb = $projectRepo->findOneBy( [ 'projectId' => $projectToAdd->getProjectId() ]);
+        $projectDb = $projectRepo->findOneBy(['projectId' => $projectToAdd->getProjectId()]);
         if (!$projectDb instanceof Project) {
             self::fail('Cannot find Project in DB.');
         }
@@ -180,7 +181,7 @@ final class ProjectControllerTest extends FunctionalTestBase
     {
         $this->client->submitForm(
             'Update',
-            [ 'project_edit[name]' => $newTitle ],
+            ['project_edit[name]' => $newTitle],
         );
     }
 }

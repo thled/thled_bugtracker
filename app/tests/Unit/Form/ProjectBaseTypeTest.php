@@ -39,7 +39,7 @@ final class ProjectBaseTypeTest extends TestCase
             ->add(
                 'name',
                 Argument::type('string'),
-                Argument::type('array')
+                Argument::type('array'),
             )
             ->shouldBeCalledTimes(1);
     }

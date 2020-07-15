@@ -42,4 +42,14 @@ final class ProjectRepositoryTest extends IntegrationTestBase
 
         $this->projectRepo->get($projectId);
     }
+
+    public function testSaveTheProjectInTheDb(): void
+    {
+        $project = new Project('FOO', 'Foo Project');
+
+        $this->projectRepo->save($project);
+
+        $savedProject = $this->projectRepo->findOneBy(['projectId' => 'FOO']);
+        self::assertInstanceOf(Project::class, $savedProject);
+    }
 }
