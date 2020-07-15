@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.10.0] - 2020-07-15
+
 ### Added
 
 - Update to Symfony 5.1.
@@ -142,7 +144,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Set up the Docker environment for development.
 - Readme for installation instructions.
 
-[unreleased]: https://github.com/thled/thled_bugtracker/compare/v0.9.0...HEAD
+[unreleased]: https://github.com/thled/thled_bugtracker/compare/v0.10.0...HEAD
+[0.10.0]: https://github.com/thled/thled_bugtracker/compare/v0.9.0...v0.10.0
 [0.9.0]: https://github.com/thled/thled_bugtracker/compare/v0.8.0...v0.9.0
 [0.8.0]: https://github.com/thled/thled_bugtracker/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/thled/thled_bugtracker/compare/v0.6.0...v0.7.0
