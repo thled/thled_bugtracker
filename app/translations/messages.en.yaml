@@ -6,11 +6,15 @@ header:
     bugs:
         name: 'Bugs'
         show: 'Show Bugs'
-        issue: 'Issue Bug'
+        add: 'Issue Bug'
     projects:
         name: 'Projects'
         show: 'Show Projects'
-        issue: 'Create Project'
+        add: 'Create Project'
+    users:
+        name: 'Users'
+        show: 'Show Users'
+        assignment: 'Assignment'
     account:
         name: 'Account'
         profile: 'Profile'
@@ -97,3 +101,13 @@ project:
         title: 'View/Edit Project'
         lead: 'Edit the Project by filling out the following form.'
 
+user:
+    list:
+        title: 'Overview of Users'
+        lead: 'See all Users related to you.'
+        table:
+            username: 'Email'
+            roles: 'Roles'
+    show:
+        title: 'Show User'
+        lead: 'View the user details.'

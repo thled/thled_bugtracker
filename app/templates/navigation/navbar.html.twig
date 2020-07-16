@@ -5,12 +5,17 @@
 
     {{ menuDropdown('header.bugs.name', {
         'header.bugs.show': path('bug_list'),
-        'header.bugs.issue': path('bug_add')
+        'header.bugs.add': path('bug_add')
     }) }}
 
     {{ menuDropdown('header.projects.name', {
         'header.projects.show': path('project_list'),
-        'header.projects.issue': path('project_add')
+        'header.projects.add': path('project_add')
+    }) }}
+
+    {{ menuDropdown('header.users.name', {
+        'header.users.show': path('user_list'),
+        'header.users.assignment': path('user_assignment')
     }) }}
 
     {{ menuDropdown('header.account.name', {
