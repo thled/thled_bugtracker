@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- MyCLabs "PHP Enum" package for convenient usage of enums.
+- User management (list/show).
+
 ## [0.10.0] - 2020-07-15
 
 ### Added

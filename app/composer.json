@@ -10,6 +10,7 @@
         "doctrine/doctrine-bundle": "^2.0",
         "doctrine/doctrine-migrations-bundle": "^2.1",
         "doctrine/orm": "^2.7",
+        "myclabs/php-enum": "^1.7",
         "phpdocumentor/reflection-docblock": "^4.3",
         "ramsey/uuid-doctrine": "^1.6",
         "sensio/framework-extra-bundle": "^5.5",

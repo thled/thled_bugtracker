@@ -1,7 +1,7 @@
 let g:vdebug_options = {
     \ 'port': 9001,
     \ 'path_maps': {
-    \     '/usr/src/app': '/path/to/thled_bugtracker'
+    \     '/usr/src/app': '/path/to/thled_bugtracker/app'
     \ },
     \ }
 

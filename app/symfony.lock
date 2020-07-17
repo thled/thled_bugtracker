@@ -141,6 +141,9 @@
     "monolog/monolog": {
         "version": "2.0.2"
     },
+    "myclabs/php-enum": {
+        "version": "1.7.6"
+    },
     "nikic/php-parser": {
         "version": "v4.3.0"
     },

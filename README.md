@@ -52,7 +52,7 @@
   - Maybe adjust local IP of host with `xdebug.remote_host` in `docker/php/xdebug.ini`
   - Vim configuration:
     - Use Vdebug Plugin from `vim-vdebug/vdebug`
-    - Copy local rc file: `$ cp .nvimrc.dist .nvimrc`
+    - Copy local rc file: `$ cp app/.nvimrc.dist app/.nvimrc`
     - Change second part of `path_maps` to the project on host in `.nvimrc`
   - PHPStorm configuration:
     - Change debug port under `Settings/Languages/PHP/Debug` to `9001`
