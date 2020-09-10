@@ -1,0 +1,21 @@
+{% extends 'main.html.twig' %}
+
+{% block main_title %}
+    {{ 'user.show.title'|trans }}
+{% endblock %}
+
+{% block main_lead %}
+    {{ 'user.show.lead'|trans }}
+{% endblock %}
+
+{% block main_content %}
+    {{ form_start(form) }}
+
+    {{ form_row(form.username) }}
+    {{ form_row(form.roles) }}
+
+    <a href="{{ path('user_list') }}" class="btn btn-secondary">Cancel</a>
+
+    {{ form_end(form) }}
+{% endblock %}
+

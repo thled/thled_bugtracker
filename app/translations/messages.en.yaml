@@ -1,3 +1,8 @@
+USER: 'Registered User'
+ADMIN: 'Administrator'
+PO: 'Product Owner'
+DEV: 'Developer'
+
 website:
     title: 'THlEd BUGTRACKER'
 
@@ -108,6 +113,9 @@ user:
         table:
             username: 'Email'
             roles: 'Roles'
+    form:
+        username: 'Email'
+        roles: 'Roles'
     show:
         title: 'Show User'
         lead: 'View the user details.'

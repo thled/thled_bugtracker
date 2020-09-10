@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Facade\UserFacadeInterface;
+use App\Form\UserShowType;
 use App\Repository\UserRepositoryInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,16 +21,19 @@ final class UserController extends BaseController
 
         return $this->render(
             'user/list.html.twig',
-            ['users' => $users]
+            ['users' => $users],
         );
     }
 
     /** @Route("show/{user}", name="show") */
-    public function show(User $user): Response
+    public function show(User $user, UserFacadeInterface $userFacade): Response
     {
+        $userDto = $userFacade->mapUserToShowDto($user);
+        $form = $this->createForm(UserShowType::class, $userDto);
+
         return $this->render(
             'user/show.html.twig',
-            ['user' => $user]
+            ['form' => $form->createView()],
         );
     }
 
